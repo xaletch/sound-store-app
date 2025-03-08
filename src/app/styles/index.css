@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+/* @theme { */
+  /* --font-sans: "Helvetica Neue", system-ui, sans-serif; */
+  /* --font-mono: "HDM Mono", system-ui, sans-serif; */
+/* } */
+
+@layer base {
+
+  * {
+    margin: 0;
+  }
+  body {
+    height: 100vh;
+    margin: 0 auto;
+    font-size: 16px;
+    background: #FFFFFF;
+    color: #000000;
+    font-weight: 400;
+    font-family: "", sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  html {
+    overflow-x: hidden;
+  }
+  input {
+    outline: none;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@layer utilities {}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
