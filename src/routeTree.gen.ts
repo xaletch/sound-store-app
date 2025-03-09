@@ -13,6 +13,9 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AppLayoutImport } from './routes/_app/_layout'
 import { Route as AppLayoutIndexImport } from './routes/_app/_layout/index'
+import { Route as AppLayoutSearchIndexImport } from './routes/_app/_layout/search/index'
+import { Route as AppLayoutFoldersIndexImport } from './routes/_app/_layout/folders/index'
+import { Route as AppLayoutFavouritesIndexImport } from './routes/_app/_layout/favourites/index'
 
 // Create/Update Routes
 
@@ -24,6 +27,24 @@ const AppLayoutRoute = AppLayoutImport.update({
 const AppLayoutIndexRoute = AppLayoutIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AppLayoutRoute,
+} as any)
+
+const AppLayoutSearchIndexRoute = AppLayoutSearchIndexImport.update({
+  id: '/search/',
+  path: '/search/',
+  getParentRoute: () => AppLayoutRoute,
+} as any)
+
+const AppLayoutFoldersIndexRoute = AppLayoutFoldersIndexImport.update({
+  id: '/folders/',
+  path: '/folders/',
+  getParentRoute: () => AppLayoutRoute,
+} as any)
+
+const AppLayoutFavouritesIndexRoute = AppLayoutFavouritesIndexImport.update({
+  id: '/favourites/',
+  path: '/favourites/',
   getParentRoute: () => AppLayoutRoute,
 } as any)
 
@@ -45,6 +66,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutIndexImport
       parentRoute: typeof AppLayoutImport
     }
+    '/_app/_layout/favourites/': {
+      id: '/_app/_layout/favourites/'
+      path: '/favourites'
+      fullPath: '/favourites'
+      preLoaderRoute: typeof AppLayoutFavouritesIndexImport
+      parentRoute: typeof AppLayoutImport
+    }
+    '/_app/_layout/folders/': {
+      id: '/_app/_layout/folders/'
+      path: '/folders'
+      fullPath: '/folders'
+      preLoaderRoute: typeof AppLayoutFoldersIndexImport
+      parentRoute: typeof AppLayoutImport
+    }
+    '/_app/_layout/search/': {
+      id: '/_app/_layout/search/'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof AppLayoutSearchIndexImport
+      parentRoute: typeof AppLayoutImport
+    }
   }
 }
 
@@ -52,10 +94,16 @@ declare module '@tanstack/react-router' {
 
 interface AppLayoutRouteChildren {
   AppLayoutIndexRoute: typeof AppLayoutIndexRoute
+  AppLayoutFavouritesIndexRoute: typeof AppLayoutFavouritesIndexRoute
+  AppLayoutFoldersIndexRoute: typeof AppLayoutFoldersIndexRoute
+  AppLayoutSearchIndexRoute: typeof AppLayoutSearchIndexRoute
 }
 
 const AppLayoutRouteChildren: AppLayoutRouteChildren = {
   AppLayoutIndexRoute: AppLayoutIndexRoute,
+  AppLayoutFavouritesIndexRoute: AppLayoutFavouritesIndexRoute,
+  AppLayoutFoldersIndexRoute: AppLayoutFoldersIndexRoute,
+  AppLayoutSearchIndexRoute: AppLayoutSearchIndexRoute,
 }
 
 const AppLayoutRouteWithChildren = AppLayoutRoute._addFileChildren(
@@ -65,24 +113,39 @@ const AppLayoutRouteWithChildren = AppLayoutRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '': typeof AppLayoutRouteWithChildren
   '/': typeof AppLayoutIndexRoute
+  '/favourites': typeof AppLayoutFavouritesIndexRoute
+  '/folders': typeof AppLayoutFoldersIndexRoute
+  '/search': typeof AppLayoutSearchIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof AppLayoutIndexRoute
+  '/favourites': typeof AppLayoutFavouritesIndexRoute
+  '/folders': typeof AppLayoutFoldersIndexRoute
+  '/search': typeof AppLayoutSearchIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_app/_layout': typeof AppLayoutRouteWithChildren
   '/_app/_layout/': typeof AppLayoutIndexRoute
+  '/_app/_layout/favourites/': typeof AppLayoutFavouritesIndexRoute
+  '/_app/_layout/folders/': typeof AppLayoutFoldersIndexRoute
+  '/_app/_layout/search/': typeof AppLayoutSearchIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/'
+  fullPaths: '' | '/' | '/favourites' | '/folders' | '/search'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_app/_layout' | '/_app/_layout/'
+  to: '/' | '/favourites' | '/folders' | '/search'
+  id:
+    | '__root__'
+    | '/_app/_layout'
+    | '/_app/_layout/'
+    | '/_app/_layout/favourites/'
+    | '/_app/_layout/folders/'
+    | '/_app/_layout/search/'
   fileRoutesById: FileRoutesById
 }
 
@@ -110,11 +173,26 @@ export const routeTree = rootRoute
     "/_app/_layout": {
       "filePath": "_app/_layout.tsx",
       "children": [
-        "/_app/_layout/"
+        "/_app/_layout/",
+        "/_app/_layout/favourites/",
+        "/_app/_layout/folders/",
+        "/_app/_layout/search/"
       ]
     },
     "/_app/_layout/": {
       "filePath": "_app/_layout/index.tsx",
+      "parent": "/_app/_layout"
+    },
+    "/_app/_layout/favourites/": {
+      "filePath": "_app/_layout/favourites/index.tsx",
+      "parent": "/_app/_layout"
+    },
+    "/_app/_layout/folders/": {
+      "filePath": "_app/_layout/folders/index.tsx",
+      "parent": "/_app/_layout"
+    },
+    "/_app/_layout/search/": {
+      "filePath": "_app/_layout/search/index.tsx",
       "parent": "/_app/_layout"
     }
   }

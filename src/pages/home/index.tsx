@@ -1,5 +1,10 @@
+import { Header, Slider } from "@/widgets"
+
 export const Home = () => {
   return (
-    <div>home</div>
+    <div>
+      <Header />
+      <Slider />
+    </div>
   )
 }

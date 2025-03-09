@@ -16,8 +16,16 @@
   font-style: normal;
 }
 
+:root {
+  --green-800: #436C5F;
+  --yellow-100: #e7e4dd;
+}
+
 @theme {
   --font-sans: "DM Mono", system-ui, sans-serif;
+
+  --color-green-800: var(--green-800);
+  --color-yellow-100: var(--yellow-100);
 }
 
 @layer base {
@@ -29,7 +37,7 @@
     height: 100vh;
     margin: 0 auto;
     font-size: 16px;
-    background: #FFFFFF;
+    background: #E7E4DD;
     color: #000000;
     font-weight: 400;
     font-family: "DM Mono", sans-serif;
