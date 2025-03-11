@@ -26,7 +26,7 @@ const items = [
 
 export const MobileNavbar = () => {
   return (
-    <div className="fixed bottom-0 left-0 w-full z-40 border-t border-black">
+    <div className="fixed bottom-0 left-0 w-full z-40 border-t border-black bg-[#E7E4DD]">
       <div className="py-1 px-5 grid grid-cols-4 gap-4 items-center">
         {items.map((item, index) => (
           <div key={index} className="flex flex-col">

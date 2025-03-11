@@ -2,7 +2,7 @@ import { Slide } from "@/entities/slider"
 
 export const Slider = () => {
   return (
-    <div className="my-7">
+    <div className="px-4">
       <Slide 
         image={"/image/slider.png"} 
         name={"Название"} 

@@ -4,7 +4,7 @@ import { CreditsIcon, Logo, SupportIcon } from "@/shared/icons"
 
 export const Header = () => {
   return (
-    <div>
+    <div className="px-4">
       <div className="flex items-center gap-3 justify-between">
         <HeaderButton href={"/"} cl={"px-2"} icon={<SupportIcon />} text={"Поддержка и FAQ"}/>
         <Logo />
