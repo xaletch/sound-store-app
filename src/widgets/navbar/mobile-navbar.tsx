@@ -5,21 +5,25 @@ const items = [
   {
     name: 'Главная',
     href: '/',
+    paths: ['/', '/faq-support', '/subscribe', '/subscribe/payment'],
     icon: <HomeIcon />,
   },
   {
     name: 'Поиск',
     href: '/search',
+    paths: ['/search'],
     icon: <SearchIcon />,
   },
   {
     name: 'Паки',
     href: '/folders',
+    paths: ['/folders'],
     icon: <FoldersIcon />,
   },
   {
     name: 'Избранное',
     href: '/favourites',
+    paths: ['/favourites'],
     icon: <FavouritesIcon />,
   },
 ]
@@ -33,8 +37,8 @@ export const MobileNavbar = () => {
         {items.map((item, index) => (
           <div key={index} className="flex flex-col">
             <Link to={item.href}>
-              <div className={`w-[35px] mx-auto ${location === item.href ? 'icon-active' : ''}`}>{item.icon}</div>
-              <div className={`text-xs font-medium text-center ${location === item.href ? 'text-[#436c5f]' : ''}`}>{item.name}</div>
+              <div className={`w-[35px] mx-auto ${item.paths.includes(location) ? 'icon-active' : ''}`}>{item.icon}</div>
+              <div className={`text-xs font-medium text-center ${item.paths.includes(location) ? 'text-[#436c5f]' : ''}`}>{item.name}</div>
             </Link>
           </div>
         ))}

@@ -12,3 +12,8 @@ export * from './popular-samples'
 export * from './referral-system'
 
 export * from './footer'
+
+export * from './faq'
+export * from './subscribe'
+
+export * from './payment'

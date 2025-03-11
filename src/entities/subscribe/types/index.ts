@@ -1,0 +1,1 @@
+export type SubscribeSortType = 'Месяц' | 'Год';

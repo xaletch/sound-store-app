@@ -13,9 +13,12 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AppLayoutImport } from './routes/_app/_layout'
 import { Route as AppLayoutIndexImport } from './routes/_app/_layout/index'
+import { Route as AppLayoutSubscribeIndexImport } from './routes/_app/_layout/subscribe/index'
 import { Route as AppLayoutSearchIndexImport } from './routes/_app/_layout/search/index'
 import { Route as AppLayoutFoldersIndexImport } from './routes/_app/_layout/folders/index'
 import { Route as AppLayoutFavouritesIndexImport } from './routes/_app/_layout/favourites/index'
+import { Route as AppLayoutFaqSupportIndexImport } from './routes/_app/_layout/faq-support/index'
+import { Route as AppLayoutSubscribePaymentIndexImport } from './routes/_app/_layout/subscribe/payment/index'
 
 // Create/Update Routes
 
@@ -27,6 +30,12 @@ const AppLayoutRoute = AppLayoutImport.update({
 const AppLayoutIndexRoute = AppLayoutIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AppLayoutRoute,
+} as any)
+
+const AppLayoutSubscribeIndexRoute = AppLayoutSubscribeIndexImport.update({
+  id: '/subscribe/',
+  path: '/subscribe/',
   getParentRoute: () => AppLayoutRoute,
 } as any)
 
@@ -48,6 +57,19 @@ const AppLayoutFavouritesIndexRoute = AppLayoutFavouritesIndexImport.update({
   getParentRoute: () => AppLayoutRoute,
 } as any)
 
+const AppLayoutFaqSupportIndexRoute = AppLayoutFaqSupportIndexImport.update({
+  id: '/faq-support/',
+  path: '/faq-support/',
+  getParentRoute: () => AppLayoutRoute,
+} as any)
+
+const AppLayoutSubscribePaymentIndexRoute =
+  AppLayoutSubscribePaymentIndexImport.update({
+    id: '/subscribe/payment/',
+    path: '/subscribe/payment/',
+    getParentRoute: () => AppLayoutRoute,
+  } as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -64,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AppLayoutIndexImport
+      parentRoute: typeof AppLayoutImport
+    }
+    '/_app/_layout/faq-support/': {
+      id: '/_app/_layout/faq-support/'
+      path: '/faq-support'
+      fullPath: '/faq-support'
+      preLoaderRoute: typeof AppLayoutFaqSupportIndexImport
       parentRoute: typeof AppLayoutImport
     }
     '/_app/_layout/favourites/': {
@@ -87,6 +116,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutSearchIndexImport
       parentRoute: typeof AppLayoutImport
     }
+    '/_app/_layout/subscribe/': {
+      id: '/_app/_layout/subscribe/'
+      path: '/subscribe'
+      fullPath: '/subscribe'
+      preLoaderRoute: typeof AppLayoutSubscribeIndexImport
+      parentRoute: typeof AppLayoutImport
+    }
+    '/_app/_layout/subscribe/payment/': {
+      id: '/_app/_layout/subscribe/payment/'
+      path: '/subscribe/payment'
+      fullPath: '/subscribe/payment'
+      preLoaderRoute: typeof AppLayoutSubscribePaymentIndexImport
+      parentRoute: typeof AppLayoutImport
+    }
   }
 }
 
@@ -94,16 +137,22 @@ declare module '@tanstack/react-router' {
 
 interface AppLayoutRouteChildren {
   AppLayoutIndexRoute: typeof AppLayoutIndexRoute
+  AppLayoutFaqSupportIndexRoute: typeof AppLayoutFaqSupportIndexRoute
   AppLayoutFavouritesIndexRoute: typeof AppLayoutFavouritesIndexRoute
   AppLayoutFoldersIndexRoute: typeof AppLayoutFoldersIndexRoute
   AppLayoutSearchIndexRoute: typeof AppLayoutSearchIndexRoute
+  AppLayoutSubscribeIndexRoute: typeof AppLayoutSubscribeIndexRoute
+  AppLayoutSubscribePaymentIndexRoute: typeof AppLayoutSubscribePaymentIndexRoute
 }
 
 const AppLayoutRouteChildren: AppLayoutRouteChildren = {
   AppLayoutIndexRoute: AppLayoutIndexRoute,
+  AppLayoutFaqSupportIndexRoute: AppLayoutFaqSupportIndexRoute,
   AppLayoutFavouritesIndexRoute: AppLayoutFavouritesIndexRoute,
   AppLayoutFoldersIndexRoute: AppLayoutFoldersIndexRoute,
   AppLayoutSearchIndexRoute: AppLayoutSearchIndexRoute,
+  AppLayoutSubscribeIndexRoute: AppLayoutSubscribeIndexRoute,
+  AppLayoutSubscribePaymentIndexRoute: AppLayoutSubscribePaymentIndexRoute,
 }
 
 const AppLayoutRouteWithChildren = AppLayoutRoute._addFileChildren(
@@ -113,39 +162,66 @@ const AppLayoutRouteWithChildren = AppLayoutRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '': typeof AppLayoutRouteWithChildren
   '/': typeof AppLayoutIndexRoute
+  '/faq-support': typeof AppLayoutFaqSupportIndexRoute
   '/favourites': typeof AppLayoutFavouritesIndexRoute
   '/folders': typeof AppLayoutFoldersIndexRoute
   '/search': typeof AppLayoutSearchIndexRoute
+  '/subscribe': typeof AppLayoutSubscribeIndexRoute
+  '/subscribe/payment': typeof AppLayoutSubscribePaymentIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof AppLayoutIndexRoute
+  '/faq-support': typeof AppLayoutFaqSupportIndexRoute
   '/favourites': typeof AppLayoutFavouritesIndexRoute
   '/folders': typeof AppLayoutFoldersIndexRoute
   '/search': typeof AppLayoutSearchIndexRoute
+  '/subscribe': typeof AppLayoutSubscribeIndexRoute
+  '/subscribe/payment': typeof AppLayoutSubscribePaymentIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_app/_layout': typeof AppLayoutRouteWithChildren
   '/_app/_layout/': typeof AppLayoutIndexRoute
+  '/_app/_layout/faq-support/': typeof AppLayoutFaqSupportIndexRoute
   '/_app/_layout/favourites/': typeof AppLayoutFavouritesIndexRoute
   '/_app/_layout/folders/': typeof AppLayoutFoldersIndexRoute
   '/_app/_layout/search/': typeof AppLayoutSearchIndexRoute
+  '/_app/_layout/subscribe/': typeof AppLayoutSubscribeIndexRoute
+  '/_app/_layout/subscribe/payment/': typeof AppLayoutSubscribePaymentIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/' | '/favourites' | '/folders' | '/search'
+  fullPaths:
+    | ''
+    | '/'
+    | '/faq-support'
+    | '/favourites'
+    | '/folders'
+    | '/search'
+    | '/subscribe'
+    | '/subscribe/payment'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/favourites' | '/folders' | '/search'
+  to:
+    | '/'
+    | '/faq-support'
+    | '/favourites'
+    | '/folders'
+    | '/search'
+    | '/subscribe'
+    | '/subscribe/payment'
   id:
     | '__root__'
     | '/_app/_layout'
     | '/_app/_layout/'
+    | '/_app/_layout/faq-support/'
     | '/_app/_layout/favourites/'
     | '/_app/_layout/folders/'
     | '/_app/_layout/search/'
+    | '/_app/_layout/subscribe/'
+    | '/_app/_layout/subscribe/payment/'
   fileRoutesById: FileRoutesById
 }
 
@@ -174,13 +250,20 @@ export const routeTree = rootRoute
       "filePath": "_app/_layout.tsx",
       "children": [
         "/_app/_layout/",
+        "/_app/_layout/faq-support/",
         "/_app/_layout/favourites/",
         "/_app/_layout/folders/",
-        "/_app/_layout/search/"
+        "/_app/_layout/search/",
+        "/_app/_layout/subscribe/",
+        "/_app/_layout/subscribe/payment/"
       ]
     },
     "/_app/_layout/": {
       "filePath": "_app/_layout/index.tsx",
+      "parent": "/_app/_layout"
+    },
+    "/_app/_layout/faq-support/": {
+      "filePath": "_app/_layout/faq-support/index.tsx",
       "parent": "/_app/_layout"
     },
     "/_app/_layout/favourites/": {
@@ -193,6 +276,14 @@ export const routeTree = rootRoute
     },
     "/_app/_layout/search/": {
       "filePath": "_app/_layout/search/index.tsx",
+      "parent": "/_app/_layout"
+    },
+    "/_app/_layout/subscribe/": {
+      "filePath": "_app/_layout/subscribe/index.tsx",
+      "parent": "/_app/_layout"
+    },
+    "/_app/_layout/subscribe/payment/": {
+      "filePath": "_app/_layout/subscribe/payment/index.tsx",
       "parent": "/_app/_layout"
     }
   }
