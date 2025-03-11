@@ -70,3 +70,8 @@
 .icon-active {
   filter: invert(48%) sepia(13%) saturate(1237%) hue-rotate(122deg) brightness(94%) contrast(88%);
 }
+
+
+.screen {
+  width: calc(100vw - 32px);
+}
