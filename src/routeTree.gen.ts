@@ -18,6 +18,7 @@ import { Route as AppLayoutSearchIndexImport } from './routes/_app/_layout/searc
 import { Route as AppLayoutFoldersIndexImport } from './routes/_app/_layout/folders/index'
 import { Route as AppLayoutFavouritesIndexImport } from './routes/_app/_layout/favourites/index'
 import { Route as AppLayoutFaqSupportIndexImport } from './routes/_app/_layout/faq-support/index'
+import { Route as AppLayoutSoundNameImport } from './routes/_app/_layout/sound/$name'
 import { Route as AppLayoutSubscribePaymentIndexImport } from './routes/_app/_layout/subscribe/payment/index'
 
 // Create/Update Routes
@@ -63,6 +64,12 @@ const AppLayoutFaqSupportIndexRoute = AppLayoutFaqSupportIndexImport.update({
   getParentRoute: () => AppLayoutRoute,
 } as any)
 
+const AppLayoutSoundNameRoute = AppLayoutSoundNameImport.update({
+  id: '/sound/$name',
+  path: '/sound/$name',
+  getParentRoute: () => AppLayoutRoute,
+} as any)
+
 const AppLayoutSubscribePaymentIndexRoute =
   AppLayoutSubscribePaymentIndexImport.update({
     id: '/subscribe/payment/',
@@ -86,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AppLayoutIndexImport
+      parentRoute: typeof AppLayoutImport
+    }
+    '/_app/_layout/sound/$name': {
+      id: '/_app/_layout/sound/$name'
+      path: '/sound/$name'
+      fullPath: '/sound/$name'
+      preLoaderRoute: typeof AppLayoutSoundNameImport
       parentRoute: typeof AppLayoutImport
     }
     '/_app/_layout/faq-support/': {
@@ -137,6 +151,7 @@ declare module '@tanstack/react-router' {
 
 interface AppLayoutRouteChildren {
   AppLayoutIndexRoute: typeof AppLayoutIndexRoute
+  AppLayoutSoundNameRoute: typeof AppLayoutSoundNameRoute
   AppLayoutFaqSupportIndexRoute: typeof AppLayoutFaqSupportIndexRoute
   AppLayoutFavouritesIndexRoute: typeof AppLayoutFavouritesIndexRoute
   AppLayoutFoldersIndexRoute: typeof AppLayoutFoldersIndexRoute
@@ -147,6 +162,7 @@ interface AppLayoutRouteChildren {
 
 const AppLayoutRouteChildren: AppLayoutRouteChildren = {
   AppLayoutIndexRoute: AppLayoutIndexRoute,
+  AppLayoutSoundNameRoute: AppLayoutSoundNameRoute,
   AppLayoutFaqSupportIndexRoute: AppLayoutFaqSupportIndexRoute,
   AppLayoutFavouritesIndexRoute: AppLayoutFavouritesIndexRoute,
   AppLayoutFoldersIndexRoute: AppLayoutFoldersIndexRoute,
@@ -162,6 +178,7 @@ const AppLayoutRouteWithChildren = AppLayoutRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '': typeof AppLayoutRouteWithChildren
   '/': typeof AppLayoutIndexRoute
+  '/sound/$name': typeof AppLayoutSoundNameRoute
   '/faq-support': typeof AppLayoutFaqSupportIndexRoute
   '/favourites': typeof AppLayoutFavouritesIndexRoute
   '/folders': typeof AppLayoutFoldersIndexRoute
@@ -172,6 +189,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof AppLayoutIndexRoute
+  '/sound/$name': typeof AppLayoutSoundNameRoute
   '/faq-support': typeof AppLayoutFaqSupportIndexRoute
   '/favourites': typeof AppLayoutFavouritesIndexRoute
   '/folders': typeof AppLayoutFoldersIndexRoute
@@ -184,6 +202,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_app/_layout': typeof AppLayoutRouteWithChildren
   '/_app/_layout/': typeof AppLayoutIndexRoute
+  '/_app/_layout/sound/$name': typeof AppLayoutSoundNameRoute
   '/_app/_layout/faq-support/': typeof AppLayoutFaqSupportIndexRoute
   '/_app/_layout/favourites/': typeof AppLayoutFavouritesIndexRoute
   '/_app/_layout/folders/': typeof AppLayoutFoldersIndexRoute
@@ -197,6 +216,7 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/'
+    | '/sound/$name'
     | '/faq-support'
     | '/favourites'
     | '/folders'
@@ -206,6 +226,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/sound/$name'
     | '/faq-support'
     | '/favourites'
     | '/folders'
@@ -216,6 +237,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_app/_layout'
     | '/_app/_layout/'
+    | '/_app/_layout/sound/$name'
     | '/_app/_layout/faq-support/'
     | '/_app/_layout/favourites/'
     | '/_app/_layout/folders/'
@@ -250,6 +272,7 @@ export const routeTree = rootRoute
       "filePath": "_app/_layout.tsx",
       "children": [
         "/_app/_layout/",
+        "/_app/_layout/sound/$name",
         "/_app/_layout/faq-support/",
         "/_app/_layout/favourites/",
         "/_app/_layout/folders/",
@@ -260,6 +283,10 @@ export const routeTree = rootRoute
     },
     "/_app/_layout/": {
       "filePath": "_app/_layout/index.tsx",
+      "parent": "/_app/_layout"
+    },
+    "/_app/_layout/sound/$name": {
+      "filePath": "_app/_layout/sound/$name.tsx",
       "parent": "/_app/_layout"
     },
     "/_app/_layout/faq-support/": {

@@ -17,3 +17,9 @@ export * from './faq'
 export * from './subscribe'
 
 export * from './payment'
+
+export * from './sound'
+
+export * from './search'
+
+export * from './like'

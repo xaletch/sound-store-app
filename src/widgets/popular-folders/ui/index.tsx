@@ -11,12 +11,12 @@ export const PopularFolders = () => {
       </SectionTitle>
       <div>
         <FoldersCardWrapper>
-          <FolderCard href={"#"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
-          <FolderCard href={"#"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
-          <FolderCard href={"#"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
-          <FolderCard href={"#"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
-          <FolderCard href={"#"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
-          <FolderCard href={"#"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
+          <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
+          <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
+          <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
+          <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
+          <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
+          <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
         </FoldersCardWrapper>
       </div>
     </div>
