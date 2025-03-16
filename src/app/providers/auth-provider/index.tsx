@@ -1,0 +1,58 @@
+import { createContext, PropsWithChildren, useEffect, useState } from "react";
+import { useTelegram } from "../telegram";
+import { useAuthMutation } from "@/features/auth/models/services";
+import { CreateAuth } from "@/features/auth";
+
+type AuthContextType = {
+  isAuth: boolean;
+}
+
+export const AuthContext = createContext<AuthContextType>({ isAuth: false });
+
+export const AuthProvider = ({ children }: PropsWithChildren) => {
+  const { webApp } = useTelegram();
+
+  const [isInitData, setInitData] = useState(localStorage.getItem("initData") || '');
+
+  const isAuth = Boolean(isInitData);
+
+  const [auth] = useAuthMutation();
+
+  useEffect(() => {
+    if (webApp) {
+      webApp.expand();
+
+    }
+  }, [webApp]);
+  
+  const authorize = async () => {
+    try {
+      const initData = webApp?.initData;
+      const res = await auth(initData).unwrap();
+
+      console.log('initData', initData)
+      
+      console.log('res', res);
+      
+      if (res) {
+        setInitData(initData || '');
+        CreateAuth('initData', initData || '');
+      }
+    }
+    catch (err) {
+      console.error('Authorize error', err);
+    }
+  }
+
+  useEffect(() => {
+    if (!isAuth) {
+      authorize();
+    }
+  }, [isAuth]);
+
+  return (
+    <AuthContext.Provider value={{ isAuth }}>
+      {children}
+    </AuthContext.Provider>
+  )
+}

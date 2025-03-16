@@ -29,12 +29,11 @@ export const TelegramProvider = ({
     }
   }, []);
 
-  useEffect(() => {
-    if (webApp) {
-      console.log('web app initDataUnsafe', webApp?.initDataUnsafe)
-      console.log('web app success!', webApp?.initData);
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (webApp) {
+  //     console.log('web app initDataUnsafe', webApp?.initDataUnsafe);
+  //   }
+  // }, [])
 
   const value = useMemo(() => {
     return webApp

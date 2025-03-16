@@ -1,4 +1,4 @@
-export function GetAuthToken(name: string) {
+export function GetAuth(name: string) {
   const token = localStorage.getItem(name);
 
   if (!token) {
@@ -10,7 +10,7 @@ export function GetAuthToken(name: string) {
 
   if (now > item.expiry) {
     localStorage.removeItem(name);
-    console.log('Токен устарел');
+    console.log('Данные устарели');
     return null;
   }
 
