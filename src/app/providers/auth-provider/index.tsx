@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     if (webApp) {
       webApp.expand();
-
+      console.log('webApp.expand();')
     }
   }, [webApp]);
   
@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       }
   
       const initData = webApp.initData;
+      console.log(' const initData = webApp.initData;', initData)
       const res = await auth(initData).unwrap();
   
       console.log("initData", initData);
@@ -49,10 +50,14 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   }
 
   useEffect(() => {
-    if (!isAuth) {
-      authorize();
+    if (webApp && !isAuth) {
+      if (webApp.initData) {
+        authorize();
+      } else {
+        console.error("initData is not available yet.");
+      }
     }
-  }, [isAuth]);
+  }, [webApp, isAuth]);
 
   return (
     <AuthContext.Provider value={{ isAuth }}>

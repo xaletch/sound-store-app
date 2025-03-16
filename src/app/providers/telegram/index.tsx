@@ -40,6 +40,7 @@ export const TelegramProvider = ({
       ? {
           webApp,
           unsafeData: webApp.initDataUnsafe,
+          initData: webApp.initData,
           user: webApp.initDataUnsafe.user,
         }
       : {};
