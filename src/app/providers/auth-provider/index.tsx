@@ -27,16 +27,20 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   
   const authorize = async () => {
     try {
-      const initData = webApp?.initData;
+      if (!webApp?.initData) {
+        console.error("initData is not available.");
+        return;
+      }
+  
+      const initData = webApp.initData;
       const res = await auth(initData).unwrap();
-
-      console.log('initData', initData)
-      
-      console.log('res', res);
-      
+  
+      console.log("initData", initData);
+      console.log("res", res);
+  
       if (res) {
-        setInitData(initData || '');
-        CreateAuth('initData', initData || '');
+        setInitData(initData);
+        CreateAuth("initData", initData);
       }
     }
     catch (err) {

@@ -23,7 +23,7 @@ export const TelegramProvider = ({
     if (app) {
       console.log('app success!', app)
       app.ready();
-      setWebApp({...app});
+      setWebApp(app);
     } else {
       console.log('app failed')
     }
