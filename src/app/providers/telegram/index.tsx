@@ -18,7 +18,14 @@ export const TelegramProvider = ({
   const { currentPath, setCurrentPath } = useCurrentPath();
 
   useEffect(() => {
-    setCurrentPath(location.pathname);
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+    };
   }, [setCurrentPath]);
 
   useEffect(() => {
