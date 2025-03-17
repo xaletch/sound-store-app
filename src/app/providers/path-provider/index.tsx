@@ -15,8 +15,6 @@ export const CurrentPathProvider = ({ children }: { children: React.ReactNode })
       setCurrentPath(window.location.pathname);
     };
 
-    console.log('message messagemessagemessagemessagemessage')
-
     window.addEventListener("popstate", handleLocationChange);
 
     return () => {
