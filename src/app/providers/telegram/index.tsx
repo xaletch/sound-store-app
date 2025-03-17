@@ -15,21 +15,7 @@ export const TelegramProvider = ({
 }) => {
   const [webApp, setWebApp] = useState<IWebApp | null>(null);
 
-  const { currentPath, setCurrentPath } = useCurrentPath();
-
-  useEffect(() => {
-    const handleLocationChange = () => {
-      setCurrentPath(window.location.pathname);
-    };
-
-    window.addEventListener('popstate', handleLocationChange);
-
-    handleLocationChange();
-
-    return () => {
-      window.removeEventListener('popstate', handleLocationChange);
-    };
-  }, [setCurrentPath]);
+  const { currentPath } = useCurrentPath();
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -44,8 +30,7 @@ export const TelegramProvider = ({
       setWebApp(app);
       
       const backButton = app.BackButton;
-      console.log('currentPath: ', currentPath);
-      
+
       const noBackButtonRoutes = [
         "/",
         "/search",
@@ -53,22 +38,20 @@ export const TelegramProvider = ({
         "/favourites"
       ];
 
+      console.log('currentPath: ', currentPath);
+
       if (noBackButtonRoutes.includes(currentPath)) {
         console.log('currentPath include: ', currentPath);
-
         backButton.hide();
       } else {
         backButton.show();
       }
 
-      const handleBackButtonClick = () => {
+      backButton.onClick(() => {
         window.history.back();
-      };
-
-      backButton.onClick(handleBackButtonClick);
+      });
 
       return () => {
-        backButton.offClick(handleBackButtonClick);
         backButton.hide();
       };
     } else {
