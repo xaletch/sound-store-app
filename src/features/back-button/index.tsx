@@ -13,19 +13,28 @@ export const TelegramBackButton = () => {
     const hidePaths = ["/", "/search", "/folders", "/favourites"];
     const currentPath = router.state.location.pathname;
 
-    if (hidePaths.includes(currentPath)) {
-      BackButton.hide();
-      BackButton.onClick(() => {});
-    } else {
-      BackButton.show();
-      BackButton.onClick(() => {
-        router.navigate({ to: ".." });
-      });
-    }
+    const updateBackButton = () => {
+      if (hidePaths.includes(currentPath)) {
+        BackButton.hide();
+        BackButton.onClick(() => {});
+      } else {
+        BackButton.show();
+        BackButton.onClick(() => {
+          router.history.back()
+        });
+      }
+    };
+
+    updateBackButton();
+
+    const unsubscribe = router.subscribe("onBeforeNavigate", () => {
+      updateBackButton();
+    });
 
     return () => {
       BackButton.hide();
       BackButton.onClick(() => {});
+      unsubscribe();
     };
   }, [router.state.location.pathname, webApp]);
 
