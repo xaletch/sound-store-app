@@ -15,7 +15,19 @@ export const TelegramProvider = ({
 }) => {
   const [webApp, setWebApp] = useState<IWebApp | null>(null);
 
-  const { currentPath } = useCurrentPath();
+  const { currentPath, setCurrentPath } = useCurrentPath();
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+    };
+  }, [setCurrentPath]);
+
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -23,41 +35,42 @@ export const TelegramProvider = ({
 
     console.log('initial app');
 
-    const noBackButtonRoutes = [
-      "/",
-      "/faq-support",
-      "/subscribe",
-      "/subscribe/payment",
-      "/sound"
-    ];
-
+    
     if (app) {
       console.log('app success!', app)
       app.ready();
       setWebApp(app);
-
+      
       const backButton = app.BackButton;
-
-      console.log('currentPath: ', currentPath);
+      
+      const noBackButtonRoutes = [
+        "/",
+        "/faq-support",
+        "/subscribe",
+        "/subscribe/payment",
+        "/sound"
+      ];
 
       if (noBackButtonRoutes.includes(currentPath)) {
-        console.log('currentPath include: ', currentPath);
         backButton.hide();
       } else {
         backButton.show();
       }
 
-      backButton.onClick(() => {
+      const handleBackButtonClick = () => {
         window.history.back();
-      });
+      };
+
+      backButton.onClick(handleBackButtonClick);
 
       return () => {
+        backButton.offClick(handleBackButtonClick);
         backButton.hide();
       };
     } else {
       console.log('app failed')
     }
-  }, []);
+  }, [currentPath]);
 
   // useEffect(() => {
   //   if (webApp) {
