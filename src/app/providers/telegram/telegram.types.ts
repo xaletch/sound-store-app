@@ -8,6 +8,14 @@ export interface ITelegramUser {
   is_premium: boolean;
 }
 
+interface Insets {
+  top: number;
+  left: number;
+  right: number;
+  bottom: number;
+}
+
+
 export interface IWebApp {
   initData: string;
   initDataUnsafe: {
@@ -48,6 +56,15 @@ export interface IWebApp {
     isProgressVisible: boolean;
     isActive: boolean;
   };
+  Viewport: {
+    height: number;
+    isExpanded: boolean;
+    isFullscreen: boolean;
+    stableHeight: number;
+    safeAreaInsets: Insets;
+    contentSafeAreaInsets: Insets;
+    width: number;
+  }
   // HapticFeedback: any;
   expand: () => void;
   ready: () => void;

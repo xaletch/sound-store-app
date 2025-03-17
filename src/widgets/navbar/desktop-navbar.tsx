@@ -36,7 +36,9 @@ export const DesktopNavbar = () => {
 
   const handleCloseFullscreen = () => {
     if (webApp) {
-      webApp.close();
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      webApp.Viewport.isFullscreen;
+      console.log('webApp.Viewport.isFullscreen', webApp.Viewport.isFullscreen)
     }
   };
 
