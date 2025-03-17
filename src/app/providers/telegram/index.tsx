@@ -23,6 +23,9 @@ export const TelegramProvider = ({
     };
 
     window.addEventListener('popstate', handleLocationChange);
+
+    handleLocationChange();
+
     return () => {
       window.removeEventListener('popstate', handleLocationChange);
     };
@@ -41,6 +44,8 @@ export const TelegramProvider = ({
       setWebApp(app);
       
       const backButton = app.BackButton;
+
+      console.log('backButton', backButton)
       
       const noBackButtonRoutes = [
         "/",

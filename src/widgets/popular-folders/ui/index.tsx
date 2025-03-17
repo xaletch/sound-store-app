@@ -24,7 +24,7 @@ export const PopularFolders = () => {
       </SectionTitle>
       <div>
         <FoldersCardWrapper>
-          {data?.Packs.map((item, index) => (
+          {data?.Packs.slice(0, 6).map((item, index) => (
             <FolderCard 
               key={index} 
               href={`/sound/${item.Id}`} 
