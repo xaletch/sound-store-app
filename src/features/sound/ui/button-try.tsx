@@ -4,7 +4,7 @@ import { SoundButton } from "./button"
 export const ButtonTry = () => {
   return (
     <>
-      <SoundButton onClick={() => {}} cl={"hover:bg-[#7cc0ab]"}>
+      <SoundButton onClick={() => {}} cl={"w-37.5 hover:bg-[#7cc0ab]"}>
         <span>
           <PlayIcon />
         </span>

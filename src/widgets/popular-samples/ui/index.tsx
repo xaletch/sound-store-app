@@ -5,7 +5,7 @@ import { SectionTitle } from "@/widgets/section-title"
 export const PopularSamples = () => {
   return (
     <div className="px-4">
-      <SectionTitle title={"Популярные паки"}>
+      <SectionTitle title={"Популярные сэмплы"}>
         <LinkButton href="/folders">Смотреть все</LinkButton>
       </SectionTitle>
       <div className="grid grid-cols-2 gap-x-4 gap-y-5">

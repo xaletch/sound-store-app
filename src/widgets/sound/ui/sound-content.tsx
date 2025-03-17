@@ -1,36 +1,27 @@
 import { TrackCard } from "@/entities/track"
 import { SoundListHead } from "./sound-list/sound-list-head"
+import { useSelector } from "react-redux"
+import { soundSelector } from "@/entities/sound/model/selector"
+import { TracksData } from "@/entities/sound/model/types"
 
-interface SoundData {
-  image: string
-  name: string
-  genre: string
-  time: string
-  bpm: number
-  isLike: boolean
-  isPurchased: boolean
-}
+export const SoundContent = () => {
+  const { tracks } = useSelector(soundSelector);
 
-interface SoundContentProps {
-  data: SoundData[]
-}
-
-export const SoundContent = ({ data }: SoundContentProps) => {
   return (
     <div>
       <SoundListHead />
       <div>
         <div className="flex flex-col gap-5">
-          {data.map((item, index) => (
+          {tracks.map((item: TracksData, index) => (
             <TrackCard 
               key={index}
-              image={item.image} 
-              name={item.name} 
-              genre={item.genre} 
-              time={item.time} 
-              bpm={item.bpm} 
-              isLike={item.isLike} 
-              isPurchased={item.isPurchased} 
+              image={'/image/executor.png'} 
+              name={item.Name} 
+              genre={item.Genre} 
+              time={'1:30'} 
+              bpm={item.Downloads} 
+              isLike={item.Loved} 
+              isPurchased={item.Downloaded} 
             />
           ))}
         </div>

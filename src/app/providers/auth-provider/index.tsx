@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     if (webApp) {
       webApp.expand();
-      console.log('webApp.expand();')
     }
   }, [webApp]);
   
@@ -33,7 +32,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       }
   
       const initData = webApp.initData;
-      console.log(' const initData = webApp.initData;', initData)
       const res = await auth(initData).unwrap();
   
       console.log("initData", initData);
