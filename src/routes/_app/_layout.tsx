@@ -1,5 +1,4 @@
 import { Layout } from '@/app/layout'
-import { TelegramBackButton } from '@/features/back-button'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_app/_layout')({
@@ -9,7 +8,6 @@ export const Route = createFileRoute('/_app/_layout')({
 function LayoutContent() {
   return (
     <Layout>
-      <TelegramBackButton />
       <Outlet />
     </Layout>
   )

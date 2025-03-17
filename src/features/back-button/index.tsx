@@ -13,6 +13,8 @@ export const TelegramBackButton = () => {
     const hidePaths = ["/", "/search", "/folders", "/favourites"];
     const currentPath = router.state.location.pathname;
 
+    console.log(currentPath)
+
     const updateBackButton = () => {
       if (hidePaths.includes(currentPath)) {
         BackButton.hide();
