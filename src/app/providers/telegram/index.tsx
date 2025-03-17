@@ -44,8 +44,7 @@ export const TelegramProvider = ({
       setWebApp(app);
       
       const backButton = app.BackButton;
-
-      console.log('backButton', backButton)
+      console.log('currentPath: ', currentPath);
       
       const noBackButtonRoutes = [
         "/",
@@ -55,6 +54,8 @@ export const TelegramProvider = ({
       ];
 
       if (noBackButtonRoutes.includes(currentPath)) {
+        console.log('currentPath include: ', currentPath);
+
         backButton.hide();
       } else {
         backButton.show();
