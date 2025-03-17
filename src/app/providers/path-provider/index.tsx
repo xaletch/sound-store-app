@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface ICurrentPathContext {
   currentPath: string;
@@ -9,6 +9,20 @@ const CurrentPathContext = createContext<ICurrentPathContext | undefined>(undefi
 
 export const CurrentPathProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    console.log('message messagemessagemessagemessagemessage')
+
+    window.addEventListener("popstate", handleLocationChange);
+
+    return () => {
+      window.removeEventListener("popstate", handleLocationChange);
+    };
+  }, []);
 
   return (
     <CurrentPathContext.Provider value={{ currentPath, setCurrentPath }}>
