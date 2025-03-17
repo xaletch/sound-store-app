@@ -18,16 +18,9 @@ export const TelegramProvider = ({
   const { currentPath, setCurrentPath } = useCurrentPath();
 
   useEffect(() => {
-    const handleLocationChange = () => {
-      setCurrentPath(window.location.pathname);
-    };
-
-    window.addEventListener('popstate', handleLocationChange);
-    return () => {
-      window.removeEventListener('popstate', handleLocationChange);
-    };
-  }, [setCurrentPath]);
-
+    setCurrentPath(location.pathname);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname, setCurrentPath]);
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,10 +38,9 @@ export const TelegramProvider = ({
       
       const noBackButtonRoutes = [
         "/",
-        "/faq-support",
-        "/subscribe",
-        "/subscribe/payment",
-        "/sound"
+        "/search",
+        "/folders",
+        "/favourites"
       ];
 
       if (noBackButtonRoutes.includes(currentPath)) {
@@ -70,13 +62,8 @@ export const TelegramProvider = ({
     } else {
       console.log('app failed')
     }
-  }, [currentPath]);
-
-  // useEffect(() => {
-  //   if (webApp) {
-  //     console.log('web app initDataUnsafe', webApp?.initDataUnsafe);
-  //   }
-  // }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
 
   const value = useMemo(() => {
     return webApp
@@ -96,4 +83,5 @@ export const TelegramProvider = ({
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTelegram = () => useContext(TelegramContext);
