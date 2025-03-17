@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { ITelegramUser, IWebApp } from "./telegram.types";
+import { useCurrentPath } from "../path-provider";
 
 export interface ITelegramContext {
   webApp?: IWebApp;
@@ -14,16 +15,45 @@ export const TelegramProvider = ({
 }) => {
   const [webApp, setWebApp] = useState<IWebApp | null>(null);
 
+  const { currentPath } = useCurrentPath();
+
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const app = (window as any).Telegram?.WebApp;
 
     console.log('initial app');
 
+    const noBackButtonRoutes = [
+      "/",
+      "/faq-support",
+      "/subscribe",
+      "/subscribe/payment",
+      "/sound"
+    ];
+
     if (app) {
       console.log('app success!', app)
       app.ready();
       setWebApp(app);
+
+      const backButton = app.BackButton;
+
+      console.log('currentPath: ', currentPath);
+
+      if (noBackButtonRoutes.includes(currentPath)) {
+        console.log('currentPath include: ', currentPath);
+        backButton.hide();
+      } else {
+        backButton.show();
+      }
+
+      backButton.onClick(() => {
+        window.history.back();
+      });
+
+      return () => {
+        backButton.hide();
+      };
     } else {
       console.log('app failed')
     }

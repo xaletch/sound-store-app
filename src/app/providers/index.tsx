@@ -2,15 +2,18 @@ import { PropsWithChildren } from 'react'
 import { TelegramProvider } from './telegram'
 import { ReduxProvider } from './redux-provider'
 import { AuthProvider } from './auth-provider'
+import { CurrentPathProvider } from './path-provider'
 
 export const Provider = ({ children }: PropsWithChildren) => {
   return (
-    <TelegramProvider>
+    <CurrentPathProvider>
+      <TelegramProvider>
         <ReduxProvider>
           <AuthProvider>
             {children}
           </AuthProvider>
         </ReduxProvider>
-    </TelegramProvider>
+      </TelegramProvider>
+    </CurrentPathProvider>
   )
 }
