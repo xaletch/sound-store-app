@@ -6,7 +6,7 @@ export const TrackPay = ({ id }: { id: number }) => {
   }
   
   return (
-    <button onClick={handlePay}>
+    <button onClick={handlePay} className="cursor-pointer">
       <PayIcon />
     </button>
   )

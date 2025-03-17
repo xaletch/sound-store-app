@@ -28,3 +28,5 @@ export * from './download'
 export * from './arrow'
 
 export * from './pay'
+
+export * from './full'

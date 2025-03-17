@@ -6,7 +6,7 @@ export const Footer = () => {
       <div className="pt-8 pb-2">
         <Logo cl={'w-5 h-5'} />
         <div className="flex items-center justify-between flex-wrap gap-3 mt-5">
-          <p className="text-[6px] text-[#e7e4dd] font-medium max-w-[260px]">
+          <p className="text-[6px] md:text-xs text-[#e7e4dd] font-medium max-w-[260px] md:max-w-xl">
             All rights reserved. No part of this publication may be reproduced, stored in a retrieval system or transmitted, in any form or by any means, electronic, mechanical, photocopying, recording or otherwise, without permission in writing from the publisher.
           </p>
           <div className="flex items-center gap-3">

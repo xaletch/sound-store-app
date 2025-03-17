@@ -12,7 +12,7 @@ function RouteComponent() {
 
   useEffect(() => {
     setCurrentPath('faq-support');
-  }, []);
+  }, [setCurrentPath]);
   
   return <FaqSupport />
 }

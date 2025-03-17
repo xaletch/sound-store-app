@@ -11,6 +11,6 @@ function RouteComponent() {
   const { setCurrentPath } = useCurrentPath();
   useEffect(() => {
     setCurrentPath('/subscribe/payment/');
-  }, []);
+  }, [setCurrentPath]);
   return <Payment />
 }

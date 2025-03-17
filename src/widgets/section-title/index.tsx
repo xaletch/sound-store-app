@@ -8,7 +8,7 @@ interface SectionTitleProps {
 export const SectionTitle = ({ children, title }: SectionTitleProps) => {
   return (
     <div className="flex items-center justify-between mb-4.5">
-      <h2>{title}</h2>
+      <h2 className="md:text-lg">{title}</h2>
       {children}
     </div>
   )

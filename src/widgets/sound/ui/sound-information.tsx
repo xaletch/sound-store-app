@@ -11,7 +11,7 @@ export const SoundInformation = () => {
       <div className="px-3 py-4">
         <div className="flex justify-between">
           <SoundImage image={pack?.PhotoPath || 'undefiend'} name={pack?.Autor || ''} />
-          <div className="ml-6">
+          <div className="ml-6 md:flex md:flex-col md:justify-between">
             <SoundName name={pack?.Name || ''} genre={pack?.Genre || ''} album_name={""} />
             <SoundWrapperButton>
               <ButtonTry />

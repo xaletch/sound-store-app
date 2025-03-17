@@ -11,6 +11,6 @@ function RouteComponent() {
   const { setCurrentPath } = useCurrentPath();
   useEffect(() => {
     setCurrentPath('/sound');
-  }, []);
+  }, [setCurrentPath]);
   return <Sound></Sound>
 }

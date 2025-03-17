@@ -10,7 +10,7 @@ export const SubscribeContent = () => {
     <div>
       <SubscribeSort select={select}/>
       <SubscribeCards select={select} selectTariff={selectTariff} />
-      <div className="mt-8">
+      <div className="mt-8 md:mt-16 md:max-w-xl md:mx-auto">
         <BigButton cl={selectTariff ? 'bg-[#7cc0ab]' : ''} href={"payment/"} disabled={!selectTariff}>
           {selectTariff ? 'Перейти к оплате'  : 'Выбери тариф'}
         </BigButton>

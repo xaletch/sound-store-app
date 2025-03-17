@@ -38,7 +38,7 @@ export const MobileNavbar = () => {
           <div key={index} className="flex flex-col">
             <Link to={item.href}>
               <div className={`w-[35px] mx-auto ${item.paths.includes(location) ? 'icon-active' : ''}`}>{item.icon}</div>
-              <div className={`text-xs font-medium text-center ${item.paths.includes(location) ? 'text-[#436c5f]' : ''}`}>{item.name}</div>
+              <div className={`text-xs md:text-base font-medium text-center ${item.paths.includes(location) ? 'text-[#436c5f]' : ''}`}>{item.name}</div>
             </Link>
           </div>
         ))}

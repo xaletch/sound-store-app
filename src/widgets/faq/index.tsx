@@ -1,6 +1,6 @@
 export const Faq = () => {
   return (
-    <div className="flex-1">
+    <div className="flex-1 md:max-w-xl md:mx-auto">
       <h1 className="text-xl font-medium text-center">FAQ</h1>
       <div className="my-4">
         <div>

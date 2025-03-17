@@ -6,6 +6,6 @@ export const TrackDownload = ({ id }: { id: number }) => {
   }
 
   return (
-    <button onClick={handleDownload}><DownloadIcon /></button>
+    <button onClick={handleDownload} className="cursor-pointer"><DownloadIcon /></button>
   )
 }

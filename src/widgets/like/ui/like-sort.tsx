@@ -64,9 +64,9 @@ export const LikeSort = () => {
   return (
     <div className="mt-4">
       <div className="flex items-center gap-1">
-        <FilterButton cl={'px-5 min-w-[107px] max-w-[107px] w-full'} onClick={() => handleFilterClick("Жанр")}>Жанр</FilterButton>
+        <FilterButton cl={'px-5 min-w-[107px] max-w-[107px] w-full md:min-w-[220px]'} onClick={() => handleFilterClick("Жанр")}>Жанр</FilterButton>
         <FilterButton cl={"px-2.5 flex-1 min-w-[130px]"} onClick={() => handleFilterClick("Инструменты")}>Инструменты</FilterButton>
-        <FilterButton cl={"px-3 min-w-[107px] max-w-[107px] w-full"} onClick={() => handleFilterClick("Ваншоты")}>Ваншоты</FilterButton>
+        <FilterButton cl={"px-3 min-w-[107px] max-w-[107px] w-full md:min-w-[220px]"} onClick={() => handleFilterClick("Ваншоты")}>Ваншоты</FilterButton>
       </div>
       {activeFilter && (
         <div className="overflow-x-auto mt-4 screen">

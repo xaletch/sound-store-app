@@ -12,19 +12,19 @@ interface TrackCardProps {
 }
 export const TrackCard = ({ image, name, genre, time, bpm, isLike, isPurchased, id }: TrackCardProps) => {
   return (
-    <div className="grid grid-cols-[40px_10px_65px_38px_25px_12px_16px] responsive-grid justify-between items-center px-1">
+    <div className="grid grid-cols-[40px_10px_65px_38px_25px_12px_16px] md:grid-cols-[50px_25px_100px_38px_25px_20px_20px] responsive-grid justify-between items-center px-1">
       <div className="w-full">
         <img className="w-full h-auto rounded-md" src={image} alt={name} />
       </div>
       <div>
         <TrackLose />
       </div>
-      <div className="flex flex-col font-medium text-xs">
+      <div className="flex flex-col font-medium text-xs md:text-base">
         <div>{name}</div>
         <span className="text-[#1D1F22]/20">{genre}</span>
       </div>
-      <div className="font-medium text-[#1D1F22]/20 text-xs">{time}</div>
-      <div className="font-medium text-[#1D1F22]/20 text-xs">{bpm}</div>
+      <div className="font-medium text-[#1D1F22]/20 text-xs md:text-base">{time}</div>
+      <div className="font-medium text-[#1D1F22]/20 text-xs md:text-base">{bpm}</div>
       {isPurchased ? <TrackDownload id={id} /> : <TrackPay id={id} />}
       <TrackLike isLike={isLike} id={id} />
     </div>
