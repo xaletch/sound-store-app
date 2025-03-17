@@ -19,8 +19,7 @@ export const TelegramProvider = ({
 
   useEffect(() => {
     setCurrentPath(location.pathname);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname, setCurrentPath]);
+  }, [setCurrentPath]);
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -62,8 +61,7 @@ export const TelegramProvider = ({
     } else {
       console.log('app failed')
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname]);
+  }, [currentPath]);
 
   const value = useMemo(() => {
     return webApp
