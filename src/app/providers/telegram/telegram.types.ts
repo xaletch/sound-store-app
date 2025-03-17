@@ -35,10 +35,10 @@ export interface IWebApp {
   headerColor: string;
   backgroundColor: string;
   BackButton: {
-    hide(): unknown;
-    show(): void;
-    isVisible: boolean;
-    onClick(): unknown;
+    show: () => void;
+    hide: () => void;
+    onClick: (callback: () => void) => void;
+    offClick: (callback: () => void) => void;
   };
   MainButton: {
     text: string;
