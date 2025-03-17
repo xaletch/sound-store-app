@@ -1,4 +1,5 @@
 import { foldersSlice } from "@/entities/folders/model/slice";
+import { lovedSlice } from "@/entities/loved/model/slice";
 import { soundSlice } from "@/entities/sound/model/slice";
 import { subscribeDataSlice } from "@/entities/subscribe/model/slice";
 import { subscribeSlice } from "@/features/subscribe/model/slice";
@@ -14,6 +15,7 @@ export const store = configureStore({
         subscribers: subscribeDataSlice.reducer,
         folders: foldersSlice.reducer,
         sounds: soundSlice.reducer,
+        loved: lovedSlice.reducer,
     },
 
     middleware(getDefaultMiddleware) {

@@ -1,21 +1,23 @@
 import { SoundContent } from "@/widgets"
 import { LikeSort } from "./like-sort"
+import { useSelector } from "react-redux";
+import { lovedSelector } from "@/entities/loved/model/selector";
+import { LoveNot } from "./not";
 
 export const LikeContent = () => {
-  const data = Array(6).fill({
-    image: "/image/executor.png",
-    name: "Название",
-    genre: "Жанр",
-    time: "0:17",
-    bpm: 115,
-    isLike: true,
-    isPurchased: true,
-  });
+  const { lovedTracks } = useSelector(lovedSelector);
 
   return (
-    <div>
-      <LikeSort />
-      <SoundContent data={data} />
-    </div>
+    <>
+      {lovedTracks.length > 0 ?
+        (
+          <div>
+            <LikeSort />
+            <SoundContent data={lovedTracks} />
+          </div>
+        )
+      : <LoveNot />
+      }
+    </>
   )
 }

@@ -6,12 +6,12 @@ export const Folders = () => {
     <div className="px-4 pb-4">
       <FoldersSort />
       <FoldersCardWrapper>
-        <FolderCard href={"#"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
-        <FolderCard href={"#"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
-        <FolderCard href={"#"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
-        <FolderCard href={"#"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
-        <FolderCard href={"#"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
-        <FolderCard href={"#"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} />
+        <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} id={"1"} />
+        <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} id={"2"} />
+        <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} id={"3"} />
+        <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} id={"4"} />
+        <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} id={"5"} />
+        <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} id={"6"} />
       </FoldersCardWrapper>
     </div>
   )

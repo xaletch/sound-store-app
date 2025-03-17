@@ -1,8 +1,12 @@
 import { PayIcon } from "@/shared/icons"
 
-export const TrackPay = () => {
+export const TrackPay = ({ id }: { id: number }) => {
+  const handlePay = () => {
+    console.log(id);
+  }
+  
   return (
-    <button>
+    <button onClick={handlePay}>
       <PayIcon />
     </button>
   )

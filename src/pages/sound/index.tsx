@@ -21,7 +21,7 @@ export const Sound = () => {
   return (
     <div className="px-4 pb-4">
       <SoundInformation />
-      <SoundContent />
+      <SoundContent data={sounds?.PackInfo.Tracks || []}/>
     </div>
   )
 }

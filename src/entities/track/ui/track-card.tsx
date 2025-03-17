@@ -8,8 +8,9 @@ interface TrackCardProps {
   bpm: number;
   isLike: boolean;
   isPurchased: boolean;
+  id: number;
 }
-export const TrackCard = ({ image, name, genre, time, bpm, isLike, isPurchased }: TrackCardProps) => {
+export const TrackCard = ({ image, name, genre, time, bpm, isLike, isPurchased, id }: TrackCardProps) => {
   return (
     <div className="grid grid-cols-[40px_10px_65px_38px_25px_12px_16px] responsive-grid justify-between items-center px-1">
       <div className="w-full">
@@ -24,8 +25,8 @@ export const TrackCard = ({ image, name, genre, time, bpm, isLike, isPurchased }
       </div>
       <div className="font-medium text-[#1D1F22]/20 text-xs">{time}</div>
       <div className="font-medium text-[#1D1F22]/20 text-xs">{bpm}</div>
-      {isPurchased ? <TrackDownload /> : <TrackPay />}
-      <TrackLike isLike={isLike}/>
+      {isPurchased ? <TrackDownload id={id} /> : <TrackPay id={id} />}
+      <TrackLike isLike={isLike} id={id} />
     </div>
   )
 }
