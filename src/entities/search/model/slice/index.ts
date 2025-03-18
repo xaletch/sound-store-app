@@ -16,7 +16,8 @@ export const searchTracksSlice = createSlice({
   initialState,
   reducers: {
     setTracks: (state, action: PayloadAction<TracksData[]>) => {
-      state.tracks = [...state.tracks, ...action.payload];
+      const newTracks = action.payload.filter((newTrack) => !state.tracks.some((existingTrack) => existingTrack.Id === newTrack.Id));
+      state.tracks = [...state.tracks, ...newTracks];
     },
     nextPage: (state) => {
       state.currentPage += 1;
