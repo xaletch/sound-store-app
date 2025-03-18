@@ -16,7 +16,7 @@ export interface TracksData {
   Downloads: number;
   Listenings: number;
   Downloaded: boolean;
-  Loved?: boolean;
+  Loved: boolean;
 }
 
 export interface SoundResponse {
