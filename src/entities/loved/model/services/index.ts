@@ -1,5 +1,5 @@
 import { API } from "@/shared/api";
-import { LovedRequest, LovedResponse } from "../types";
+import { LovedRequest, LovedResponse, LovedTrack } from "../types";
 
 export const LovedAPI = API.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,7 +18,7 @@ export const LovedAPI = API.injectEndpoints({
       }),
       providesTags: ['LOVED'],
     }),
-    lovedTrack: builder.mutation<void, LovedRequest>({
+    lovedTrack: builder.mutation<void, LovedTrack>({
       query: (req) => ({
         url: 'sounds/tg/lovetrack',
         method: 'POST',
@@ -28,7 +28,7 @@ export const LovedAPI = API.injectEndpoints({
       }),
       invalidatesTags: ['LOVED'],
     }),
-    unLovedTrack: builder.mutation<void, LovedRequest>({
+    unLovedTrack: builder.mutation<void, LovedTrack>({
       query: (req) => ({
         url: 'sounds/tg/unlovetrack',
         method: 'DELETE',

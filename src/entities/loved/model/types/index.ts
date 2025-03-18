@@ -10,3 +10,7 @@ export interface LovedRequest {
   Type: string;
   Instruments: number[] | null;
 }
+
+export interface LovedTrack {
+  id: string;
+}
