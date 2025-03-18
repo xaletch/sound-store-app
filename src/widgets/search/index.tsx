@@ -34,7 +34,7 @@ export const SearchSort = () => {
       <Search />
       <Sort />
       <SoundContent data={tracks || []}  />
-      {popularTracks && popularTracks?.Tracks.length < 10 && (
+      {popularTracks && popularTracks?.Tracks.length < 9 && (
         <div className="mt-8 md:mt-16">
           <button onClick={showMore} className="max-w-[280px] mx-auto px-10 py-2 bg-[#7cc0ab] rounded-3xl border border-black text-sm md:text-base font-medium flex items-center justify-center hover:opacity-80 duration-300 cursor-pointer">Загрузить еще</button>
         </div>
