@@ -1,5 +1,5 @@
 import { API } from "@/shared/api";
-import { SoundRequest, SoundResponse } from "../types";
+import { SoundPhotoResponse, SoundRequest, SoundResponse } from "../types";
 
 export const SoundAPI = API.injectEndpoints({
   endpoints: (builder) => ({
@@ -12,8 +12,17 @@ export const SoundAPI = API.injectEndpoints({
         }
       }),
       providesTags: ['LOVED']
+    }),
+    getPackPhoto: builder.query<SoundPhotoResponse, SoundRequest>({
+      query: (req) => ({
+        url: 'sounds/tg/getpackphoto',
+        method: 'GET',
+        headers: {
+          id: req.id.toString()
+        }
+      }),
     })
   })
 });
 
-export const { useGetSoundQuery } = SoundAPI;
+export const { useGetSoundQuery, useGetPackPhotoQuery } = SoundAPI;

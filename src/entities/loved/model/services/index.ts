@@ -6,7 +6,12 @@ export const LovedAPI = API.injectEndpoints({
     getLoved: builder.query<LovedResponse, LovedRequest>({
       query: (req) => ({
         url: 'sounds/tg/getlovedtracks',
-        method: 'GET',
+        method: 'POST',
+        body: {
+          Genre: req.Genre,
+          Type: req.Type,
+          Instruments: req.Instruments,
+        },
         headers: {
           page: req.id
         }

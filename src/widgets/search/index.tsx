@@ -1,23 +1,23 @@
 import { Search } from "@/features/search"
 import { Sort } from "./sort"
 import { SoundContent } from "../sound"
+import { useGetAllTracksQuery } from "@/entities/folders/model/services";
 
 export const SearchSort = () => {
-  const data = Array(6).fill({
-    image: "/image/executor.png",
-    name: "Название",
-    genre: "Жанр",
-    time: "0:17",
-    bpm: 115,
-    isLike: false,
-    isPurchased: false,
+  const { data: popularTracks } = useGetAllTracksQuery({ 
+    page: "1",
+    Genre: "",
+    Type: "",
+    Instruments: [], 
   });
+  
+  
 
   return (
     <div className="mt-6">
       <Search />
       <Sort />
-      <SoundContent data={data}  />
+      <SoundContent data={popularTracks?.Tracks || []}  />
     </div>
   )
 }

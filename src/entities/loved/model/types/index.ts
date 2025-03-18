@@ -6,4 +6,7 @@ export interface LovedResponse {
 
 export interface LovedRequest {
   id: string;
+  Genre: string;
+  Type: string;
+  Instruments: number[] | null;
 }

@@ -1,4 +1,4 @@
-import { useGetSoundQuery } from "@/entities/sound/model/services";
+import { useGetPackPhotoQuery, useGetSoundQuery } from "@/entities/sound/model/services";
 import { setSoundPack, setSoundTracks } from "@/entities/sound/model/slice";
 import { Route } from "@/routes/_app/_layout/sound/$name";
 import { SoundContent, SoundInformation } from "@/widgets"
@@ -10,6 +10,7 @@ export const Sound = () => {
   const dispatch = useDispatch();
 
   const { data: sounds, isSuccess } = useGetSoundQuery({ id:  name});
+  const { data } = useGetPackPhotoQuery({ id:  name});
 
   useEffect(() => {
     if (sounds && isSuccess) {
@@ -20,6 +21,7 @@ export const Sound = () => {
 
   return (
     <div className="px-4 pb-4">
+      <img src={`data:image/png;base64, ${data?.Photo}`} alt="" />
       <SoundInformation />
       <SoundContent data={sounds?.PackInfo.Tracks || []}/>
     </div>

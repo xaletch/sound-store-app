@@ -6,7 +6,13 @@ import { useDispatch } from "react-redux";
 
 export const Favourites = () => {
   const dispatch = useDispatch();
-  const { data, isSuccess } = useGetLovedQuery({ id: '1' });
+
+  const { data, isSuccess } = useGetLovedQuery({ 
+    id: '1', 
+    Genre: '',
+    Type: '',
+    Instruments: []
+  });
 
   useEffect(() => {
     if (data && isSuccess) {

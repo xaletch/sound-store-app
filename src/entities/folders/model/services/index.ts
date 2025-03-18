@@ -1,5 +1,5 @@
 import { API } from "@/shared/api";
-import { FoldersRequest, FoldersResponse } from "../types";
+import { AllTracksRequest, FoldersRequest, FoldersResponse, PopularTracksRequest, TracksResponse } from "../types";
 
 export const FoldersAPI = API.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,8 +11,31 @@ export const FoldersAPI = API.injectEndpoints({
           page: req.id
         }
       }),
-    })
+    }),
+    getPopularTracks: builder.query<TracksResponse, PopularTracksRequest>({
+      query: (req) => ({
+        url: 'sounds/tg/getpopulartracks',
+        method: 'GET',
+        headers: {
+          page: req.page
+        }
+      }),
+    }),
+    getAllTracks: builder.query<TracksResponse, AllTracksRequest>({
+      query: (req) => ({
+        url: 'sounds/tg/gettracks',
+        method: 'POST',
+        body: {
+          Genre: req.Genre,
+          Type: req.Type,
+          Instruments: req.Instruments,
+        },
+        headers: {
+          page: req.page
+        }
+      })
+    }),
   })
 });
 
-export const { useGetPopularFoldersQuery } = FoldersAPI;
+export const { useGetPopularFoldersQuery, useGetPopularTracksQuery, useGetAllTracksQuery } = FoldersAPI;

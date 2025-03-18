@@ -16,7 +16,7 @@ export interface TracksData {
   Downloads: number;
   Listenings: number;
   Downloaded: boolean;
-  Loved: boolean;
+  Loved?: boolean;
 }
 
 export interface SoundResponse {
@@ -28,4 +28,8 @@ export interface SoundResponse {
 
 export interface SoundRequest {
   id: string;
+}
+
+export interface SoundPhotoResponse {
+  Photo: string;
 }

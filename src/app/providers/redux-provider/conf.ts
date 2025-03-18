@@ -2,6 +2,7 @@ import { foldersSlice } from "@/entities/folders/model/slice";
 import { lovedSlice } from "@/entities/loved/model/slice";
 import { soundSlice } from "@/entities/sound/model/slice";
 import { subscribeDataSlice } from "@/entities/subscribe/model/slice";
+import { filterLoveSlice } from "@/features/like/model/slice";
 import { subscribeSlice } from "@/features/subscribe/model/slice";
 import { API } from "@/shared/api";
 import { configureStore } from "@reduxjs/toolkit";
@@ -16,6 +17,7 @@ export const store = configureStore({
         folders: foldersSlice.reducer,
         sounds: soundSlice.reducer,
         loved: lovedSlice.reducer,
+        filterLove: filterLoveSlice.reducer,
     },
 
     middleware(getDefaultMiddleware) {
