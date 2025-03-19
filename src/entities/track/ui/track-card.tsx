@@ -17,7 +17,7 @@ export const TrackCard = ({ image, name, genre, time, bpm, isLike, isPurchased, 
         <img className="w-full h-auto rounded-md" src={image} alt={name} />
       </div>
       <div>
-        <TrackLose />
+        <TrackLose id={id} />
       </div>
       <div className="flex flex-col font-medium text-xs md:text-base">
         <div>{name}</div>

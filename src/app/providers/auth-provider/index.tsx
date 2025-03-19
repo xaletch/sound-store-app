@@ -2,6 +2,9 @@ import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import { useTelegram } from "../telegram";
 import { useAuthMutation } from "@/features/auth/models/services";
 import { CreateAuth } from "@/features/auth";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/entities/user/model/slice";
+import { UserData } from "@/entities/user/model/types";
 
 type AuthContextType = {
   isAuth: boolean;
@@ -11,6 +14,7 @@ export const AuthContext = createContext<AuthContextType>({ isAuth: false });
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const { webApp } = useTelegram();
+  const dispatch = useDispatch();
 
   const [isInitData, setInitData] = useState(localStorage.getItem("initData") || '');
 
@@ -32,6 +36,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       }
   
       const initData = webApp.initData;
+      const initDataUnsafe = webApp.initDataUnsafe;
       const res = await auth(initData).unwrap();
   
       console.log("initData", initData);
@@ -39,6 +44,14 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   
       if (res) {
         setInitData(initData);
+
+        const user: UserData = {
+          data: initDataUnsafe.user,
+          credits: res.Credits,
+          subscribe: res.CurentSubscribe
+        };
+
+        dispatch(setUser(user));
         CreateAuth("initData", initData);
       }
     }
@@ -48,14 +61,14 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   }
 
   useEffect(() => {
-    if (webApp && !isAuth) {
+    if (webApp) {
       if (webApp.initData) {
         authorize();
       } else {
         console.error("initData is not available yet.");
       }
     }
-  }, [webApp, isAuth]);
+  }, [webApp]);
 
   return (
     <AuthContext.Provider value={{ isAuth }}>

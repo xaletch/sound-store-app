@@ -33,7 +33,8 @@ export const FoldersAPI = API.injectEndpoints({
         headers: {
           page: req.page
         }
-      })
+      }),
+      providesTags: ['LOVED'],
     }),
   })
 });

@@ -3,6 +3,7 @@ import { lovedSlice } from "@/entities/loved/model/slice";
 import { searchTracksSlice } from "@/entities/search/model/slice";
 import { soundSlice } from "@/entities/sound/model/slice";
 import { subscribeDataSlice } from "@/entities/subscribe/model/slice";
+import { userSlice } from "@/entities/user/model/slice";
 import { filterLoveSlice } from "@/features/like/model/slice";
 import { subscribeSlice } from "@/features/subscribe/model/slice";
 import { API } from "@/shared/api";
@@ -20,6 +21,7 @@ export const store = configureStore({
         loved: lovedSlice.reducer,
         filterLove: filterLoveSlice.reducer,
         search: searchTracksSlice.reducer,
+        user: userSlice.reducer,
     },
 
     middleware(getDefaultMiddleware) {

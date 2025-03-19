@@ -4,7 +4,7 @@ import { SoundContent } from "../sound"
 import { useGetAllTracksQuery } from "@/entities/folders/model/services";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { nextPage, setTracks } from "@/entities/search/model/slice";
+import { setTracks } from "@/entities/search/model/slice";
 import { useSearchSelector } from "@/entities/search/model/selector";
 
 export const SearchSort = () => {
@@ -16,7 +16,7 @@ export const SearchSort = () => {
     page: currentPage.toString(),
     Genre: "",
     Type: "",
-    Instruments: [], 
+    Instruments: [],
   });
   
   useEffect(() => {
@@ -25,21 +25,21 @@ export const SearchSort = () => {
     }
   }, [popularTracks, dispatch]);
 
-  const showMore = () => {
-    dispatch(nextPage());
-  }
+  // const showMore = () => {
+  //   dispatch(nextPage());
+  // }
 
   return (
     <div className="mt-6">
       <Search />
       <Sort />
       <SoundContent data={tracks || []}  />
-      {popularTracks && popularTracks?.Tracks.length < 9 && (
+      {/* {popularTracks && popularTracks?.Tracks.length >= 10 && (
         <div className="mt-8 md:mt-16">
           <button onClick={showMore} className="max-w-[280px] mx-auto px-10 py-2 bg-[#7cc0ab] rounded-3xl border border-black text-sm md:text-base font-medium flex items-center justify-center hover:opacity-80 duration-300 cursor-pointer">Загрузить еще</button>
         </div>
       )
-      }
+      } */}
     </div>
   )
 }

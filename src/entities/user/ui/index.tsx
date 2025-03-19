@@ -1,8 +1,8 @@
 import { useMediaQuery } from "react-responsive";
 
 interface UserData {
-  avatar: string;
-  name: string;
+  avatar: string | undefined;
+  name: string | undefined;
 }
 
 export const User = ({ avatar, name }: UserData) => {
