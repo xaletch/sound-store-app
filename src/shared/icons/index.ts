@@ -4,6 +4,7 @@ export * from './credits'
 
 export * from './pause'
 export * from './play'
+export * from './play/play-bold'
 
 export * from './telegram'
 export * from './instagram'

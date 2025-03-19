@@ -1,11 +1,7 @@
 import { AudioControl, useAudioPlayer } from "@/features/audio-player";
 
 const tracks = [
-  'https://storage.yandexcloud.net/tma-dev-bits/audio/track-33?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Checksum-Mode=ENABLED&X-Amz-Credential=YCAJE4WdZjq2mm9lLqu6JbU8g%2F20250319%2Fru-central1%2Fs3%2Faws4_request&X-Amz-Date=20250319T135628Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&x-id=GetObject&X-Amz-Signature=8493aa4caa5e32a95bf8accdd730b56f5638189146f46d072cc045ed1e65a35e',
-  'https://storage.yandexcloud.net/tma-dev-bits/audio/track-33?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Checksum-Mode=ENABLED&X-Amz-Credential=YCAJE4WdZjq2mm9lLqu6JbU8g%2F20250319%2Fru-central1%2Fs3%2Faws4_request&X-Amz-Date=20250319T135628Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&x-id=GetObject&X-Amz-Signature=8493aa4caa5e32a95bf8accdd730b56f5638189146f46d072cc045ed1e65a35e',
-  'https://storage.yandexcloud.net/tma-dev-bits/audio/track-33?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Checksum-Mode=ENABLED&X-Amz-Credential=YCAJE4WdZjq2mm9lLqu6JbU8g%2F20250319%2Fru-central1%2Fs3%2Faws4_request&X-Amz-Date=20250319T135628Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&x-id=GetObject&X-Amz-Signature=8493aa4caa5e32a95bf8accdd730b56f5638189146f46d072cc045ed1e65a35e',
-  'https://storage.yandexcloud.net/tma-dev-bits/audio/track-33?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Checksum-Mode=ENABLED&X-Amz-Credential=YCAJE4WdZjq2mm9lLqu6JbU8g%2F20250319%2Fru-central1%2Fs3%2Faws4_request&X-Amz-Date=20250319T135628Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&x-id=GetObject&X-Amz-Signature=8493aa4caa5e32a95bf8accdd730b56f5638189146f46d072cc045ed1e65a35e',
-  'https://storage.yandexcloud.net/tma-dev-bits/audio/track-33?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Checksum-Mode=ENABLED&X-Amz-Credential=YCAJE4WdZjq2mm9lLqu6JbU8g%2F20250319%2Fru-central1%2Fs3%2Faws4_request&X-Amz-Date=20250319T135628Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&x-id=GetObject&X-Amz-Signature=8493aa4caa5e32a95bf8accdd730b56f5638189146f46d072cc045ed1e65a35e',
+  'https://storage.yandexcloud.net/tma-dev-bits/audio/track-32?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=YCAJEGYuKPjNlESjNCbip2Anw%2F20250319%2Fru-central1%2Fs3%2Faws4_request&X-Amz-Date=20250319T143042Z&X-Amz-Expires=3600&X-Amz-Signature=3C404CA193F041E2E4B7B596ACD72BC102BFA4D301C787233BF310C6DC3E20AA&X-Amz-SignedHeaders=host'
 ];
 
 export const AudioPlayer = () => {
