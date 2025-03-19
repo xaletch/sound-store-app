@@ -1,4 +1,4 @@
-import { DesktopNavbar, MobileNavbar } from "@/widgets"
+import { AudioPlayer, DesktopNavbar, MobileNavbar } from "@/widgets"
 import { PropsWithChildren } from "react"
 import { useMediaQuery } from 'react-responsive';
 
@@ -12,6 +12,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
           {children}
         </div>
         {!isDesktop && <MobileNavbar />}
+        <AudioPlayer />
       </main>
     </div>
   )
