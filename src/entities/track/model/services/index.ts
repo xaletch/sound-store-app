@@ -1,13 +1,14 @@
 import { API } from "@/shared/api";
+import { ListenTrackRequest, ListenTrackResponse } from "../types";
 
 export const TrackAPI = API.injectEndpoints({
   endpoints: (builder) => ({
-    listenTrack: builder.query({
+    listenTrack: builder.query<ListenTrackResponse, ListenTrackRequest>({
       query: (req) => ({
         url: 'sounds/tg/listentrack',
         method: 'GET',
         headers: {
-          id: req.id.toString()
+          trackid: req.id.toString()
         }
       }),
     }),

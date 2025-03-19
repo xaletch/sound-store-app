@@ -4,9 +4,10 @@ import { TracksData } from "@/entities/sound/model/types"
 
 interface SoundContentProps {
   data: TracksData[];
+  creator?: string;
 }
 
-export const SoundContent = ({ data }: SoundContentProps) => {
+export const SoundContent = ({ data, creator }: SoundContentProps) => {
   return (
     <div>
       <SoundListHead />
@@ -19,10 +20,11 @@ export const SoundContent = ({ data }: SoundContentProps) => {
               name={item.Name} 
               genre={item.Genre} 
               time={'1:30'} 
-              bpm={item.Downloads} 
+              bpm={item.Listenings} 
               isLike={item.Loved} 
               isPurchased={item.Downloaded}
               id={item.Id}
+              creator={creator || ''}
             />
           ))}
         </div>

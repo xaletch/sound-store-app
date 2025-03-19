@@ -16,7 +16,7 @@ export const Header = () => {
         <HeaderButton href={"/faq-support"} cl={"px-2 md:h-9 md:px-3 md:flex md:gap-3"} icon={<SupportIcon />} text={"Поддержка и FAQ"}/>
         <Logo />
         <div className="flex items-center gap-3">
-          <HeaderButton href={"/subscribe"} cl={"px-3 md:h-9 md:px-3 md:flex md:gap-3"} icon={<CreditsIcon />} text={user?.credits ? (user.credits.toString(), user.subscribe) : "подписка"}/>
+          <HeaderButton href={"/subscribe"} cl={"px-3 md:h-9 md:px-3 md:flex md:gap-3"} icon={<CreditsIcon />} text={user?.credits ? `${user.credits} ${user.subscribe || ''}` : "подписка"}/>
           {!isDesktop && <User avatar={user?.data.photo_url} name={user?.data.first_name} />}
         </div>
       </div>

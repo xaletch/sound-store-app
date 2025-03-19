@@ -1,9 +1,13 @@
+import { playerSelector } from "@/features/audio-player";
 import { AudioPlayer, DesktopNavbar, MobileNavbar } from "@/widgets"
 import { PropsWithChildren } from "react"
+import { useSelector } from "react-redux";
 import { useMediaQuery } from 'react-responsive';
 
 export const Layout = ({ children }: PropsWithChildren) => {
   const isDesktop = useMediaQuery({ minWidth: 768 });
+  const { isPlayer } = useSelector(playerSelector);
+  
   return (
     <div className="flex flex-col flex-1">
       <main className="flex flex-row relative">
@@ -12,7 +16,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
           {children}
         </div>
         {!isDesktop && <MobileNavbar />}
-        <AudioPlayer />
+        {isPlayer && <AudioPlayer />}
       </main>
     </div>
   )

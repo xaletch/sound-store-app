@@ -1,44 +1,76 @@
-import { AudioControl, useAudioPlayer } from "@/features/audio-player";
-
-const tracks = [
-  'https://storage.yandexcloud.net/tma-dev-bits/audio/track-32?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=YCAJEGYuKPjNlESjNCbip2Anw%2F20250319%2Fru-central1%2Fs3%2Faws4_request&X-Amz-Date=20250319T143042Z&X-Amz-Expires=3600&X-Amz-Signature=3C404CA193F041E2E4B7B596ACD72BC102BFA4D301C787233BF310C6DC3E20AA&X-Amz-SignedHeaders=host'
-];
+import { AudioControl, playerSelector, useAudioPlayer } from "@/features/audio-player";
+import { setCurrentTime } from "@/features/audio-player/model/slice";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export const AudioPlayer = () => {
-  const {
-    isPlaying,
-    currentTrack,
-    audioRef,
-    play,
-    pause,
-    nextTrack,
-    prevTrack,
-  } = useAudioPlayer(tracks[0]);
+  const dispatch = useDispatch();
 
-  const handleNext = () => {
-    const currentIndex = tracks.indexOf(currentTrack);
-    const nextIndex = (currentIndex + 1) % tracks.length;
-    nextTrack(tracks[nextIndex]);
+  const { playerTrack, isPlaying, currentTime } = useSelector(playerSelector);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const currentTimeRef = useRef(currentTime);
+
+  const { play, pause } = useAudioPlayer();
+
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.currentTime = currentTimeRef.current;
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
+
+      if (playerTrack) {
+        audioRef.current.currentTime = 0;
+        currentTimeRef.current = 0;
+      }
+    }
+  }, [isPlaying, playerTrack, currentTime]);
+
+  const handleTimeUpdate = () => {
+    currentTimeRef.current = audioRef?.current?.currentTime || 0;
+  }
+
+  useEffect(() => {
+    const track = audioRef.current;
+    if (track) {
+      track.addEventListener('timeupdate', handleTimeUpdate);
+
+      return () => {
+        track.removeEventListener('timeupdate', handleTimeUpdate);
+      };
+    }
+  }, []);
+
+  useEffect(() => {
+    const track = audioRef.current;
+    if (track && !isPlaying) {
+      dispatch(setCurrentTime(currentTimeRef.current));
+    }
+  }, [isPlaying, dispatch]);
+
+  const next = () => {
+    console.log('next');
   };
 
-  const handlePrev = () => {
-    const currentIndex = tracks.indexOf(currentTrack);
-    const prevIndex = (currentIndex - 1 + tracks.length) % tracks.length;
-    prevTrack(tracks[prevIndex]);
+  const prev = () => {
+    console.log('prev');
   };
 
   return (
-    <div className="fixed bottom-20 left-0 w-full px-5 md:px-5">
+    <div className="fixed bottom-20 left-0 md:left-[260px] w-full md:w-auto md:right-0 px-5 md:px-5">
       <div className="bg-[#e7e4dd] border border-black rounded-3xl">
         <AudioControl
           isPlaying={isPlaying}
           onPlay={play}
           onPause={pause}
-          onNext={handleNext}
-          onPrev={handlePrev}
+          onNext={next}
+          onPrev={prev} 
+          trackData={playerTrack}
         />
       </div>
-      <audio ref={audioRef} src={currentTrack} />
+      <audio ref={audioRef} src={playerTrack?.track || ''} />
     </div>
   )
 }
