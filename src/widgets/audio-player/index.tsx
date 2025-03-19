@@ -20,13 +20,15 @@ export const AudioPlayer = () => {
       } else {
         audioRef.current.pause();
       }
-
-      if (playerTrack) {
-        audioRef.current.currentTime = 0;
-        currentTimeRef.current = 0;
-      }
     }
   }, [isPlaying, playerTrack, currentTime]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      currentTimeRef.current = 0;
+    }
+  }, [playerTrack]);
 
   const handleTimeUpdate = () => {
     currentTimeRef.current = audioRef?.current?.currentTime || 0;
@@ -59,7 +61,7 @@ export const AudioPlayer = () => {
   };
 
   return (
-    <div className="fixed bottom-20 left-0 md:left-[260px] w-full md:w-auto md:right-0 px-5 md:px-5">
+    <div className="fixed bottom-20 md:bottom-10 left-0 md:left-[260px] w-full md:w-auto md:right-0 px-5 md:px-5">
       <div className="bg-[#e7e4dd] border border-black rounded-3xl">
         <AudioControl
           isPlaying={isPlaying}
