@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTracks } from "@/entities/search/model/slice";
 import { useSearchSelector } from "@/entities/search/model/selector";
+import { setPlayerTracks } from "@/features/audio-player/model/slice";
 
 export const SearchSort = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export const SearchSort = () => {
   useEffect(() => {
     if (popularTracks && popularTracks.Tracks) {
       dispatch(setTracks(popularTracks.Tracks));
+      dispatch(setPlayerTracks(popularTracks.Tracks));
     }
   }, [popularTracks, dispatch]);
 

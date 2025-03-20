@@ -1,5 +1,6 @@
 import { useGetPackPhotoQuery, useGetSoundQuery } from "@/entities/sound/model/services";
 import { setSoundPack, setSoundTracks } from "@/entities/sound/model/slice";
+import { setPlayerTracks } from "@/features/audio-player/model/slice";
 import { Route } from "@/routes/_app/_layout/sound/$name";
 import { SoundContent, SoundInformation } from "@/widgets"
 import { useEffect } from "react";
@@ -16,6 +17,7 @@ export const Sound = () => {
     if (sounds && isSuccess) {
       dispatch(setSoundPack(sounds.PackInfo.Pack));
       dispatch(setSoundTracks(sounds.PackInfo.Tracks));
+      dispatch(setPlayerTracks(sounds.PackInfo.Tracks));
     }
   }, [sounds]);
 

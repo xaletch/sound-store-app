@@ -1,10 +1,20 @@
 import { useGetPopularTracksQuery } from "@/entities/folders/model/services"
+import { setPlayerTracks } from "@/features/audio-player/model/slice"
 import { SamplesCard } from "@/features/samples"
 import { LinkButton } from "@/shared/ui"
 import { SectionTitle } from "@/widgets/section-title"
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
 
 export const PopularSamples = () => {
+  const dispatch = useDispatch();
   const { data: popularTracks } = useGetPopularTracksQuery({ page: 1 });
+
+  useEffect(() => {
+    if (popularTracks && popularTracks.Tracks) {
+      dispatch(setPlayerTracks(popularTracks.Tracks));
+    }
+  }, [popularTracks, dispatch]);
 
   return (
     <div className="px-4">
