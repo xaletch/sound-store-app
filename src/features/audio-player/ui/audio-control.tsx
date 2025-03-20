@@ -1,8 +1,11 @@
+import { LikeIcon, LikeSelectPlayerIcon } from "@/shared/icons";
 import { IPlayerTrack } from "../model/types";
 import { NextButton } from "./next-button";
 import { PauseButton } from "./payse-button";
 import { PlayButton } from "./play-button";
 import { PrevButton } from "./prev-button";
+import { useSelector } from "react-redux";
+import { playerSelector } from "../model/selector";
 
 interface AudioControlProps {
   isPlaying: boolean;
@@ -10,10 +13,15 @@ interface AudioControlProps {
   onPause: () => void;
   onNext: () => void;
   onPrev: () => void;
+  onLike: () => void;
   trackData: IPlayerTrack | null;
 }
 
-export const AudioControl = ({ isPlaying, onPlay, onPause, onNext, onPrev, trackData }: AudioControlProps) => {
+export const AudioControl = ({ isPlaying, onPlay, onPause, onNext, onPrev, onLike, trackData }: AudioControlProps) => {
+  const { lovedTracks } = useSelector(playerSelector);
+
+  const IS_LOVE = trackData?.id ? lovedTracks[trackData.id] : false;
+
   return (
     <div className="px-6 py-3">
       <div className="flex items-center justify-between gap-4">
@@ -28,7 +36,8 @@ export const AudioControl = ({ isPlaying, onPlay, onPause, onNext, onPrev, track
           ) : (
             <PlayButton onClick={onPlay} />
           )}
-          <NextButton onClick={onNext} />
+          <NextButton onClick={onNext} /> 
+          <button onClick={onLike} className="cursor-pointer">{IS_LOVE ? <LikeSelectPlayerIcon /> : <LikeIcon />}</button>
         </div>
       </div>
     </div>

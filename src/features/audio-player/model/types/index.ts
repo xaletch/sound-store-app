@@ -3,6 +3,7 @@ export type IPlayerTrack = {
   creator: string;
   id: number;
   track: string;
+  loved?: boolean;
 }
 
 export interface ITrackData {
@@ -15,4 +16,9 @@ export interface ITrackData {
   Listenings?: number;
   Downloaded?: boolean;
   Loved?: boolean;
+}
+
+export type ILovedTracks = {
+  trackId: number;
+  loved: boolean;
 }

@@ -9,9 +9,10 @@ interface TrackLoseProps {
   id: number;
   name: string;
   creator?: string;
+  loved?: boolean;
 }
 
-export const TrackLose = ({ id, name, creator }: TrackLoseProps) => {
+export const TrackLose = ({ id, name, creator, loved }: TrackLoseProps) => {
   const dispatch = useDispatch();
   const [play] = useLazyListenTrackQuery();
 
@@ -37,7 +38,8 @@ export const TrackLose = ({ id, name, creator }: TrackLoseProps) => {
           name: name,
           creator: creator || '',
           id: id,
-          track: res.Link
+          track: res.Link,
+          loved: loved || false
         };
 
         dispatch(setPlayerTrack(trackData));

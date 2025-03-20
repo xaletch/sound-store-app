@@ -10,7 +10,7 @@ export const AudioPlayer = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const currentTimeRef = useRef(currentTime);
 
-  const { play, pause, next, prev } = useAudioPlayer({ tracks: tracks || [] });
+  const { play, pause, next, prev, like } = useAudioPlayer({ tracks: tracks || [] });
 
   useEffect(() => {
     if (audioRef.current) {
@@ -67,6 +67,7 @@ export const AudioPlayer = () => {
           onPause={pause}
           onNext={next}
           onPrev={prev} 
+          onLike={like}
           trackData={playerTrack}
         />
       </div>

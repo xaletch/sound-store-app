@@ -23,6 +23,7 @@ export * from './next'
 export * from './like'
 export * from './like/thin'
 export * from './like/select'
+export * from './like/like-select'
 
 export * from './add'
 export * from './download'

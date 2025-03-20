@@ -10,9 +10,10 @@ interface ButtonTryProps {
   id: number;
   name: string;
   creator?: string;
+  loved?: boolean;
 }
 
-export const ButtonTry = ({ id, name, creator }: ButtonTryProps) => {
+export const ButtonTry = ({ id, name, creator, loved }: ButtonTryProps) => {
   const dispatch = useDispatch();
   const [play] = useLazyListenTrackQuery();
   
@@ -39,7 +40,8 @@ export const ButtonTry = ({ id, name, creator }: ButtonTryProps) => {
             name: name,
             creator: creator || '',
             id: id,
-            track: res.Link
+            track: res.Link,
+            loved: loved || false
           };
     
           dispatch(setPlayerTrack(trackData));

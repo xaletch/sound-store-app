@@ -9,6 +9,7 @@ export const SoundInformation = ({ photo }: { photo: string }) => {
   const trackId = tracks && tracks.length > 0 ? tracks[0].Id : 0;
   const trackName = tracks && tracks.length > 0 ? tracks[0].Name : '';
   const packAuthor = pack?.Autor || '';
+  const trackLoved = tracks && tracks.length > 0 ? tracks[0].Loved : false;
 
   return (
     <div className="border border-black/20 rounded-xl">
@@ -18,7 +19,7 @@ export const SoundInformation = ({ photo }: { photo: string }) => {
           <div className="ml-6 md:flex md:flex-col md:justify-between">
             <SoundName name={pack?.Name || ''} genre={pack?.Genre || ''} album_name={""} />
             <SoundWrapperButton>
-              <ButtonTry id={trackId} name={trackName} creator={packAuthor} />
+              <ButtonTry id={trackId} name={trackName} creator={packAuthor} loved={trackLoved} />
               <ButtonPay />
             </SoundWrapperButton>
           </div>

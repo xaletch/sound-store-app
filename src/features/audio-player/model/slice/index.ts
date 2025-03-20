@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IPlayerTrack, ITrackData } from "../types";
+import { ILovedTracks, IPlayerTrack, ITrackData } from "../types";
 
 export interface PlayerState {
   playerTrack: IPlayerTrack | null;
@@ -8,6 +8,7 @@ export interface PlayerState {
   currentPlayingId: number | null;
   currentTime: number;
   tracks: ITrackData[] | null;
+  lovedTracks: Record<number, boolean>;
 }
 
 const initialState: PlayerState = {
@@ -17,6 +18,7 @@ const initialState: PlayerState = {
   currentPlayingId: null,
   currentTime: 0,
   tracks: null,
+  lovedTracks: {}
 };
 
 export const playerSlice = createSlice({
@@ -40,9 +42,14 @@ export const playerSlice = createSlice({
     },
     setPlayerTracks: (state, action: PayloadAction<ITrackData[] | null>) => {
       state.tracks = action.payload
+    },
+    setLovedPlayerTracks: (state, action: PayloadAction<ILovedTracks[]>) => {
+      action.payload.forEach(update => {
+        state.lovedTracks[update.trackId] = update.loved;
+      });
     }
   },
 });
 
-export const { setPlayerTrack, setIsPlaying, setIsPlayer, setCurrentPlayingId, setCurrentTime, setPlayerTracks } = playerSlice.actions;
+export const { setPlayerTrack, setIsPlaying, setIsPlayer, setCurrentPlayingId, setCurrentTime, setPlayerTracks, setLovedPlayerTracks } = playerSlice.actions;
 export default playerSlice.reducer;
