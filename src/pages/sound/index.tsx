@@ -23,8 +23,7 @@ export const Sound = () => {
 
   return (
     <div className="px-4 pb-4">
-      <img src={`data:image/png;base64, ${data?.Photo}`} alt="" />
-      <SoundInformation />
+      <SoundInformation photo={data?.Photo || ''} />
       <SoundContent data={sounds?.PackInfo.Tracks || []} creator={sounds?.PackInfo.Pack.Autor} />
     </div>
   )
