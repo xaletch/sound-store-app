@@ -6,8 +6,8 @@ export interface LovedResponse {
 
 export interface LovedRequest {
   id: string;
-  Genre: string;
-  Type: string;
+  Genre: number[] | null;
+  Type: number[] | null;
   Instruments: number[] | null;
 }
 

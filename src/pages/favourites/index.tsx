@@ -9,8 +9,8 @@ export const Favourites = () => {
 
   const { data, isSuccess } = useGetLovedQuery({ 
     id: '1', 
-    Genre: '',
-    Type: '',
+    Genre: [],
+    Type: [],
     Instruments: []
   });
 
