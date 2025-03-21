@@ -29,7 +29,7 @@ export interface PopularTracksRequest {
 
 export interface AllTracksRequest {
   page: string;
-  Genre: string;
-  Type: string;
+  Genre: string[];
+  Type: string[];
   Instruments: number[] | null;
 }

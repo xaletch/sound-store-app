@@ -36,7 +36,21 @@ export const FoldersAPI = API.injectEndpoints({
       }),
       providesTags: ['LOVED'],
     }),
+    getAllFolders: builder.query<FoldersResponse, AllTracksRequest>({
+      query: (req) => ({
+        url: 'sounds/tg/getpacks',
+        method: 'POST',
+        body: {
+          Genre: req.Genre,
+          Type: req.Type,
+          Instruments: req.Instruments,
+        },
+        headers: {
+          page: req.page
+        }
+      })
+    }),
   })
 });
 
-export const { useGetPopularFoldersQuery, useGetPopularTracksQuery, useGetAllTracksQuery } = FoldersAPI;
+export const { useGetPopularFoldersQuery, useGetPopularTracksQuery, useGetAllTracksQuery, useGetAllFoldersQuery } = FoldersAPI;

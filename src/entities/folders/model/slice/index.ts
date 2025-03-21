@@ -3,10 +3,12 @@ import { PackData } from "../types";
 
 export interface FoldersState {
   popularPack:  PackData[] | null;
+  folders: PackData[] | null
 }
 
 const initialState: FoldersState = {
   popularPack: [],
+  folders: [],
 };
 
 export const foldersSlice = createSlice({
@@ -16,8 +18,11 @@ export const foldersSlice = createSlice({
     setPopularPack: (state, action: PayloadAction<PackData[]>) => {
       state.popularPack = action.payload;
     },
+    setFolders: (state, action: PayloadAction<PackData[]>) => {
+      state.folders = action.payload
+    }
   },
 });
 
-export const { setPopularPack } = foldersSlice.actions;
+export const { setPopularPack, setFolders } = foldersSlice.actions;
 export default foldersSlice.reducer;

@@ -1,18 +1,56 @@
+import { foldersSelector } from "@/entities/folders/model/selector"
+import { useGetAllFoldersQuery } from "@/entities/folders/model/services"
+import { setFolders } from "@/entities/folders/model/slice"
+import { filterSelector } from "@/features/filters/model/selector"
 import { FolderCard } from "@/features/folders"
-import { FoldersCardWrapper, FoldersSort } from "@/widgets/folders"
+import { FoldersCardWrapper } from "@/widgets/folders"
+import { NotFound } from "@/widgets/not-found"
+import { Sort } from "@/widgets/sort"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 export const Folders = () => {
+  const dispatch = useDispatch();
+  const { selectedFilters } = useSelector(filterSelector)
+
+  const { folders } = useSelector(foldersSelector);
+
+  const { data } = useGetAllFoldersQuery({ 
+    page: '1',
+    Genre: selectedFilters.Genre || [],
+    Type: selectedFilters.Type || [],
+    Instruments: selectedFilters.Instruments || [] 
+  });
+
+  useEffect(() => {
+    if (data && data.Packs) {
+      dispatch(setFolders(data.Packs));
+    }
+  }, [data, dispatch])
+  
   return (
     <div className="px-4 pb-4">
-      <FoldersSort />
-      <FoldersCardWrapper>
-        <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} id={"1"} />
-        <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} id={"2"} />
-        <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} id={"3"} />
-        <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} id={"4"} />
-        <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} id={"5"} />
-        <FolderCard href={"/sound/$name"} image={"/image/executor.png"} name={"Название"} genre={"Жанр"} naming={"Audentuty Records"} id={"6"} />
-      </FoldersCardWrapper>
+      <h1 className="text-center font-medium text-xl">Фильтры</h1>
+      <div className="my-6">
+        <Sort />
+      </div>
+      {folders && folders?.length > 0 ? (
+        <FoldersCardWrapper>
+          {folders.map((item, index) => (
+            <FolderCard 
+              key={index}
+              href={`/sound/${item.Id}`} 
+              image={item.PhotoPath || "/image/executor.png"} 
+              name={item.Name} 
+              genre={item.Genre} 
+              naming={item.Autor} 
+              id={item.Id.toString()} 
+            />
+          ))}
+        </FoldersCardWrapper>
+      ) : (
+        <NotFound text="Ничего не найдено"/>
+      )}
     </div>
   )
 }
