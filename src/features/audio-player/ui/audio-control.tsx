@@ -23,7 +23,7 @@ export const AudioControl = ({ isPlaying, onPlay, onPause, onNext, onPrev, onLik
 
   const IS_LOVE = trackData?.id ? lovedTracks[trackData.id] : false;
 
-  console.log('trackData', trackData)
+  console.log(trackData);
 
   return (
     <div className="px-6 py-3">

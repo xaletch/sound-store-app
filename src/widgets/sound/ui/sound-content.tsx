@@ -1,6 +1,7 @@
 import { TrackCard, TrackLoader } from "@/entities/track"
 import { SoundListHead } from "./sound-list/sound-list-head"
 import { TracksData } from "@/entities/sound/model/types"
+import { NotFound } from "@/widgets/not-found";
 
 interface SoundContentProps {
   data: TracksData[];
@@ -20,21 +21,25 @@ export const SoundContent = ({ data, creator, isLoading }: SoundContentProps) =>
             ))
           :
           (
-            data.map((item: TracksData, index) => (
-              <TrackCard 
-                key={index}
-                image={'/image/executor.png'} 
-                name={item.Name} 
-                genre={item.Genre} 
-                time={'1:30'} 
-                bpm={item.Listenings} 
-                isLike={item.Loved} 
-                isPurchased={item.Downloaded}
-                id={item.Id}
-                creator={creator || ''}
-                packId={item.PackId}
-              />
-            ))
+            data.length > 0 ? (
+              data.map((item: TracksData, index) => (
+                <TrackCard 
+                  key={index}
+                  image={'/image/executor.png'} 
+                  name={item.Name} 
+                  genre={item.Genre} 
+                  time={'1:30'} 
+                  bpm={item.Listenings} 
+                  isLike={item.Loved} 
+                  isPurchased={item.Downloaded}
+                  id={item.Id}
+                  creator={creator || ''}
+                  packId={item.PackId}
+                />
+              ))
+            ) : (
+              <NotFound text="Ничего не найдено" />
+            )
           )}
         </div>
       </div>
