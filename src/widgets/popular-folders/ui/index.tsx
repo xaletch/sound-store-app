@@ -25,7 +25,7 @@ export const PopularFolders = () => {
       </SectionTitle>
       <div>
         <FoldersCardWrapper>
-          {isLoading ? (
+          {isLoading || !data?.Packs ? (
             Array.from({ length: 6 }).map((_, index) => (
               <FolderCardLoader key={index} />
             ))

@@ -23,7 +23,7 @@ export const PopularSamples = () => {
         <LinkButton href="/search">Смотреть все</LinkButton>
       </SectionTitle>
       <div className="grid grid-cols-2 gap-x-4 gap-y-5">
-        {isLoading ? (
+        {isLoading || !popularTracks?.Tracks ? (
           Array.from({ length: 6 }).map((_, index) => (
             <SamplesCardLoading key={index}/>
           ))
