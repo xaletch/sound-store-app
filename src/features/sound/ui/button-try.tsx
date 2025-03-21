@@ -9,11 +9,12 @@ import { setCurrentPlayingId, setCurrentTime, setIsPlayer, setIsPlaying, setPlay
 interface ButtonTryProps {
   id: number;
   name: string;
+  packId: number;
   creator?: string;
   loved?: boolean;
 }
 
-export const ButtonTry = ({ id, name, creator, loved }: ButtonTryProps) => {
+export const ButtonTry = ({ id, name, creator, loved, packId }: ButtonTryProps) => {
   const dispatch = useDispatch();
   const [play] = useLazyListenTrackQuery();
   
@@ -41,7 +42,8 @@ export const ButtonTry = ({ id, name, creator, loved }: ButtonTryProps) => {
             creator: creator || '',
             id: id,
             track: res.Link,
-            loved: loved || false
+            loved: loved || false,
+            packId: packId || 0
           };
     
           dispatch(setPlayerTrack(trackData));

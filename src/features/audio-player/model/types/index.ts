@@ -4,6 +4,7 @@ export type IPlayerTrack = {
   id: number;
   track: string;
   loved?: boolean;
+  packId: number;
 }
 
 export interface ITrackData {

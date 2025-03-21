@@ -8,11 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 interface TrackLoseProps {
   id: number;
   name: string;
+  packId: number;
   creator?: string;
   loved?: boolean;
 }
 
-export const TrackLose = ({ id, name, creator, loved }: TrackLoseProps) => {
+export const TrackLose = ({ id, name, creator, loved, packId }: TrackLoseProps) => {
   const dispatch = useDispatch();
   const [play] = useLazyListenTrackQuery();
 
@@ -39,7 +40,8 @@ export const TrackLose = ({ id, name, creator, loved }: TrackLoseProps) => {
           creator: creator || '',
           id: id,
           track: res.Link,
-          loved: loved || false
+          loved: loved || false,
+          packId: packId || 0
         };
 
         dispatch(setPlayerTrack(trackData));

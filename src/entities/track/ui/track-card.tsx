@@ -9,16 +9,17 @@ interface TrackCardProps {
   isLike: boolean;
   isPurchased: boolean;
   id: number;
+  packId: number;
   creator?: string;
 }
-export const TrackCard = ({ image, name, genre, time, bpm, isLike, isPurchased, id, creator }: TrackCardProps) => {
+export const TrackCard = ({ image, name, genre, time, bpm, isLike, isPurchased, id, creator, packId }: TrackCardProps) => {
   return (
     <div className="grid grid-cols-[40px_10px_65px_38px_25px_12px_16px] md:grid-cols-[50px_25px_300px_38px_25px_20px_20px] responsive-grid justify-between items-center px-1">
       <div className="w-full">
         <img className="w-full h-auto rounded-md" src={image} alt={name} />
       </div>
       <div>
-        <TrackLose id={id} name={name} creator={creator} loved={isLike} />
+        <TrackLose id={id} name={name} creator={creator} loved={isLike} packId={packId} />
       </div>
       <div className="flex flex-col font-medium text-xs md:text-base">
         <div>{name}</div>

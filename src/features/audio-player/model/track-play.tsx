@@ -7,7 +7,7 @@ export const useTrackPlay = () => {
   const dispatch = useDispatch();
   const [play] = useLazyListenTrackQuery();
   
-  const playTrack = async (trackId: number, trackName: string, creator: string, loved?: boolean) => {
+  const playTrack = async (trackId: number, trackName: string, creator: string, packId: number, loved?: boolean) => {
     try {
       const ID = trackId.toString();
       const res = await play({ id: ID }).unwrap();
@@ -19,6 +19,7 @@ export const useTrackPlay = () => {
           id: trackId,
           track: res.Link,
           loved: loved || false,
+          packId: packId || 0
         };
 
         dispatch(setPlayerTrack(trackData));

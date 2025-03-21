@@ -19,7 +19,7 @@ export const SoundInformation = ({ photo }: { photo: string }) => {
           <div className="ml-6 md:flex md:flex-col md:justify-between">
             <SoundName name={pack?.Name || ''} genre={pack?.Genre || ''} album_name={""} />
             <SoundWrapperButton>
-              <ButtonTry id={trackId} name={trackName} creator={packAuthor} loved={trackLoved} />
+              <ButtonTry id={trackId} name={trackName} creator={packAuthor} loved={trackLoved} packId={pack?.Id || 0} />
               <ButtonPay />
             </SoundWrapperButton>
           </div>

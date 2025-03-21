@@ -25,6 +25,7 @@ export const SoundContent = ({ data, creator }: SoundContentProps) => {
               isPurchased={item.Downloaded}
               id={item.Id}
               creator={creator || ''}
+              packId={item.PackId}
             />
           ))}
         </div>
