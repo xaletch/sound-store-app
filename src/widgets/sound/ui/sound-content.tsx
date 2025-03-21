@@ -1,33 +1,41 @@
-import { TrackCard } from "@/entities/track"
+import { TrackCard, TrackLoader } from "@/entities/track"
 import { SoundListHead } from "./sound-list/sound-list-head"
 import { TracksData } from "@/entities/sound/model/types"
 
 interface SoundContentProps {
   data: TracksData[];
   creator?: string;
+  isLoading: boolean;
 }
 
-export const SoundContent = ({ data, creator }: SoundContentProps) => {
+export const SoundContent = ({ data, creator, isLoading }: SoundContentProps) => {
   return (
     <div>
       <SoundListHead />
       <div>
         <div className="flex flex-col gap-5">
-          {data.map((item: TracksData, index) => (
-            <TrackCard 
-              key={index}
-              image={'/image/executor.png'} 
-              name={item.Name} 
-              genre={item.Genre} 
-              time={'1:30'} 
-              bpm={item.Listenings} 
-              isLike={item.Loved} 
-              isPurchased={item.Downloaded}
-              id={item.Id}
-              creator={creator || ''}
-              packId={item.PackId}
-            />
-          ))}
+          {isLoading ? 
+            Array.from({ length: 5 }).map((_, index) => (
+              <TrackLoader key={index} />
+            ))
+          :
+          (
+            data.map((item: TracksData, index) => (
+              <TrackCard 
+                key={index}
+                image={'/image/executor.png'} 
+                name={item.Name} 
+                genre={item.Genre} 
+                time={'1:30'} 
+                bpm={item.Listenings} 
+                isLike={item.Loved} 
+                isPurchased={item.Downloaded}
+                id={item.Id}
+                creator={creator || ''}
+                packId={item.PackId}
+              />
+            ))
+          )}
         </div>
       </div>
     </div>

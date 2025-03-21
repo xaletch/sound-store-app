@@ -77,3 +77,13 @@
 .screen {
   width: calc(100vw - 32px);
 }
+
+
+.loader {
+  animation: loader-animate 3s linear infinite;
+}
+
+@keyframes loader-animate {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

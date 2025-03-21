@@ -3,6 +3,7 @@ import { useGetAllFoldersQuery } from "@/entities/folders/model/services"
 import { setFolders } from "@/entities/folders/model/slice"
 import { filterSelector } from "@/features/filters/model/selector"
 import { FolderCard } from "@/features/folders"
+import { FolderCardLoader } from "@/features/folders/ui/folder-card-loader"
 import { FoldersCardWrapper } from "@/widgets/folders"
 import { NotFound } from "@/widgets/not-found"
 import { Sort } from "@/widgets/sort"
@@ -15,7 +16,7 @@ export const Folders = () => {
 
   const { folders } = useSelector(foldersSelector);
 
-  const { data } = useGetAllFoldersQuery({ 
+  const { data, isLoading } = useGetAllFoldersQuery({ 
     page: '1',
     Genre: selectedFilters.Genre || [],
     Type: selectedFilters.Type || [],
@@ -34,22 +35,30 @@ export const Folders = () => {
       <div className="my-6">
         <Sort />
       </div>
-      {folders && folders?.length > 0 ? (
+      {isLoading ? (
         <FoldersCardWrapper>
-          {folders.map((item, index) => (
-            <FolderCard 
-              key={index}
-              href={`/sound/${item.Id}`} 
-              image={item.PhotoPath || "/image/executor.png"} 
-              name={item.Name} 
-              genre={item.Genre} 
-              naming={item.Autor} 
-              id={item.Id.toString()} 
-            />
+          {Array.from({ length: 6 }).map((_, index) => (
+            <FolderCardLoader key={index} />
           ))}
         </FoldersCardWrapper>
       ) : (
-        <NotFound text="Ничего не найдено"/>
+        folders && folders?.length > 0 ? (
+          <FoldersCardWrapper>
+            {folders.map((item, index) => (
+              <FolderCard 
+                key={index}
+                href={`/sound/${item.Id}`} 
+                image={item.PhotoPath || "/image/executor.png"} 
+                name={item.Name} 
+                genre={item.Genre} 
+                naming={item.Autor} 
+                id={item.Id.toString()} 
+              />
+            ))}
+          </FoldersCardWrapper>
+        ) : (
+          <NotFound text="Ничего не найдено"/>
+        )
       )}
     </div>
   )

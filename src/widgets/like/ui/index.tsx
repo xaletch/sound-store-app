@@ -7,23 +7,24 @@ import { filterSelector } from "@/features/filters/model/selector";
 import { NotFound } from "@/widgets/not-found";
 
 export const LikeContent = () => {
-  const { lovedTracks } = useSelector(lovedSelector);
+  const { lovedTracks, isLoading } = useSelector(lovedSelector);
   const { selectedFilters } = useSelector(filterSelector);
   
   const hasActiveFilters = selectedFilters.Genre.length > 0 || selectedFilters.Type.length > 0 || selectedFilters.Instruments.length > 0;
 
-  const showNotFound = hasActiveFilters && lovedTracks.length === 0;
-  const showLoveNot = !hasActiveFilters && lovedTracks.length === 0;
-  const showContent = lovedTracks.length > 0 || hasActiveFilters;
+  const showNotFound = hasActiveFilters && lovedTracks.length === 0 && !isLoading;
+  const showLoveNot = !hasActiveFilters && lovedTracks.length === 0 && !isLoading;
+  const showSort = (lovedTracks.length > 0 || hasActiveFilters) && !isLoading;
 
   return (
     <>
-      {showContent && <Sort />}
+      {showSort && <Sort />}
 
       {showLoveNot && <LoveNot />}
+
       {showNotFound && <NotFound text="Ничего не найдено" />}
 
-      {lovedTracks.length > 0 && <SoundContent data={lovedTracks} />}
+      <SoundContent data={lovedTracks} isLoading={false} />
     </>
   )
 }

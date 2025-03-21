@@ -16,7 +16,7 @@ export const SearchSort = () => {
   const { tracks, currentPage } = useSelector(useSearchSelector);
   const { selectedFilters } = useSelector(filterSelector)
 
-  const { data: popularTracks } = useGetAllTracksQuery({ 
+  const { data: popularTracks, isLoading } = useGetAllTracksQuery({ 
     page: currentPage.toString(),
     Genre: selectedFilters.Genre || [],
     Type: selectedFilters.Type || [],
@@ -38,9 +38,13 @@ export const SearchSort = () => {
     <div className="mt-6">
       <Search />
       <Sort />
-      {tracks.length > 0 ? (
-        <SoundContent data={tracks || []}  />
-      ) : <NotFound text="Ничего не найдено" />}
+      {!isLoading ? (
+        tracks.length > 0 ? (
+          <SoundContent data={tracks || []} isLoading={isLoading} />
+        ) : (
+          <NotFound text="Ничего не найдено" />
+        )
+      ) : null}
       {/* {popularTracks && popularTracks?.Tracks.length >= 10 && (
         <div className="mt-8 md:mt-16">
           <button onClick={showMore} className="max-w-[280px] mx-auto px-10 py-2 bg-[#7cc0ab] rounded-3xl border border-black text-sm md:text-base font-medium flex items-center justify-center hover:opacity-80 duration-300 cursor-pointer">Загрузить еще</button>

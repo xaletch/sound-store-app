@@ -1,6 +1,7 @@
 import { useTelegram } from "@/app/providers/telegram";
 import { User } from "@/entities/user";
 import { userSelector } from "@/entities/user/model/selector";
+import { UserLoader } from "@/entities/user/ui/loader";
 import { FavouritesIcon, FoldersIcon, FullIcon, HomeIcon, SearchIcon } from "@/shared/icons"
 import { Link, useLocation } from "@tanstack/react-router"
 import { useSelector } from "react-redux";
@@ -65,7 +66,11 @@ export const DesktopNavbar = () => {
             Выйти из фуллскрина
           </button>
           <div className="mt-2 px-2">
-            <User avatar={user?.data.photo_url} name={user?.data.first_name} />
+            {user?.data.first_name ? 
+              <User avatar={user?.data.photo_url} name={user?.data.first_name} />
+             : 
+              <UserLoader />
+            }
           </div> 
         </div>
       </div>

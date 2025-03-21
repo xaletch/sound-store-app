@@ -1,5 +1,5 @@
 import { useGetLovedQuery } from "@/entities/loved/model/services"
-import { setLovedTracks } from "@/entities/loved/model/slice";
+import { setLovedLoading, setLovedTracks } from "@/entities/loved/model/slice";
 import { filterSelector } from "@/features/filters/model/selector";
 import { LikeContent } from "@/widgets"
 import { useEffect } from "react";
@@ -10,7 +10,7 @@ export const Favourites = () => {
 
   const { selectedFilters } = useSelector(filterSelector);
 
-  const { data, isSuccess } = useGetLovedQuery({ 
+  const { data, isSuccess, isLoading } = useGetLovedQuery({ 
     id: '1', 
     Genre: selectedFilters.Genre || [],
     Type: selectedFilters.Type || [],
@@ -20,6 +20,7 @@ export const Favourites = () => {
   useEffect(() => {
     if (data && isSuccess) {
       dispatch(setLovedTracks(data.Tracks));
+      dispatch(setLovedLoading(isLoading))
     }
   }, [data]);
 
