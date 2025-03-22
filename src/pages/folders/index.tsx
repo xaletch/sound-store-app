@@ -18,6 +18,7 @@ export const Folders = () => {
 
   const { data, isLoading } = useGetAllFoldersQuery({ 
     page: '1',
+    Name: '',
     Genre: selectedFilters.Genre || [],
     Type: selectedFilters.Type || [],
     Instruments: selectedFilters.Instruments || [] 
