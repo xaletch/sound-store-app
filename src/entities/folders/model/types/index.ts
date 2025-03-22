@@ -29,6 +29,7 @@ export interface PopularTracksRequest {
 
 export interface AllTracksRequest {
   page: string;
+  Name: string;
   Genre: string[];
   Type: string[];
   Instruments: number[] | null;

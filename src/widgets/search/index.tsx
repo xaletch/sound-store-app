@@ -8,15 +8,19 @@ import { useSearchSelector } from "@/entities/search/model/selector";
 import { setPlayerTracks } from "@/features/audio-player/model/slice";
 import { Sort } from "../sort";
 import { filterSelector } from "@/features/filters/model/selector";
+import { searchSelector } from "@/features/search/model/selector";
 
 export const SearchSort = () => {
   const dispatch = useDispatch();
   
   const { tracks, currentPage } = useSelector(useSearchSelector);
-  const { selectedFilters } = useSelector(filterSelector)
+  const { selectedFilters } = useSelector(filterSelector);
+
+  const { search } = useSelector(searchSelector);
 
   const { data: popularTracks, isLoading } = useGetAllTracksQuery({ 
     page: currentPage.toString(),
+    Name: search || '',
     Genre: selectedFilters.Genre || [],
     Type: selectedFilters.Type || [],
     Instruments: selectedFilters.Instruments || [],

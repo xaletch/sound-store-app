@@ -1,12 +1,13 @@
 import { foldersSlice } from "@/entities/folders/model/slice";
 import { lovedSlice } from "@/entities/loved/model/slice";
-import { searchTracksSlice } from "@/entities/search/model/slice";
+import { tracksSlice } from "@/entities/search/model/slice";
 import { soundSlice } from "@/entities/sound/model/slice";
 import { subscribeDataSlice } from "@/entities/subscribe/model/slice";
 import { userSlice } from "@/entities/user/model/slice";
 import { playerSlice } from "@/features/audio-player/model/slice";
 import { filterSlice } from "@/features/filters/model/slice";
 import { filterLoveSlice } from "@/features/like/model/slice";
+import { searchSlice } from "@/features/search/model/slice";
 import { subscribeSlice } from "@/features/subscribe/model/slice";
 import { API } from "@/shared/api";
 import { configureStore } from "@reduxjs/toolkit";
@@ -22,10 +23,11 @@ export const store = configureStore({
         sounds: soundSlice.reducer,
         loved: lovedSlice.reducer,
         filterLove: filterLoveSlice.reducer,
-        search: searchTracksSlice.reducer,
+        tracks: tracksSlice.reducer,
         user: userSlice.reducer,
         player: playerSlice.reducer,
         filter: filterSlice.reducer,
+        search: searchSlice.reducer,
     },
 
     middleware(getDefaultMiddleware) {

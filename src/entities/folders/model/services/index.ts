@@ -26,6 +26,7 @@ export const FoldersAPI = API.injectEndpoints({
         url: 'sounds/tg/gettracks',
         method: 'POST',
         body: {
+          Name: req.Name,
           Genre: req.Genre,
           Type: req.Type,
           Instruments: req.Instruments,

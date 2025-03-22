@@ -1,18 +1,18 @@
 import { TracksData } from "@/entities/sound/model/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface SearchTracksState {
+export interface tracksState {
   tracks: TracksData[] | [];
   currentPage: number;
 }
 
-const initialState: SearchTracksState = {
+const initialState: tracksState = {
   tracks: [],
   currentPage: 1
 };
 
-export const searchTracksSlice = createSlice({
-  name: "search_tracks_slice",
+export const tracksSlice = createSlice({
+  name: "tracks_slice",
   initialState,
   reducers: {
     setTracks: (state, action: PayloadAction<TracksData[]>) => {
@@ -26,5 +26,5 @@ export const searchTracksSlice = createSlice({
   },
 });
 
-export const { setTracks, nextPage } = searchTracksSlice.actions;
-export default searchTracksSlice.reducer;
+export const { setTracks, nextPage } = tracksSlice.actions;
+export default tracksSlice.reducer;
