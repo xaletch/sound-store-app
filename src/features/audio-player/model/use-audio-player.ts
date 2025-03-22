@@ -53,7 +53,7 @@ export const useAudioPlayer = ({ tracks }: useAudioPlayerProps) => {
     const nextTrackData = tracks[nextTrack];
 
     if (nextTrackData) {
-      await playTrack(nextTrackData.Id, nextTrackData.Name, nextTrackData.PackId.toString(), nextTrackData.PackId);
+      await playTrack(nextTrackData.Id, nextTrackData.Name, nextTrackData.Author, nextTrackData.PackId, );
     }
   }
 
@@ -65,7 +65,7 @@ export const useAudioPlayer = ({ tracks }: useAudioPlayerProps) => {
     const prevTrackData = tracks[prevTrack];
 
     if (prevTrackData) {
-      await playTrack(prevTrackData.Id, prevTrackData.Name, prevTrackData.PackId.toString(), prevTrackData.PackId);
+      await playTrack(prevTrackData.Id, prevTrackData.Name, prevTrackData.Author, prevTrackData.PackId);
     }
   }
 

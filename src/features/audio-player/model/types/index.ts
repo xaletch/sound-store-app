@@ -17,6 +17,7 @@ export interface ITrackData {
   Listenings?: number;
   Downloaded?: boolean;
   Loved?: boolean;
+  Author: string;
 }
 
 export type ILovedTracks = {

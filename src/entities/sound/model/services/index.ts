@@ -11,7 +11,7 @@ export const SoundAPI = API.injectEndpoints({
           id: req.id
         }
       }),
-      providesTags: ['LOVED']
+      providesTags: ['LOVED', 'DOWNLOAD']
     }),
     getPackPhoto: builder.query<SoundPhotoResponse, SoundRequest>({
       query: (req) => ({

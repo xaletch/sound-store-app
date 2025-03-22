@@ -9,11 +9,11 @@ interface TrackLoseProps {
   id: number;
   name: string;
   packId: number;
-  creator?: string;
   loved?: boolean;
+  author: string;
 }
 
-export const TrackLose = ({ id, name, creator, loved, packId }: TrackLoseProps) => {
+export const TrackLose = ({ id, name, loved, packId, author }: TrackLoseProps) => {
   const dispatch = useDispatch();
   const [play] = useLazyListenTrackQuery();
 
@@ -37,7 +37,7 @@ export const TrackLose = ({ id, name, creator, loved, packId }: TrackLoseProps) 
       if (res.Link) {
         const trackData: IPlayerTrack = {
           name: name,
-          creator: creator || '',
+          creator: author || '',
           id: id,
           track: res.Link,
           loved: loved || false,

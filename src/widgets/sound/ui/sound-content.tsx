@@ -29,7 +29,7 @@ export const SoundContent = ({ data, creator, isLoading }: SoundContentProps) =>
                   name={item.Name} 
                   genre={item.Genre} 
                   time={'1:30'} 
-                  bpm={item.Listenings} 
+                  bpm={item.Bpm} 
                   isLike={item.Loved} 
                   isPurchased={item.Downloaded}
                   id={item.Id}

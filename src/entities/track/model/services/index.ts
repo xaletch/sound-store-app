@@ -12,16 +12,17 @@ export const TrackAPI = API.injectEndpoints({
         }
       }),
     }),
-    downloadTrack: builder.query({
+    downloadTrack: builder.mutation({
       query: (req) => ({
         url: 'sounds/tg/downloadTrack',
         method: 'GET',
         headers: {
           trackid: req.id.toString()
         }
-      })
-    })
+      }),
+      invalidatesTags: ['DOWNLOAD'],
+    }),
   })
 });
 
-export const { useLazyListenTrackQuery, useLazyDownloadTrackQuery } = TrackAPI;
+export const { useLazyListenTrackQuery, useDownloadTrackMutation } = TrackAPI;

@@ -1,8 +1,8 @@
-import { useLazyDownloadTrackQuery } from "@/entities/track/model/services";
+import { useDownloadTrackMutation } from "@/entities/track/model/services";
 import { PayIcon } from "@/shared/icons"
 
 export const TrackPay = ({ id }: { id: number }) => {
-  const [download] = useLazyDownloadTrackQuery();
+  const [download] = useDownloadTrackMutation();
   
   const handleDownload = async () => {
     try {

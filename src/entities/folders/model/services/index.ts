@@ -35,7 +35,7 @@ export const FoldersAPI = API.injectEndpoints({
           page: req.page
         }
       }),
-      providesTags: ['LOVED'],
+      providesTags: ['LOVED', 'DOWNLOAD'],
     }),
     getAllFolders: builder.query<FoldersResponse, AllTracksRequest>({
       query: (req) => ({

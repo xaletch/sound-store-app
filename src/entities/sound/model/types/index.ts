@@ -17,6 +17,9 @@ export interface TracksData {
   Listenings: number;
   Downloaded: boolean;
   Loved: boolean;
+  Bpm: number;
+  Duration: number;
+  Author: string;
 }
 
 export interface SoundResponse {
