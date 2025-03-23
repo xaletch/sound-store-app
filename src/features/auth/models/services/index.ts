@@ -10,6 +10,7 @@ export const AuthAPI = API.injectEndpoints({
           'initdata': initdata
         }
       }),
+      invalidatesTags: ['DOWNLOAD']
     }),
   })
 });

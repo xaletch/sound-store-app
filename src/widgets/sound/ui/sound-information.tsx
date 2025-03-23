@@ -3,7 +3,11 @@ import { soundSelector } from "@/entities/sound/model/selector"
 import { ButtonPay, ButtonTry } from "@/features/sound"
 import { useSelector } from "react-redux"
 
-export const SoundInformation = ({ photo }: { photo: string }) => {
+interface ISoundInformation {
+  photo: string;
+}
+
+export const SoundInformation = ({ photo }: ISoundInformation) => {
   const { pack, tracks } = useSelector(soundSelector);
 
   const trackId = tracks && tracks.length > 0 ? tracks[0].Id : 0;
@@ -17,7 +21,7 @@ export const SoundInformation = ({ photo }: { photo: string }) => {
         <div className="flex justify-between">
           <SoundImage image={photo} name={pack?.Autor || ''} />
           <div className="ml-6 md:flex md:flex-col md:justify-between">
-            <SoundName name={pack?.Name || ''} genre={pack?.Genre || ''} album_name={""} />
+            <SoundName name={pack?.Name || ''} genre={pack?.Genre || ''} album_name={pack?.Autor || ''} />
             <SoundWrapperButton>
               <ButtonTry id={trackId} name={trackName} creator={packAuthor} loved={trackLoved} packId={pack?.Id || 0} />
               <ButtonPay />

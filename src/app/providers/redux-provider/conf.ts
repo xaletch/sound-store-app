@@ -1,5 +1,6 @@
 import { foldersSlice } from "@/entities/folders/model/slice";
 import { lovedSlice } from "@/entities/loved/model/slice";
+import { modalsSlice } from "@/entities/modals/model/slice";
 import { tracksSlice } from "@/entities/search/model/slice";
 import { soundSlice } from "@/entities/sound/model/slice";
 import { subscribeDataSlice } from "@/entities/subscribe/model/slice";
@@ -28,6 +29,7 @@ export const store = configureStore({
         player: playerSlice.reducer,
         filter: filterSlice.reducer,
         search: searchSlice.reducer,
+        modals: modalsSlice.reducer,
     },
 
     middleware(getDefaultMiddleware) {

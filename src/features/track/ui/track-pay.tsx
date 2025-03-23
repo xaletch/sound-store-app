@@ -13,9 +13,12 @@ export const TrackPay = ({ id, track }: { id: number, track: string }) => {
         const link = document.createElement('a');
         link.href = res.Link;
         link.download = `${track}.mp3`;
+
         document.body.appendChild(link);
+
         link.click();
         document.body.removeChild(link);
+        
       }
     }
     catch (err) {

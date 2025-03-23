@@ -32,3 +32,5 @@ export * from './arrow'
 export * from './pay'
 
 export * from './full'
+
+export * from './plus'
