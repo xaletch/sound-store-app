@@ -35,7 +35,18 @@ export const FoldersAPI = API.injectEndpoints({
           page: req.page
         }
       }),
-      providesTags: ['LOVED', 'DOWNLOAD'],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.Tracks.map(({ Id }) => ({ type: 'LOVED' as const, id: Id.toString() })),
+              ...result.Tracks.map(({ Id }) => ({ type: 'DOWNLOAD' as const, id: Id.toString() })),
+              { type: 'LOVED' as const, id: 'LIST' },
+              { type: 'DOWNLOAD' as const, id: 'LIST' },
+            ]
+          : [
+              { type: 'LOVED' as const, id: 'LIST' },
+              { type: 'DOWNLOAD' as const, id: 'LIST' },
+            ],
     }),
     getAllFolders: builder.query<FoldersResponse, AllTracksRequest>({
       query: (req) => ({

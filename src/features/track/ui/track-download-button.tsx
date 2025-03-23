@@ -21,21 +21,41 @@ export const TrackDownloadButton = ({ id, track }: TrackDownloadButtonProps) => 
   const handleDownload = async () => {
     if (credits <= 1) {
       console.error('Недостаточно средств');
-      dispatch(setDownloadTrackModal(false));
-      return;
+      // dispatch(setDownloadTrackModal(false));
+      // return;
     }
     try {
       const res = await download({ id: id }).unwrap();
 
       if (res.Link) {
-        const link = document.createElement('a');
-        link.href = res.Link;
-        link.download = `${track}.mp3`;
+        const binaryData = atob(res.Link);
 
+        const byteArray = new Uint8Array(binaryData.length);
+        for (let i = 0; i < binaryData.length; i++) {
+          byteArray[i] = binaryData.charCodeAt(i);
+        }
+
+        const blob = new Blob([byteArray], { type: 'audio/mpeg' });
+
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${track}.mp3`;
         document.body.appendChild(link);
 
         link.click();
+
         document.body.removeChild(link);
+
+        window.URL.revokeObjectURL(url);
+        // const link = document.createElement('a');
+        // link.href = res.Link;
+        // link.download = `${track}.mp3`;
+
+        // document.body.appendChild(link);
+
+        // link.click();
+        // document.body.removeChild(link);
         
       }
       dispatch(setDownloadTrackModal(false));

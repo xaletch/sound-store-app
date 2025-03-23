@@ -32,15 +32,37 @@ export const PackDownloadButtonModal = () => {
         console.log('download pack track', track);
 
         if (res.Link) {
-          const link = document.createElement('a');
-          link.href = res.Link;
-          link.download = `${track.Name}.mp3`;
+          const binaryData = atob(res.Link);
 
+          const byteArray = new Uint8Array(binaryData.length);
+          for (let i = 0; i < binaryData.length; i++) {
+            byteArray[i] = binaryData.charCodeAt(i);
+          }
+  
+          const blob = new Blob([byteArray], { type: 'audio/mpeg' });
+  
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `${track.Name}.mp3`;
           document.body.appendChild(link);
 
           link.click();
-
+  
           document.body.removeChild(link);
+  
+          window.URL.revokeObjectURL(url);
+  
+          console.log(`Трек ${track.Name} успешно установлен`);
+          // const link = document.createElement('a');
+          // link.href = res.Link;
+          // link.download = `${track.Name}.mp3`;
+
+          // document.body.appendChild(link);
+
+          // link.click();
+
+          // document.body.removeChild(link);
 
           console.log(`Трек ${track.Name} успешно установлен`);
         }

@@ -11,7 +11,18 @@ export const SoundAPI = API.injectEndpoints({
           id: req.id
         }
       }),
-      providesTags: ['LOVED', 'DOWNLOAD']
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.PackInfo.Tracks.map(({ Id }) => ({ type: 'LOVED' as const, id: Id.toString() })),
+              ...result.PackInfo.Tracks.map(({ Id }) => ({ type: 'DOWNLOAD' as const, id: Id.toString() })),
+              { type: 'LOVED' as const, id: 'LIST' },
+              { type: 'DOWNLOAD' as const, id: 'LIST' },
+            ]
+          : [
+              { type: 'LOVED' as const, id: 'LIST' },
+              { type: 'DOWNLOAD' as const, id: 'LIST' },
+            ],
     }),
     getPackPhoto: builder.query<SoundPhotoResponse, SoundRequest>({
       query: (req) => ({
