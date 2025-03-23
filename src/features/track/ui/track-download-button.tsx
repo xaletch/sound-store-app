@@ -5,8 +5,6 @@ import { PlusIcon } from "@/shared/icons";
 import { ModalButton } from "@/shared/ui";
 import { useDispatch, useSelector } from "react-redux";
 
-import { downloadFile } from '@telegram-apps/sdk';
-
 interface TrackDownloadButtonProps {
   id: number;
   track: string;
