@@ -2,6 +2,7 @@ import { modalSelector } from "@/entities/modals/model/services";
 import { playerSelector } from "@/features/audio-player";
 import { AudioPlayer, DesktopNavbar, MobileNavbar } from "@/widgets"
 import { DownloadPackModal, DownloadTrackModal, LinkModal, ToTryModal } from "@/widgets/modals";
+import { AnimatePresence } from "framer-motion";
 import { PropsWithChildren } from "react"
 import { useSelector } from "react-redux";
 import { useMediaQuery } from 'react-responsive';
@@ -27,10 +28,12 @@ export const Layout = ({ children }: PropsWithChildren) => {
         {isPlayer && <AudioPlayer />}
 
         {/* modals */}
-        {downloadPackModal && <DownloadPackModal />}
-        {downloadTrackModal && <DownloadTrackModal />}
-        {linkModal && <LinkModal />}
-        {toTryModal && <ToTryModal />}
+        <AnimatePresence>
+          {downloadPackModal && <DownloadPackModal />}
+          {downloadTrackModal && <DownloadTrackModal />}
+          {linkModal && <LinkModal />}
+          {toTryModal && <ToTryModal />}
+        </AnimatePresence>
       </main>
     </div>
   )

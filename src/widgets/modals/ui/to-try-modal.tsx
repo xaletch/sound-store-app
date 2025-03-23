@@ -16,6 +16,11 @@ export const ToTryModal = () => {
     dispatch(setToTryModal(false));
   }
 
+  const redirect = () => {
+    navigate({ to: '/subscribe' });
+    close();
+  }
+
   return (
     <Modal close={close}>
       <ModalText cl={"mb-6"}>
@@ -26,7 +31,7 @@ export const ToTryModal = () => {
           <p>{pack?.Autor}</p>
         </div>
       </ModalText>
-      <ModalButton onClick={() => navigate({ to: '/subscribe' })} icon={<PlusIcon />} name={"оформить подписку!"}></ModalButton>
+      <ModalButton onClick={redirect} icon={<PlusIcon />} name={"оформить подписку!"}></ModalButton>
     </Modal>
   )
 }
