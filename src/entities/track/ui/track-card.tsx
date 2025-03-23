@@ -1,8 +1,9 @@
+import { useGetPackPhotoQuery } from "@/entities/sound/model/services";
 import { TrackDownload, TrackLike, TrackLose, TrackPay } from "@/features/track";
 import { trackDuration } from "@/features/track/model";
 
 interface TrackCardProps {
-  image: string;
+  image?: string;
   name: string;
   genre: string;
   duration: number;
@@ -13,13 +14,15 @@ interface TrackCardProps {
   packId: number;
   creator?: string;
 }
-export const TrackCard = ({ image, name, genre, duration, bpm, isLike, isPurchased, id, creator, packId }: TrackCardProps) => {
+export const TrackCard = ({ name, genre, duration, bpm, isLike, isPurchased, id, creator, packId }: TrackCardProps) => {
   
+  const { data: photo } = useGetPackPhotoQuery({ id: packId.toString() });
+
   const DURATION = trackDuration(duration);
   return (
     <div className="grid grid-cols-[40px_10px_65px_38px_25px_12px_16px] md:grid-cols-[50px_25px_300px_38px_25px_20px_20px] responsive-grid justify-between items-center px-1">
       <div className="w-full">
-        <img className="w-full h-auto rounded-md" src={image} alt={name} />
+        <img className="w-full h-auto rounded-md" src={`data:image/png;base64, ${photo?.Photo}`} alt={name} />
       </div>
       <div>
         <TrackLose id={id} name={name} author={creator || ''} loved={isLike} packId={packId} />
