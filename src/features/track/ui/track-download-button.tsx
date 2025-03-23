@@ -30,23 +30,31 @@ export const TrackDownloadButton = ({ id, track }: TrackDownloadButtonProps) => 
       const res = await download({ id: id }).unwrap();
 
       if (res.Link) {
-        const binaryData = atob(res.Link);
+        const link = document.createElement('a');
+        link.href = res.Link;
+        link.setAttribute('download', `${track}.mp3`);
+        link.setAttribute('target', '_blank');
+  
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        // const binaryData = atob(res.Link);
 
-        const byteArray = new Uint8Array(binaryData.length);
-        for (let i = 0; i < binaryData.length; i++) {
-          byteArray[i] = binaryData.charCodeAt(i);
-        }
+        // const byteArray = new Uint8Array(binaryData.length);
+        // for (let i = 0; i < binaryData.length; i++) {
+        //   byteArray[i] = binaryData.charCodeAt(i);
+        // }
 
-        const blob = new Blob([byteArray], { type: 'audio/mpeg' });
-        const url = window.URL.createObjectURL(blob);
+        // const blob = new Blob([byteArray], { type: 'audio/mpeg' });
+        // const url = window.URL.createObjectURL(blob);
 
-        if (downloadFile.isAvailable()) {
-          await downloadFile(url, `${track}.mp3`);
-        } else {
-          console.error('загружаемый файл недоступен');
-        }
+        // if (downloadFile.isAvailable()) {
+        //   await downloadFile(url, `${track}.mp3`);
+        // } else {
+        //   console.error('загружаемый файл недоступен');
+        // }
 
-        window.URL.revokeObjectURL(url);
+        // window.URL.revokeObjectURL(url);
         // const link = document.createElement('a');
         // link.href = res.Link;
         // link.download = `${track}.mp3`;
