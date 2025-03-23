@@ -48,16 +48,12 @@
     overflow-x: hidden;
     scroll-behavior: smooth;
   }
-  html {
-    overflow-x: hidden;
-  }
   input {
     outline: none;
   }
   main {
     flex: 1;
     display: flex;
-    flex-direction: column;
   }
 }
 

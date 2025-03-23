@@ -7,6 +7,55 @@ import { FilterButton } from "@/shared/ui";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+const vanshots: string[] = [
+  "Kick",
+  "Snare",
+  "Hi-Hat",
+  "Clap",
+  "Tom",
+  "Cymbal",
+  "Percussion",
+  "Sub-bass",
+  "Synth bass",
+  "Acoustic bass",
+  "808 bass",
+  "Piano",
+  "Guitar",
+  "Strings",
+  "Brass",
+  "Synth leads",
+  "Pads",
+  "Plucks",
+  "Risers",
+  "Downers",
+  "Sweeps",
+  "White noise",
+  "Impacts",
+  "Whooshes",
+  "Reverse sounds",
+  "Vocal chops",
+  "Ad-libs",
+  "Shouts",
+  "Breaths",
+  "Flutes",
+  "Ethnic drums",
+  "Chants",
+  "Ethnic string instruments",
+  "Arpeggios",
+  "Stabs",
+  "Bells",
+  "Chords",
+  "Pads",
+  "Ambient textures",
+  "Nature sounds",
+  "Analog kicks",
+  "Vinyl noise",
+  "Old-school synth sounds",
+  "Glitches",
+  "Foley",
+  "Cinematic sounds"
+]
+
 export const Sort = () => {
   const dispatch = useDispatch();
   const { selectedFilters } = useSelector(filterSelector);
@@ -46,7 +95,7 @@ export const Sort = () => {
       case 'Instruments':
         return instrumentsData?.Instruments || [];
       case 'Type':
-        return ["категория 1", "категория 2"].map(name => ({ Id: 0, Name: name }));
+        return vanshots.map(name => ({ Id: 0, Name: name }));
       default:
         return [];
     }
@@ -98,7 +147,7 @@ export const Sort = () => {
                   ? instrumentsData?.Instruments.map(i => i.Id) || []
                   : activeFilter === 'Genre'
                   ? genresData?.Genres.map(g => g.Name) || []
-                  : ["категория 1", "категория 2"];
+                  : vanshots;
                 handleSelectAll(activeFilter, items);
               }}
             />

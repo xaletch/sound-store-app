@@ -9,9 +9,10 @@ interface ISoundInformation {
 }
 
 export const SoundInformation = ({ photo }: ISoundInformation) => {
-  const { pack } = useSelector(soundSelector);
+  const { pack, tracks } = useSelector(soundSelector);
   const { user } = useSelector(userSelector);
 
+  const allTracksDownloaded = tracks.every(track => track.Downloaded === true);
   return (
     <div className="border border-black/20 rounded-xl">
       <div className="px-3 py-4">
@@ -21,7 +22,7 @@ export const SoundInformation = ({ photo }: ISoundInformation) => {
             <SoundName name={pack?.Name || ''} genre={pack?.Genre || ''} album_name={pack?.Autor || ''} />
             <SoundWrapperButton>
               {!user?.subscribe && <ButtonTry />}
-              <ButtonPay />
+              {!allTracksDownloaded && <ButtonPay />}
             </SoundWrapperButton>
           </div>
         </div>

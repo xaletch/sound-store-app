@@ -20,7 +20,10 @@ export const TrackAPI = API.injectEndpoints({
           trackid: req.id.toString()
         }
       }),
-      invalidatesTags: ['DOWNLOAD'],
+      invalidatesTags: (_result, _error, arg) => [
+        { type: 'DOWNLOAD', id: arg.id },
+        { type: 'DOWNLOAD', id: 'LIST' },
+      ],
     }),
   })
 });

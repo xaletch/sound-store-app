@@ -16,7 +16,13 @@ export const LovedAPI = API.injectEndpoints({
           page: req.id
         }
       }),
-      providesTags: ['LOVED'],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.Tracks.map(({ Id }) => ({ type: 'LOVED' as const, Id })),
+              { type: 'LOVED', id: 'LIST' },
+            ]
+          : [{ type: 'LOVED', id: 'LIST' }],
     }),
     lovedTrack: builder.mutation<void, LovedTrack>({
       query: (req) => ({

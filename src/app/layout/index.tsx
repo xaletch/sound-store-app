@@ -14,11 +14,13 @@ export const Layout = ({ children }: PropsWithChildren) => {
   const { downloadPackModal, downloadTrackModal, linkModal, toTryModal } = useSelector(modalSelector);
   
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-1">
       <main className="flex flex-row relative">
-        {isDesktop && <DesktopNavbar />}
-        <div className="flex-1 pb-15 md:pb-0 pt-6 max-w-7xl mx-auto">
-          {children}
+        <div className="flex flex-1">
+          {isDesktop && <DesktopNavbar />}
+          <div className="flex-1 pb-15 md:pb-0 pt-6 max-w-7xl mx-auto">
+            {children}
+          </div>
         </div>
 
         {/* navbar */}

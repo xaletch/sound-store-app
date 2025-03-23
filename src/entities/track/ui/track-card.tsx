@@ -26,7 +26,7 @@ export const TrackCard = ({ image, name, genre, duration, bpm, isLike, isPurchas
       </div>
       <div className="flex flex-col font-medium text-xs md:text-base">
         <div>{name}</div>
-        <span className="text-[#1D1F22]/20">{genre}</span>
+        <span className="text-[#1D1F22]/20">{creator}</span>
       </div>
       <div className="font-medium text-[#1D1F22]/20 text-xs md:text-base">{DURATION}</div>
       <div className="font-medium text-[#1D1F22]/20 text-xs md:text-base">{bpm}</div>

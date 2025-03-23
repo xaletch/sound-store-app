@@ -2,6 +2,7 @@ import { TrackCard, TrackLoader } from "@/entities/track"
 import { SoundListHead } from "./sound-list/sound-list-head"
 import { TracksData } from "@/entities/sound/model/types"
 import { NotFound } from "@/widgets/not-found";
+import { forwardRef } from "react";
 
 interface SoundContentProps {
   data: TracksData[];
@@ -9,12 +10,12 @@ interface SoundContentProps {
   isLoading: boolean;
 }
 
-export const SoundContent = ({ data, creator, isLoading }: SoundContentProps) => {
+export const SoundContent = forwardRef<HTMLDivElement, SoundContentProps>(({ data, isLoading }, ref) => {
   return (
     <div>
       <SoundListHead />
       <div>
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5" ref={ref}>
           {isLoading ? 
             Array.from({ length: 5 }).map((_, index) => (
               <TrackLoader key={index} />
@@ -33,7 +34,7 @@ export const SoundContent = ({ data, creator, isLoading }: SoundContentProps) =>
                   isLike={item.Loved} 
                   isPurchased={item.Downloaded}
                   id={item.Id}
-                  creator={creator || ''}
+                  creator={item.Author || ''}
                   packId={item.PackId}
                 />
               ))
@@ -45,4 +46,4 @@ export const SoundContent = ({ data, creator, isLoading }: SoundContentProps) =>
       </div>
     </div>
   )
-}
+})
