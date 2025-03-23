@@ -13,19 +13,23 @@ export const PackDownloadButtonModal = () => {
   const { tracks } = useSelector(soundSelector);
 
   const [download] = useDownloadTrackMutation();
+  
+  const balance = user?.credits || 0;
+  const totalTracks = tracks.length;
 
   const downloadPack = async () => {
-    const totalTracks = tracks.length;
-    const balance = user?.credits || 0;
-    
     if (balance < totalTracks) {
       console.error('Недостаточно кредитов для покупки всех треков');
+      dispatch(setDownloadPackModal(false));
       return;
     }
 
     try {
       for (const track of tracks) {
-        const res = await download(track.Id).unwrap();
+        const res = await download({ id: track.Id }).unwrap();
+
+        console.log('download pack res', res);
+        console.log('download pack track', track);
 
         if (res.Link) {
           const link = document.createElement('a');
@@ -41,7 +45,7 @@ export const PackDownloadButtonModal = () => {
           console.log(`Трек ${track.Name} успешно установлен`);
         }
       }
-      
+
       dispatch(setDownloadPackModal(false));
     }
     catch (err) {
@@ -49,6 +53,6 @@ export const PackDownloadButtonModal = () => {
     }
   }
   return (
-    <ModalButton onClick={downloadPack} icon={<PlusIcon />} name={"подтвердить покупку"}></ModalButton>
+    <ModalButton onClick={downloadPack} icon={balance >= totalTracks ? <PlusIcon /> : null} name={balance >= totalTracks ? "подтвердить покупку" : "недостаточно средств"}></ModalButton>
   )
 }

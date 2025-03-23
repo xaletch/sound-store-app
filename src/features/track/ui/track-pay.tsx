@@ -1,29 +1,24 @@
-import { useDownloadTrackMutation } from "@/entities/track/model/services";
+import { setDownloadTrackData, setDownloadTrackModal } from "@/entities/modals/model/slice";
 import { PayIcon } from "@/shared/icons"
+import { useDispatch } from "react-redux";
 
-export const TrackPay = ({ id, track }: { id: number, track: string }) => {
-  const [download] = useDownloadTrackMutation();
+export interface ITrackPay {
+  id: number;
+  genre: string;
+  creator: string;
+  track: string;
+}
+
+export const TrackPay = ({ id, genre, creator, track }: ITrackPay) => {
+  const dispatch = useDispatch();
   
   const handleDownload = async () => {
-    try {
-      const res = await download({ id: id }).unwrap();
-
-      console.log('download', res);
-      if (res.Link) {
-        const link = document.createElement('a');
-        link.href = res.Link;
-        link.download = `${track}.mp3`;
-
-        document.body.appendChild(link);
-
-        link.click();
-        document.body.removeChild(link);
-        
-      }
-    }
-    catch (err) {
-      console.error('Не удалось загрузить трек', err);
-    }
+    dispatch(setDownloadTrackModal(true));
+    dispatch(setDownloadTrackData({
+      id: id, track: track,
+      genre: genre,
+      creator: creator
+    }));
   }
 
   return (

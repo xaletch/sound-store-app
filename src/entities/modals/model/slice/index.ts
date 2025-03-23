@@ -1,14 +1,17 @@
+import { ITrackPay } from "@/features/track";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface modalsState {
   downloadPackModal: boolean;
   downloadTrackModal: boolean;
+  downloadTrackData: ITrackPay | null,
   linkModal: boolean;
 }
 
 const initialState: modalsState = {
   downloadPackModal: false,
   downloadTrackModal: false,
+  downloadTrackData: null,
   linkModal: false
 };
 
@@ -22,11 +25,14 @@ export const modalsSlice = createSlice({
     setDownloadTrackModal: (state, action: PayloadAction<boolean>) => {
       state.downloadTrackModal = action.payload;
     },
+    setDownloadTrackData: (state, action: PayloadAction<ITrackPay>) => {
+      state.downloadTrackData = action.payload
+    },
     setLinkModal: (state, action: PayloadAction<boolean>) => {
       state.linkModal = action.payload;
     }
   },
 });
 
-export const { setDownloadPackModal, setDownloadTrackModal, setLinkModal } = modalsSlice.actions;
+export const { setDownloadPackModal, setDownloadTrackModal, setDownloadTrackData, setLinkModal } = modalsSlice.actions;
 export default modalsSlice.reducer;
