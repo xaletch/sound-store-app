@@ -3,7 +3,8 @@ export interface SubscribeData {
   Type: string;
   YearPrice: number;
   MonthPrice: number;
-  Credits: number;
+  MonthCredits: number;
+  YearCredits: number;
 }
 
 export interface SubscribeResponse {

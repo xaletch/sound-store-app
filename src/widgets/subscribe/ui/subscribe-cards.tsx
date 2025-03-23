@@ -27,7 +27,7 @@ export const SubscribeCards = ({ select, selectTariff }: SubscribeCardsProps ) =
 
   const tariffs = subscribers.map((subscriber) => ({
     name: subscriber.Type,
-    credit: subscriber.Credits.toString(),
+    credit: select === 'Месяц' ? `${subscriber.MonthCredits}` : `${subscriber.YearCredits}`,
     credit_text: "",
     price: select === 'Месяц' ? subscriber.MonthPrice : subscriber.YearPrice,
     price_text: select === 'Месяц' ? "месяц" : "год",
