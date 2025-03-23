@@ -9,8 +9,8 @@ interface TrackLoseProps {
   id: number;
   name: string;
   packId: number;
-  loved?: boolean;
   author: string;
+  loved?: boolean;
 }
 
 export const TrackLose = ({ id, name, loved, packId, author }: TrackLoseProps) => {

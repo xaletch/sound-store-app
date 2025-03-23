@@ -1,0 +1,1 @@
+export { trackDuration } from './utils/duration'

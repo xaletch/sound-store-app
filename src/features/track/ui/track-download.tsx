@@ -1,11 +1,8 @@
 import { DownloadIcon } from "@/shared/icons"
 
-export const TrackDownload = ({ id }: { id: number }) => {
-  const handleDownload = () => {
-    console.log("Download", id)
-  }
+export const TrackDownload = () => {
 
   return (
-    <button onClick={handleDownload} className="cursor-pointer"><DownloadIcon /></button>
+    <span className="cursor-default"><DownloadIcon /></span>
   )
 }

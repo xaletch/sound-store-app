@@ -28,7 +28,7 @@ export const SoundContent = ({ data, creator, isLoading }: SoundContentProps) =>
                   image={'/image/executor.png'} 
                   name={item.Name} 
                   genre={item.Genre} 
-                  time={'1:30'} 
+                  duration={item.Duration} 
                   bpm={item.Bpm} 
                   isLike={item.Loved} 
                   isPurchased={item.Downloaded}
