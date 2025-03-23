@@ -66,9 +66,8 @@ export const PackDownloadButtonModal = () => {
 
           console.log(`Трек ${track.Name} успешно установлен`);
         }
+        dispatch(setDownloadPackModal(false));
       }
-
-      dispatch(setDownloadPackModal(false));
     }
     catch (err) {
       console.error('Не удалось установить весь пак ', err)

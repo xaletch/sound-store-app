@@ -5,6 +5,8 @@ import { PlusIcon } from "@/shared/icons";
 import { ModalButton } from "@/shared/ui";
 import { useDispatch, useSelector } from "react-redux";
 
+import { downloadFile } from '@telegram-apps/sdk';
+
 interface TrackDownloadButtonProps {
   id: number;
   track: string;
@@ -21,8 +23,8 @@ export const TrackDownloadButton = ({ id, track }: TrackDownloadButtonProps) => 
   const handleDownload = async () => {
     if (credits <= 1) {
       console.error('Недостаточно средств');
-      // dispatch(setDownloadTrackModal(false));
-      // return;
+      dispatch(setDownloadTrackModal(false));
+      return;
     }
     try {
       const res = await download({ id: id }).unwrap();
@@ -36,16 +38,13 @@ export const TrackDownloadButton = ({ id, track }: TrackDownloadButtonProps) => 
         }
 
         const blob = new Blob([byteArray], { type: 'audio/mpeg' });
-
         const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `${track}.mp3`;
-        document.body.appendChild(link);
 
-        link.click();
-
-        document.body.removeChild(link);
+        if (downloadFile.isAvailable()) {
+          await downloadFile(url, `${track}.mp3`);
+        } else {
+          console.error('загружаемый файл недоступен');
+        }
 
         window.URL.revokeObjectURL(url);
         // const link = document.createElement('a');

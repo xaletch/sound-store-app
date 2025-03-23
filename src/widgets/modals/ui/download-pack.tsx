@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 export const DownloadPackModal = () => {
   const dispatch = useDispatch();
 
-  const { pack } = useSelector(soundSelector);
+  const { pack, tracks } = useSelector(soundSelector);
 
   const close = () => {
     dispatch(setDownloadPackModal(false));
@@ -17,7 +17,7 @@ export const DownloadPackModal = () => {
   return (
     <Modal close={close}>
       <ModalText>
-        <p>Оформите пробную подписку и получите доступ к скачиванию сэмплов:</p>
+        <p>Вы потратите {tracks.length} кредитов и получите доступ к скачиванию этого сэмпл пака:</p>
         <div className="mt-4">
           <p>{pack?.Name}</p>
           <p>{pack?.Genre}</p>
