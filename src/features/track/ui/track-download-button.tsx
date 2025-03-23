@@ -37,8 +37,8 @@ export const TrackDownloadButton = ({ id, track }: TrackDownloadButtonProps) => 
         link.click();
         document.body.removeChild(link);
         
-        dispatch(setDownloadTrackModal(false));
       }
+      dispatch(setDownloadTrackModal(false));
     }
     catch (err) {
       console.error('не удалось установить трек ', err);

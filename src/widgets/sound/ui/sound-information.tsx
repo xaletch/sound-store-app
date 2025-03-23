@@ -1,5 +1,6 @@
 import { SoundDescription, SoundImage, SoundName, SoundWrapperButton } from "@/entities/sound"
 import { soundSelector } from "@/entities/sound/model/selector"
+import { userSelector } from "@/entities/user/model/selector";
 import { ButtonPay, ButtonTry } from "@/features/sound"
 import { useSelector } from "react-redux"
 
@@ -8,12 +9,8 @@ interface ISoundInformation {
 }
 
 export const SoundInformation = ({ photo }: ISoundInformation) => {
-  const { pack, tracks } = useSelector(soundSelector);
-
-  const trackId = tracks && tracks.length > 0 ? tracks[0].Id : 0;
-  const trackName = tracks && tracks.length > 0 ? tracks[0].Name : '';
-  const packAuthor = pack?.Autor || '';
-  const trackLoved = tracks && tracks.length > 0 ? tracks[0].Loved : false;
+  const { pack } = useSelector(soundSelector);
+  const { user } = useSelector(userSelector);
 
   return (
     <div className="border border-black/20 rounded-xl">
@@ -23,7 +20,7 @@ export const SoundInformation = ({ photo }: ISoundInformation) => {
           <div className="ml-6 md:flex md:flex-col md:justify-between">
             <SoundName name={pack?.Name || ''} genre={pack?.Genre || ''} album_name={pack?.Autor || ''} />
             <SoundWrapperButton>
-              <ButtonTry id={trackId} name={trackName} creator={packAuthor} loved={trackLoved} packId={pack?.Id || 0} />
+              {!user?.subscribe && <ButtonTry />}
               <ButtonPay />
             </SoundWrapperButton>
           </div>

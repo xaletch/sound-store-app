@@ -6,13 +6,15 @@ export interface modalsState {
   downloadTrackModal: boolean;
   downloadTrackData: ITrackPay | null,
   linkModal: boolean;
+  toTryModal: boolean;
 }
 
 const initialState: modalsState = {
   downloadPackModal: false,
   downloadTrackModal: false,
   downloadTrackData: null,
-  linkModal: false
+  linkModal: false,
+  toTryModal: false
 };
 
 export const modalsSlice = createSlice({
@@ -30,9 +32,12 @@ export const modalsSlice = createSlice({
     },
     setLinkModal: (state, action: PayloadAction<boolean>) => {
       state.linkModal = action.payload;
+    },
+    setToTryModal: (state, action: PayloadAction<boolean>) => {
+      state.toTryModal = action.payload;
     }
   },
 });
 
-export const { setDownloadPackModal, setDownloadTrackModal, setDownloadTrackData, setLinkModal } = modalsSlice.actions;
+export const { setDownloadPackModal, setDownloadTrackModal, setDownloadTrackData, setLinkModal, setToTryModal } = modalsSlice.actions;
 export default modalsSlice.reducer;
