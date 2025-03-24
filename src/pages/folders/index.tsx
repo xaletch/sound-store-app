@@ -50,7 +50,7 @@ export const Folders = () => {
   }, [inView]);
   
   return (
-    <div className="px-4 pb-4">
+    <div className="px-4 pb-4 ">
       <h1 className="text-center font-medium text-xl">Фильтры</h1>
       <div className="my-6">
         <Sort />
@@ -64,7 +64,7 @@ export const Folders = () => {
       ) : (
         <div>
           {folders && folders?.length > 0 ? (
-            <FoldersCardWrapper>
+            <FoldersCardWrapper cl="pb-20">
               {folders.map((item, index) => (
                 <FolderCard 
                   key={index}

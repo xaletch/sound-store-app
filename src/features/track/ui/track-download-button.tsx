@@ -24,8 +24,8 @@ export const TrackDownloadButton = ({ id, track }: TrackDownloadButtonProps) => 
   const handleDownload = async () => {
     if (credits <= 1) {
       console.error('Недостаточно средств');
-      dispatch(setDownloadTrackModal(false));
-      return;
+      // dispatch(setDownloadTrackModal(false));
+      // return;
     }
     try {
       const res = await download({ id: id }).unwrap();
@@ -38,10 +38,10 @@ export const TrackDownloadButton = ({ id, track }: TrackDownloadButtonProps) => 
           byteArray[i] = binaryData.charCodeAt(i);
         }
 
-        // const blob = new Blob([byteArray], { type: 'audio/mpeg' });
-        // const fileUrl = window.URL.createObjectURL(blob);
+        const blob = new Blob([byteArray], { type: 'audio/mpeg' });
+        const fileUrl = window.URL.createObjectURL(blob);
 
-        const fileUrl = 'https://storage.yandexcloud.net/tma-dev-bits/audio/track-62?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=YCAJEGYuKPjNlESjNCbip2Anw%2F20250324%2Fru-central1%2Fs3%2Faws4_request&X-Amz-Date=20250324T153328Z&X-Amz-Expires=3600&X-Amz-Signature=97A7A419030DF4C3DD9F2806B58915E034CD5D2914BD178F1C6549B5CD934C49&X-Amz-SignedHeaders=host'
+        console.log('fileUrl ======= fileUrl', fileUrl);
 
         const downloadParams: DownloadFileParams = {
           url: fileUrl,
