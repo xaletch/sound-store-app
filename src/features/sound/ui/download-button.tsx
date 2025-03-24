@@ -38,16 +38,17 @@ export const PackDownloadButtonModal = () => {
         console.log('download pack track', track);
 
         if (res.Link) {
-          const binaryData = atob(res.Link);
+          // const binaryData = atob(res.Link);
 
-          const byteArray = new Uint8Array(binaryData.length);
-          for (let i = 0; i < binaryData.length; i++) {
-            byteArray[i] = binaryData.charCodeAt(i);
-          }
+          // const byteArray = new Uint8Array(binaryData.length);
+          // for (let i = 0; i < binaryData.length; i++) {
+          //   byteArray[i] = binaryData.charCodeAt(i);
+          // }
   
-          const blob = new Blob([byteArray], { type: 'audio/mpeg' });
+          // const blob = new Blob([byteArray], { type: 'audio/mpeg' });
 
-          const fileUrl = window.URL.createObjectURL(blob);
+          // const fileUrl = window.URL.createObjectURL(blob);
+          const fileUrl = res.Link;
 
           const downloadParams: DownloadFileParams = {
             url: fileUrl,

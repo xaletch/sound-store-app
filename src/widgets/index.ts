@@ -25,3 +25,5 @@ export * from './search'
 export * from './like'
 
 export * from './audio-player'
+
+export * from './welcome'

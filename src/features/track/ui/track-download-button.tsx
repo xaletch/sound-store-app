@@ -31,15 +31,17 @@ export const TrackDownloadButton = ({ id, track }: TrackDownloadButtonProps) => 
       const res = await download({ id: id }).unwrap();
 
       if (res.Link) {
-        const binaryData = atob(res.Link);
-        const byteArray = new Uint8Array(binaryData.length);
+        // const binaryData = atob(res.Link);
+        // const byteArray = new Uint8Array(binaryData.length);
 
-        for (let i = 0; i < binaryData.length; i++) {
-          byteArray[i] = binaryData.charCodeAt(i);
-        }
+        // for (let i = 0; i < binaryData.length; i++) {
+        //   byteArray[i] = binaryData.charCodeAt(i);
+        // }
 
-        const blob = new Blob([byteArray], { type: 'audio/mpeg' });
-        const fileUrl = window.URL.createObjectURL(blob);
+        // const blob = new Blob([byteArray], { type: 'audio/mpeg' });
+        // const fileUrl = window.URL.createObjectURL(blob);
+
+        const fileUrl = res.Link;
 
         console.log('fileUrl ======= fileUrl', fileUrl);
 
