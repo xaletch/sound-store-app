@@ -4,6 +4,7 @@ import { userSelector } from "@/entities/user/model/selector";
 import { UserLoader } from "@/entities/user/ui/loader";
 import { FavouritesIcon, FoldersIcon, FullIcon, FullOpenBigIcon, HomeIcon, SearchIcon } from "@/shared/icons"
 import { Link, useLocation } from "@tanstack/react-router"
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const items = [
@@ -39,7 +40,16 @@ export const DesktopNavbar = () => {
 
   const { user } = useSelector(userSelector);
 
-  const isFull = webApp?.isFullscreen || false;
+  const [isFull, setIsFull] = useState(webApp?.isFullscreen || false);
+
+  useEffect(() => {
+    const handleViewportChange = () => {
+      setIsFull(webApp?.isFullscreen || false);
+    };
+  
+    webApp?.onEvent("viewportChanged", handleViewportChange);
+    return () => webApp?.offEvent("viewportChanged", handleViewportChange);
+  }, [webApp]);
 
   const fullScreen = () => {
     if (webApp) {

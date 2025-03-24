@@ -6,6 +6,7 @@ import { UserLoader } from "@/entities/user/ui/loader";
 import { FullAppButton } from "@/features/full-app";
 import { CreditsIcon, Logo, SupportIcon } from "@/shared/icons"
 import { Loader } from "@/shared/ui";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
@@ -17,6 +18,17 @@ export const Header = () => {
   const { user } = useSelector(userSelector);
 
   const isMobile = webApp?.platform === 'android' || webApp?.platform === 'ios';
+
+  const [isFull, setIsFull] = useState(webApp?.isFullscreen || false);
+  
+  useEffect(() => {
+    const handleViewportChange = () => {
+      setIsFull(webApp?.isFullscreen || false);
+    };
+  
+    webApp?.onEvent("viewportChanged", handleViewportChange);
+    return () => webApp?.offEvent("viewportChanged", handleViewportChange);
+  }, [webApp]);
 
   const fullScreen = () => {
     if (webApp) {
@@ -44,7 +56,7 @@ export const Header = () => {
           ) : null}
         </div>
       </div>
-      {!isMobile && (
+      {!isMobile && !isFull && (
         <div className="flex justify-end mt-6">
           <FullAppButton fullScreen={fullScreen}/>
         </div>
