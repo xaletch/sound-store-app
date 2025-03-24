@@ -2,7 +2,11 @@
 
 // const SLIDES_COUNT = 3;
 
-export const Welcome = () => {}
+export const Welcome = () => {
+  return (
+    <div>2</div>
+  )
+}
 //   const [currentSlide, setCurrentSlide] = useState(0);
 //   const [progress, setProgress] = useState([0, 0, 0]);
 
