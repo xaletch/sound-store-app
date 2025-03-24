@@ -1,10 +1,10 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { ITelegramUser, IWebApp } from "./telegram.types";
+import { WebApp, WebAppUser } from "@twa-dev/types";
 import { useCurrentPath } from "../path-provider";
 
 export interface ITelegramContext {
-  webApp?: IWebApp;
-  user?: ITelegramUser;
+  webApp?: WebApp;
+  user?: WebAppUser;
 }
 const TelegramContext = createContext<ITelegramContext>({});
 
@@ -13,7 +13,7 @@ export const TelegramProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [webApp, setWebApp] = useState<IWebApp | null>(null);
+  const [webApp, setWebApp] = useState<WebApp | null>(null);
 
   const { currentPath } = useCurrentPath();
 

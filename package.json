@@ -14,6 +14,7 @@
     "@tailwindcss/vite": "^4.0.12",
     "@tanstack/react-router": "^1.112.18",
     "@telegram-apps/sdk": "^3.5.3",
+    "@twa-dev/types": "^8.0.2",
     "framer-motion": "^12.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -21,7 +22,9 @@
     "react-redux": "^9.2.0",
     "react-responsive": "^10.0.1",
     "swiper": "^11.2.5",
-    "tailwindcss": "^4.0.12"
+    "tailwindcss": "^4.0.12",
+    "telegram-webapps": "^8.0.4",
+    "telegram-webapps-types": "^1.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

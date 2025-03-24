@@ -1,7 +1,6 @@
 import { modalSelector } from "@/entities/modals/model/services";
 import { playerSelector } from "@/features/audio-player";
 import { AudioPlayer, DesktopNavbar, MobileNavbar } from "@/widgets"
-import { FullScreenTest } from "@/widgets/full-screen-test";
 import { DownloadPackModal, DownloadTrackModal, LinkModal, ToTryModal } from "@/widgets/modals";
 import { AnimatePresence } from "framer-motion";
 import { PropsWithChildren, useEffect, useState } from "react"
@@ -26,8 +25,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
       <main className="flex flex-row relative">
         <div className="flex flex-1">
           {!firstVisit && isDesktop && <DesktopNavbar />}
-          <div className="flex-1 pb-15 md:pb-0 pt-6 max-w-7xl mx-auto">
-            <FullScreenTest />
+          <div className="flex-1 md:pb-0 pt-6 max-w-7xl mx-auto">
             {children}
           </div>
         </div>

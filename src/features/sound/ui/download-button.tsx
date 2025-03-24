@@ -6,7 +6,12 @@ import { PlusIcon } from "@/shared/icons"
 import { ModalButton } from "@/shared/ui"
 import { useDispatch, useSelector } from "react-redux"
 
+import { DownloadFileParams } from '@twa-dev/types';
+import { useTelegram } from "@/app/providers/telegram";
+
+
 export const PackDownloadButtonModal = () => {
+  const { webApp } = useTelegram();
   const dispatch = useDispatch();
 
   const { user } = useSelector(userSelector);
@@ -24,6 +29,7 @@ export const PackDownloadButtonModal = () => {
       return;
     }
 
+    console.log(window.Telegram.WebApp)
     try {
       for (const track of tracks) {
         const res = await download({ id: track.Id }).unwrap();
@@ -40,18 +46,15 @@ export const PackDownloadButtonModal = () => {
           }
   
           const blob = new Blob([byteArray], { type: 'audio/mpeg' });
-  
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = `${track.Name}.mp3`;
-          document.body.appendChild(link);
 
-          link.click();
-  
-          document.body.removeChild(link);
-  
-          window.URL.revokeObjectURL(url);
+          const fileUrl = window.URL.createObjectURL(blob);
+
+          const downloadParams: DownloadFileParams = {
+            url: fileUrl,
+            file_name: `${track.Name}.mp3`,
+          };
+
+          webApp?.downloadFile(downloadParams);
   
           console.log(`Трек ${track.Name} успешно установлен`);
           // const link = document.createElement('a');

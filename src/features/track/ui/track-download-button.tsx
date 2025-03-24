@@ -1,8 +1,10 @@
+import { useTelegram } from "@/app/providers/telegram";
 import { setDownloadTrackModal } from "@/entities/modals/model/slice";
 import { useDownloadTrackMutation } from "@/entities/track/model/services"
 import { userSelector } from "@/entities/user/model/selector";
 import { PlusIcon } from "@/shared/icons";
 import { ModalButton } from "@/shared/ui";
+import { DownloadFileParams } from "@twa-dev/types";
 import { useDispatch, useSelector } from "react-redux";
 
 interface TrackDownloadButtonProps {
@@ -11,6 +13,7 @@ interface TrackDownloadButtonProps {
 }
 
 export const TrackDownloadButton = ({ id, track }: TrackDownloadButtonProps) => {
+  const { webApp } = useTelegram();
   const dispatch = useDispatch();
   const [download] = useDownloadTrackMutation();
 
@@ -28,40 +31,24 @@ export const TrackDownloadButton = ({ id, track }: TrackDownloadButtonProps) => 
       const res = await download({ id: id }).unwrap();
 
       if (res.Link) {
-        const link = document.createElement('a');
-        link.href = res.Link;
-        link.setAttribute('download', `${track}.mp3`);
-        link.setAttribute('target', '_blank');
-  
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        // const binaryData = atob(res.Link);
+        const binaryData = atob(res.Link);
+        const byteArray = new Uint8Array(binaryData.length);
 
-        // const byteArray = new Uint8Array(binaryData.length);
-        // for (let i = 0; i < binaryData.length; i++) {
-        //   byteArray[i] = binaryData.charCodeAt(i);
-        // }
+        for (let i = 0; i < binaryData.length; i++) {
+          byteArray[i] = binaryData.charCodeAt(i);
+        }
 
-        // const blob = new Blob([byteArray], { type: 'audio/mpeg' });
-        // const url = window.URL.createObjectURL(blob);
+        const blob = new Blob([byteArray], { type: 'audio/mpeg' });
+        const fileUrl = window.URL.createObjectURL(blob);
 
-        // if (downloadFile.isAvailable()) {
-        //   await downloadFile(url, `${track}.mp3`);
-        // } else {
-        //   console.error('загружаемый файл недоступен');
-        // }
+        const downloadParams: DownloadFileParams = {
+          url: fileUrl,
+          file_name: `${track}.mp3`,
+        };
 
-        // window.URL.revokeObjectURL(url);
-        // const link = document.createElement('a');
-        // link.href = res.Link;
-        // link.download = `${track}.mp3`;
+        webApp?.downloadFile(downloadParams);
 
-        // document.body.appendChild(link);
-
-        // link.click();
-        // document.body.removeChild(link);
-        
+        console.log(`трек ${track} успешно установлен`)
       }
       dispatch(setDownloadTrackModal(false));
     }
