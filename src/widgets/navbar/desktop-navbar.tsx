@@ -2,7 +2,7 @@ import { useTelegram } from "@/app/providers/telegram";
 import { User } from "@/entities/user";
 import { userSelector } from "@/entities/user/model/selector";
 import { UserLoader } from "@/entities/user/ui/loader";
-import { FavouritesIcon, FoldersIcon, FullIcon, HomeIcon, SearchIcon } from "@/shared/icons"
+import { FavouritesIcon, FoldersIcon, FullIcon, FullOpenBigIcon, HomeIcon, SearchIcon } from "@/shared/icons"
 import { Link, useLocation } from "@tanstack/react-router"
 import { useSelector } from "react-redux";
 
@@ -39,12 +39,19 @@ export const DesktopNavbar = () => {
 
   const { user } = useSelector(userSelector);
 
-  const handleCloseFullscreen = () => {
+  const isFull = webApp?.isFullscreen || false;
+
+  const fullScreen = () => {
     if (webApp) {
-      // webApp.Viewport.isFullscreen;
-      // console.log('webApp.Viewport.isFullscreen', webApp.Viewport.isFullscreen)
+      webApp.requestFullscreen();
     }
-  };
+  }
+
+  const exitFullScreen = () => {
+    if (webApp) {
+      webApp.exitFullscreen();
+    }
+  }
 
   return (
     <div className="w-[260px] border border-black/20 flex-shrink-0">
@@ -61,10 +68,17 @@ export const DesktopNavbar = () => {
             ))}
           </div>
           <div>
-            <button className="flex w-full items-center px-2 py-1.5 text-sm font-medium text-center cursor-pointer hover:opacity-50 duration-300" onClick={handleCloseFullscreen}>
-              <span className="mr-1"><FullIcon/></span>
-              Выйти из фуллскрина
-            </button>
+            {isFull ? (
+              <button className="flex w-full items-center px-2 py-1.5 text-sm font-medium text-center cursor-pointer hover:opacity-50 duration-300" onClick={exitFullScreen}>
+                <span className="mr-1"><FullIcon/></span>
+                Выйти из фуллскрина
+              </button>
+            ) : (
+              <button className="flex w-full items-center px-2 py-1.5 text-sm font-medium text-center cursor-pointer hover:opacity-50 duration-300" onClick={fullScreen}>
+                <span className="mr-1"><FullOpenBigIcon /></span>
+                Войти в полный экран
+              </button>
+            )}
             <div className="mt-2 px-2">
               {user?.data.user?.first_name ? 
                 <User avatar={user?.data.user?.photo_url} name={user?.data.user?.first_name} />

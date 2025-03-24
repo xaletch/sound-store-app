@@ -64,7 +64,7 @@ export const Folders = () => {
       ) : (
         <div>
           {folders && folders?.length > 0 ? (
-            <FoldersCardWrapper cl="pb-20">
+            <FoldersCardWrapper cl="pb-10">
               {folders.map((item, index) => (
                 <FolderCard 
                   key={index}

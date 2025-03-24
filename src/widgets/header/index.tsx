@@ -1,16 +1,28 @@
+import { useTelegram } from "@/app/providers/telegram";
 import { HeaderButton } from "@/entities/header"
 import { User } from "@/entities/user"
 import { userSelector } from "@/entities/user/model/selector";
 import { UserLoader } from "@/entities/user/ui/loader";
+import { FullAppButton } from "@/features/full-app";
 import { CreditsIcon, Logo, SupportIcon } from "@/shared/icons"
 import { Loader } from "@/shared/ui";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
 export const Header = () => {
+  const { webApp } = useTelegram();
+
   const isDesktop = useMediaQuery({ minWidth: 768 });
 
   const { user } = useSelector(userSelector);
+
+  const isMobile = webApp?.platform === 'android' || webApp?.platform === 'ios';
+
+  const fullScreen = () => {
+    if (webApp) {
+      webApp.requestFullscreen();
+    }
+  }
 
   return (
     <div className="px-4">
@@ -32,6 +44,11 @@ export const Header = () => {
           ) : null}
         </div>
       </div>
+      {!isMobile && (
+        <div className="flex justify-end mt-6">
+          <FullAppButton fullScreen={fullScreen}/>
+        </div>
+      )}
     </div>
   )
 }
