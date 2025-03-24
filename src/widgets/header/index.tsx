@@ -25,8 +25,8 @@ export const Header = () => {
           }
           {/* {!isDesktop && <User avatar={user?.data.photo_url} name={user?.data.first_name} />} */}
           {!isDesktop ? (
-           user?.data.first_name ? 
-            <User avatar={user?.data.photo_url} name={user?.data.first_name} />
+           user?.data.user?.first_name ? 
+            <User avatar={user?.data.user?.photo_url} name={user?.data.user?.first_name} />
             : 
             <UserLoader />
           ) : null}

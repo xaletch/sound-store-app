@@ -41,9 +41,8 @@ export const DesktopNavbar = () => {
 
   const handleCloseFullscreen = () => {
     if (webApp) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      webApp.Viewport.isFullscreen;
-      console.log('webApp.Viewport.isFullscreen', webApp.Viewport.isFullscreen)
+      // webApp.Viewport.isFullscreen;
+      // console.log('webApp.Viewport.isFullscreen', webApp.Viewport.isFullscreen)
     }
   };
 
@@ -67,8 +66,8 @@ export const DesktopNavbar = () => {
               Выйти из фуллскрина
             </button>
             <div className="mt-2 px-2">
-              {user?.data.first_name ? 
-                <User avatar={user?.data.photo_url} name={user?.data.first_name} />
+              {user?.data.user?.first_name ? 
+                <User avatar={user?.data.user?.photo_url} name={user?.data.user?.first_name} />
               : 
                 <UserLoader />
               }

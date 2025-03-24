@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         setInitData(initData);
 
         const user: UserData = {
-          data: initDataUnsafe.user,
+          data: initDataUnsafe,
           credits: res.Credits,
           subscribe: res.CurentSubscribe
         };
