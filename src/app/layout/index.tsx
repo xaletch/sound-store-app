@@ -1,12 +1,12 @@
 import { modalSelector } from "@/entities/modals/model/services";
 import { playerSelector } from "@/features/audio-player";
 import { AudioPlayer, DesktopNavbar, MobileNavbar } from "@/widgets"
+import { FullScreenTest } from "@/widgets/full-screen-test";
 import { DownloadPackModal, DownloadTrackModal, LinkModal, ToTryModal } from "@/widgets/modals";
 import { AnimatePresence } from "framer-motion";
 import { PropsWithChildren, useEffect, useState } from "react"
 import { useSelector } from "react-redux";
 import { useMediaQuery } from 'react-responsive';
-import { useTelegram } from "../providers/telegram";
 
 export const Layout = ({ children }: PropsWithChildren) => {
   const [firstVisit, setFirstVisit] = useState<boolean>(true);
@@ -20,12 +20,6 @@ export const Layout = ({ children }: PropsWithChildren) => {
     const firstVisit = localStorage.getItem("first-visit");
     setFirstVisit(firstVisit ? false : true);
   }, []);
-  
-  const { webApp } = useTelegram();
-
-  const handleExpand = () => {
-    webApp?.expand();
-  };
 
   return (
     <div className="flex flex-1">
@@ -33,7 +27,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
         <div className="flex flex-1">
           {!firstVisit && isDesktop && <DesktopNavbar />}
           <div className="flex-1 pb-15 md:pb-0 pt-6 max-w-7xl mx-auto">
-            <button onClick={handleExpand}>на весь экран</button>
+            <FullScreenTest />
             {children}
           </div>
         </div>
