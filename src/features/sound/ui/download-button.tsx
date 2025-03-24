@@ -68,8 +68,8 @@ export const PackDownloadButtonModal = () => {
           // document.body.removeChild(link);
 
           console.log(`Трек ${track.Name} успешно установлен`);
+          dispatch(setDownloadPackModal(false));
         }
-        dispatch(setDownloadPackModal(false));
       }
     }
     catch (err) {
