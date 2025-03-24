@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AppLayoutImport } from './routes/_app/_layout'
 import { Route as AppLayoutIndexImport } from './routes/_app/_layout/index'
+import { Route as AppLayoutWelcomeIndexImport } from './routes/_app/_layout/welcome/index'
 import { Route as AppLayoutSubscribeIndexImport } from './routes/_app/_layout/subscribe/index'
 import { Route as AppLayoutSearchIndexImport } from './routes/_app/_layout/search/index'
 import { Route as AppLayoutFoldersIndexImport } from './routes/_app/_layout/folders/index'
@@ -31,6 +32,12 @@ const AppLayoutRoute = AppLayoutImport.update({
 const AppLayoutIndexRoute = AppLayoutIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AppLayoutRoute,
+} as any)
+
+const AppLayoutWelcomeIndexRoute = AppLayoutWelcomeIndexImport.update({
+  id: '/welcome/',
+  path: '/welcome/',
   getParentRoute: () => AppLayoutRoute,
 } as any)
 
@@ -137,6 +144,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutSubscribeIndexImport
       parentRoute: typeof AppLayoutImport
     }
+    '/_app/_layout/welcome/': {
+      id: '/_app/_layout/welcome/'
+      path: '/welcome'
+      fullPath: '/welcome'
+      preLoaderRoute: typeof AppLayoutWelcomeIndexImport
+      parentRoute: typeof AppLayoutImport
+    }
     '/_app/_layout/subscribe/payment/': {
       id: '/_app/_layout/subscribe/payment/'
       path: '/subscribe/payment'
@@ -157,6 +171,7 @@ interface AppLayoutRouteChildren {
   AppLayoutFoldersIndexRoute: typeof AppLayoutFoldersIndexRoute
   AppLayoutSearchIndexRoute: typeof AppLayoutSearchIndexRoute
   AppLayoutSubscribeIndexRoute: typeof AppLayoutSubscribeIndexRoute
+  AppLayoutWelcomeIndexRoute: typeof AppLayoutWelcomeIndexRoute
   AppLayoutSubscribePaymentIndexRoute: typeof AppLayoutSubscribePaymentIndexRoute
 }
 
@@ -168,6 +183,7 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
   AppLayoutFoldersIndexRoute: AppLayoutFoldersIndexRoute,
   AppLayoutSearchIndexRoute: AppLayoutSearchIndexRoute,
   AppLayoutSubscribeIndexRoute: AppLayoutSubscribeIndexRoute,
+  AppLayoutWelcomeIndexRoute: AppLayoutWelcomeIndexRoute,
   AppLayoutSubscribePaymentIndexRoute: AppLayoutSubscribePaymentIndexRoute,
 }
 
@@ -184,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/folders': typeof AppLayoutFoldersIndexRoute
   '/search': typeof AppLayoutSearchIndexRoute
   '/subscribe': typeof AppLayoutSubscribeIndexRoute
+  '/welcome': typeof AppLayoutWelcomeIndexRoute
   '/subscribe/payment': typeof AppLayoutSubscribePaymentIndexRoute
 }
 
@@ -195,6 +212,7 @@ export interface FileRoutesByTo {
   '/folders': typeof AppLayoutFoldersIndexRoute
   '/search': typeof AppLayoutSearchIndexRoute
   '/subscribe': typeof AppLayoutSubscribeIndexRoute
+  '/welcome': typeof AppLayoutWelcomeIndexRoute
   '/subscribe/payment': typeof AppLayoutSubscribePaymentIndexRoute
 }
 
@@ -208,6 +226,7 @@ export interface FileRoutesById {
   '/_app/_layout/folders/': typeof AppLayoutFoldersIndexRoute
   '/_app/_layout/search/': typeof AppLayoutSearchIndexRoute
   '/_app/_layout/subscribe/': typeof AppLayoutSubscribeIndexRoute
+  '/_app/_layout/welcome/': typeof AppLayoutWelcomeIndexRoute
   '/_app/_layout/subscribe/payment/': typeof AppLayoutSubscribePaymentIndexRoute
 }
 
@@ -222,6 +241,7 @@ export interface FileRouteTypes {
     | '/folders'
     | '/search'
     | '/subscribe'
+    | '/welcome'
     | '/subscribe/payment'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -232,6 +252,7 @@ export interface FileRouteTypes {
     | '/folders'
     | '/search'
     | '/subscribe'
+    | '/welcome'
     | '/subscribe/payment'
   id:
     | '__root__'
@@ -243,6 +264,7 @@ export interface FileRouteTypes {
     | '/_app/_layout/folders/'
     | '/_app/_layout/search/'
     | '/_app/_layout/subscribe/'
+    | '/_app/_layout/welcome/'
     | '/_app/_layout/subscribe/payment/'
   fileRoutesById: FileRoutesById
 }
@@ -278,6 +300,7 @@ export const routeTree = rootRoute
         "/_app/_layout/folders/",
         "/_app/_layout/search/",
         "/_app/_layout/subscribe/",
+        "/_app/_layout/welcome/",
         "/_app/_layout/subscribe/payment/"
       ]
     },
@@ -307,6 +330,10 @@ export const routeTree = rootRoute
     },
     "/_app/_layout/subscribe/": {
       "filePath": "_app/_layout/subscribe/index.tsx",
+      "parent": "/_app/_layout"
+    },
+    "/_app/_layout/welcome/": {
+      "filePath": "_app/_layout/welcome/index.tsx",
       "parent": "/_app/_layout"
     },
     "/_app/_layout/subscribe/payment/": {
