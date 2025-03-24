@@ -24,14 +24,14 @@ export const Layout = ({ children }: PropsWithChildren) => {
     <div className="flex flex-1">
       <main className="flex flex-row relative">
         <div className="flex flex-1">
-          {!firstVisit && isDesktop && <DesktopNavbar />}
+          {firstVisit && isDesktop && <DesktopNavbar />}
           <div className="flex-1 md:pb-0 pt-6 max-w-7xl mx-auto">
             {children}
           </div>
         </div>
 
         {/* navbar */}
-        {!firstVisit && !isDesktop && <MobileNavbar />}
+        {firstVisit && !isDesktop && <MobileNavbar />}
 
         {/* player */}
         {isPlayer && <AudioPlayer />}
