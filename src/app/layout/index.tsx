@@ -3,12 +3,13 @@ import { playerSelector } from "@/features/audio-player";
 import { AudioPlayer, DesktopNavbar, MobileNavbar } from "@/widgets"
 import { DownloadPackModal, DownloadTrackModal, LinkModal, ToTryModal } from "@/widgets/modals";
 import { AnimatePresence } from "framer-motion";
-import { PropsWithChildren, useEffect, useState } from "react"
+import { PropsWithChildren, useEffect } from "react"
 import { useSelector } from "react-redux";
 import { useMediaQuery } from 'react-responsive';
+import { useVisit } from "../providers/visit-provider";
 
 export const Layout = ({ children }: PropsWithChildren) => {
-  const [firstVisit, setFirstVisit] = useState<boolean>(true);
+  const { firstVisit, setFirstVisit } = useVisit();
 
   const isDesktop = useMediaQuery({ minWidth: 768 });
   const { isPlayer } = useSelector(playerSelector);
@@ -18,7 +19,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     const firstVisit = localStorage.getItem("first-visit");
     setFirstVisit(firstVisit ? false : true);
-  }, []);
+  }, [firstVisit]);
 
   return (
     <div className="flex flex-1">
