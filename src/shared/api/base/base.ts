@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const API = createApi({
   baseQuery:  fetchBaseQuery({
-    baseUrl: `http://localhost:8080/`,
+    baseUrl: `https://layer-app.ru/`,
     prepareHeaders: (headers) => {
         const initData = GetAuth('initData');
         if (initData) {
