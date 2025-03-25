@@ -11,7 +11,7 @@ import { useVisit } from "../providers/visit-provider";
 export const Layout = ({ children }: PropsWithChildren) => {
   const { firstVisit, setFirstVisit } = useVisit();
 
-  const isDesktop = useMediaQuery({ minWidth: 768 });
+  const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { isPlayer } = useSelector(playerSelector);
 
   const { downloadPackModal, downloadTrackModal, linkModal, toTryModal } = useSelector(modalSelector);

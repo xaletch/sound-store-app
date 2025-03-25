@@ -6,7 +6,7 @@ interface UserData {
 }
 
 export const User = ({ avatar, name }: UserData) => {
-  const isDesktop = useMediaQuery({ minWidth: 768 });
+  const isDesktop = useMediaQuery({ minWidth: 1080 });
 
   return (
     <>

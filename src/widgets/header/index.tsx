@@ -13,7 +13,7 @@ import { useMediaQuery } from "react-responsive";
 export const Header = () => {
   const { webApp } = useTelegram();
 
-  const isDesktop = useMediaQuery({ minWidth: 768 });
+  const isDesktop = useMediaQuery({ minWidth: 1080 });
 
   const { user } = useSelector(userSelector);
 

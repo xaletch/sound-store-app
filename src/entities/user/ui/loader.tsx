@@ -2,7 +2,7 @@ import { Loader } from "@/shared/ui";
 import { useMediaQuery } from "react-responsive";
 
 export const UserLoader = () => {
-  const isDesktop = useMediaQuery({ minWidth: 768 });
+  const isDesktop = useMediaQuery({ minWidth: 1080 });
 
   return (
     <>
