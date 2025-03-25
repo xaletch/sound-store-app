@@ -53,6 +53,7 @@
   --shadow-subscribe: 0 0 10px 5px #7cc0ab;
 
   --breakpoint-1160: 73rem;
+  --breakpoint-400: 25rem;
 }
 
 @layer base {
