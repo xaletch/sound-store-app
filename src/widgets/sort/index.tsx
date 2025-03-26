@@ -117,19 +117,19 @@ export const Sort = () => {
     <div className="mt-4">
       <div className="flex items-center gap-1">
         <FilterButton 
-          cl={'px-5 min-w-[107px] max-w-[107px] w-full md:min-w-[220px]'} 
+          cl={'px-5 min-w-20 400:min-w-[107px] max-w-[107px] w-full md:min-w-[220px]'} 
           onClick={() => setActiveFilter(prev => prev === 'Genre' ? null : 'Genre')}
         >
           Жанр
         </FilterButton>
         <FilterButton 
-          cl={"px-2.5 flex-1 min-w-[130px]"} 
+          cl={"px-2.5 flex-1 min-w-[110px] 380:min-w-[130px]"} 
           onClick={() => setActiveFilter(prev => prev === 'Instruments' ? null : 'Instruments')}
         >
           Инструменты
         </FilterButton>
         <FilterButton 
-          cl={"px-3 min-w-[107px] max-w-[107px] w-full md:min-w-[220px]"} 
+          cl={"px-3 400:min-w-[107px] max-w-[107px] max-w-[107px] w-full md:min-w-[220px]"} 
           onClick={() => setActiveFilter(prev => prev === 'Type' ? null : 'Type')}
         >
           Ваншоты

@@ -29,7 +29,7 @@ export const Search = () => {
         onKeyDown={handleKeyDown}
       />
       <div className="h-11.5 py-1 pr-2">
-        <button onClick={handleSearchClick} className="bg-green-800 text-white px-3.5 rounded-xl h-full min-h">Найти</button>
+        <button onClick={handleSearchClick} className="bg-green-800 text-white px-3.5 rounded-xl md:text-base text-sm h-full min-h">Найти</button>
       </div>
     </div>
   )

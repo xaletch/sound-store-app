@@ -39,8 +39,10 @@ export const Header = () => {
   return (
     <div className="px-4">
       <div className="flex items-center gap-3 justify-between">
-        <HeaderButton href={"/faq-support"} cl={"px-2 md:h-9 md:px-3 md:flex md:gap-3"} icon={<SupportIcon />} text={"Поддержка и FAQ"}/>
-        <Logo />
+        <div className="w-full 380:w-auto">
+          <HeaderButton href={"/faq-support"} cl={"w-8 h-8 380:w-auto 380:h-auto px-2 md:h-9 md:px-3 md:flex md:gap-3"} icon={<SupportIcon />} text={"Поддержка и FAQ"}/>
+        </div>
+        <Logo cl="400:w-9 400:h-9 min-w-6 h-6" />
         <div className="flex items-center gap-3">
           {user?.data ?
             <HeaderButton href={"/subscribe"} cl={"px-3 md:h-9 md:px-3 md:flex md:gap-3"} icon={<CreditsIcon />} text={user?.credits ? `${user.credits} ${user.subscribe || ''}` : "подписка"}/>
