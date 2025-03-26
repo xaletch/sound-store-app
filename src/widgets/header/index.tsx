@@ -6,6 +6,7 @@ import { UserLoader } from "@/entities/user/ui/loader";
 import { FullAppButton } from "@/features/full-app";
 import { CreditsIcon, Logo, SupportIcon } from "@/shared/icons"
 import { Loader } from "@/shared/ui";
+import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
@@ -45,7 +46,10 @@ export const Header = () => {
         <Logo cl="400:w-9 400:h-9 min-w-6 h-6" />
         <div className="flex items-center gap-3">
           {user?.data ?
-            <HeaderButton href={"/subscribe"} cl={"px-3 md:h-9 md:px-3 md:flex md:gap-3"} icon={<CreditsIcon />} text={user?.credits ? `${user.credits} ${user.subscribe || ''}` : "подписка"}/>
+              <Link to={'/subscribe'} className={`text-xs md:text-base font-medium bg-green-800 py-1 h-6.5 flex items-center rounded-2xl text-yellow-100 gap-1 px-3 md:h-9 md:px-3 md:flex md:gap-3`}>
+                <span><CreditsIcon /></span>
+                <span>{user?.credits ? `${user.credits} ${user.subscribe || ''}` : "подписка"}</span>
+              </Link>
             : 
             <Loader width={10} height={10} borderRadius={100} cl={"px-3 md:min-h-9 min-h-6.5 md:px-3 min-w-[100px] md:min-w-[130px]"} />  
           }
