@@ -37,7 +37,7 @@ export const SubscribeCards = ({ select, selectTariff }: SubscribeCardsProps ) =
 
   return (
     <div className="mt-7.5">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 px-20">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:px-20">
         {tariffs.map((tariff: TariffData, index) => (
           <SubscribeCard
             key={index}

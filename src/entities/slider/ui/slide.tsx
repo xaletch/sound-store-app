@@ -15,9 +15,9 @@ export const Slide = ({ image, name, description }: SlideProps) => {
         backgroundRepeat: "no-repeat"
       }}
     >
-      <div className="pl-4 h-full flex flex-col justify-end pr-7.5 pb-2.5">
+      <div className="px-2 sm:pl-4 h-full flex flex-col justify-end sm:pr-7.5 pb-2.5">
         <h3 className="font-medium text-yellow-100">{name}</h3>
-        <p className="text-[10px] md:text-sm leading-3 font-medium md:leading-4 text-yellow-100">{description}</p>
+        <p className="text-[9px] 380:text-[10px] md:text-sm leading-3 font-medium md:leading-4 text-yellow-100">{description}</p>
       </div>
     </div>
   )

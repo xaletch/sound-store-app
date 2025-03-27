@@ -25,7 +25,7 @@ export const playerSlice = createSlice({
   name: "player",
   initialState,
   reducers: {
-    setPlayerTrack: (state, action: PayloadAction<IPlayerTrack>) => {
+    setPlayerTrack: (state, action: PayloadAction<IPlayerTrack | null>) => {
       state.playerTrack = action.payload;
     },
     setIsPlaying: (state, action: PayloadAction<boolean>) => {

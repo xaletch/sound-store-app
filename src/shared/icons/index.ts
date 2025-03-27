@@ -35,3 +35,5 @@ export * from './full'
 export * from './full/full'
 
 export * from './plus'
+
+export * from './close'

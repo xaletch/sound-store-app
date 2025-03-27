@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setIsPlaying, setLovedPlayerTracks } from "./slice";
+import { setIsPlayer, setIsPlaying, setLovedPlayerTracks } from "./slice";
 import { ILovedTracks, ITrackData } from "./types";
 import { playerSelector } from "./selector";
 import { useTrackPlay } from "./track-play";
@@ -13,7 +13,7 @@ interface useAudioPlayerProps {
 export const useAudioPlayer = ({ tracks }: useAudioPlayerProps) => {
   const dispatch = useDispatch();
 
-  const { currentPlayingId } = useSelector(playerSelector);
+  const { currentPlayingId, isPlayer } = useSelector(playerSelector);
 
   const { playTrack } = useTrackPlay();
   const { likeTrack } = useTrackLike();
@@ -34,6 +34,9 @@ export const useAudioPlayer = ({ tracks }: useAudioPlayerProps) => {
   }, [tracks, dispatch]);
 
   const play = () => {
+    if (!isPlayer) {
+      dispatch(setIsPlayer(true));
+    }
     dispatch(setIsPlaying(true));
   };
 

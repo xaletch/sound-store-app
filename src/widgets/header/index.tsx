@@ -15,6 +15,8 @@ export const Header = () => {
   const { webApp } = useTelegram();
 
   const isDesktop = useMediaQuery({ minWidth: 1080 });
+  const isMedia380 = useMediaQuery({ minWidth: 380 });
+
 
   const { user } = useSelector(userSelector);
 
@@ -40,8 +42,8 @@ export const Header = () => {
   return (
     <div className="px-4">
       <div className="flex items-center gap-3 justify-between">
-        <div className="w-full 380:w-auto">
-          <HeaderButton href={"/faq-support"} cl={"w-8 h-8 380:w-auto 380:h-auto px-2 md:h-9 md:px-3 md:flex md:gap-3"} icon={<SupportIcon />} text={"Поддержка и FAQ"}/>
+        <div className="380:w-auto">
+          <HeaderButton href={"/faq-support"} cl={"380:w-auto 380:h-auto px-2 md:h-9 md:px-3 md:flex gap-1.5 md:gap-3"} icon={<SupportIcon />} text={isMedia380 ? "Поддержка и FAQ" : "FAQ"}/>
         </div>
         <Logo cl="400:w-9 400:h-9 min-w-6 h-6" />
         <div className="flex items-center gap-3">
