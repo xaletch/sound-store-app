@@ -7,54 +7,7 @@ import { FilterButton } from "@/shared/ui";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const vanshots: string[] = [
-  "Kick",
-  "Snare",
-  "Hi-Hat",
-  "Clap",
-  "Tom",
-  "Cymbal",
-  "Percussion",
-  "Sub-bass",
-  "Synth bass",
-  "Acoustic bass",
-  "808 bass",
-  "Piano",
-  "Guitar",
-  "Strings",
-  "Brass",
-  "Synth leads",
-  "Pads",
-  "Plucks",
-  "Risers",
-  "Downers",
-  "Sweeps",
-  "White noise",
-  "Impacts",
-  "Whooshes",
-  "Reverse sounds",
-  "Vocal chops",
-  "Ad-libs",
-  "Shouts",
-  "Breaths",
-  "Flutes",
-  "Ethnic drums",
-  "Chants",
-  "Ethnic string instruments",
-  "Arpeggios",
-  "Stabs",
-  "Bells",
-  "Chords",
-  "Pads",
-  "Ambient textures",
-  "Nature sounds",
-  "Analog kicks",
-  "Vinyl noise",
-  "Old-school synth sounds",
-  "Glitches",
-  "Foley",
-  "Cinematic sounds"
-]
+const vanshots: string[] = ["Ваншот", "Луп"]
 
 export const Sort = () => {
   const dispatch = useDispatch();
@@ -113,6 +66,11 @@ export const Sort = () => {
     return (selectedFilters[category] as string[]).includes(value as string);
   };
 
+  const filterItems = getFilterItems();
+  const half = Math.ceil(filterItems.length / 2);
+  const firstRow = filterItems.slice(0, half);
+  const secondRow = filterItems.slice(half);
+
   return (
     <div className="mt-4">
       <div className="flex items-center gap-1">
@@ -137,7 +95,7 @@ export const Sort = () => {
       </div>
       
       {activeFilter && (
-        <div className="overflow-x-auto mt-4 screen">
+        <div className="overflow-x-auto mt-4 full">
           <div className="max-w-5xl flex items-center gap-1">
             <FilterItem
               name="Выбрать все"
@@ -151,20 +109,24 @@ export const Sort = () => {
                 handleSelectAll(activeFilter, items);
               }}
             />
-            
-            {getFilterItems().map((item) => {
-              const value = getItemValue(item);
-              const name = typeof item === 'string' ? item : item.Name;
-
-              return (
-                <FilterItem
-                  key={value}
-                  name={name}
-                  select={isItemSelected(activeFilter, value)}
-                  onClick={() => handleToggleItem(activeFilter, value)}
-                />
-              );
-            })}
+            {firstRow.map((item, index) => (
+              <FilterItem
+                key={index}
+                name={typeof item === 'string' ? item : item.Name}
+                select={isItemSelected(activeFilter, getItemValue(item))}
+                onClick={() => handleToggleItem(activeFilter, getItemValue(item))}
+              />
+            ))}
+          </div>
+          <div className="flex gap-1 mt-1">
+            {secondRow.map((item, index) => (
+              <FilterItem
+                key={index}
+                name={typeof item === 'string' ? item : item.Name}
+                select={isItemSelected(activeFilter, getItemValue(item))}
+                onClick={() => handleToggleItem(activeFilter, getItemValue(item))}
+              />
+            ))}
           </div>
         </div>
       )}

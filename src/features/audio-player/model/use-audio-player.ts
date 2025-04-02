@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setIsPlayer, setIsPlaying, setLovedPlayerTracks } from "./slice";
-import { ILovedTracks, ITrackData } from "./types";
+import { setIsPlayer, setIsPlaying, setLovedPlayerTracks, updatePlayerTrackLoved } from "./slice";
+import { ILovedTracks, IPlayerTrack, ITrackData } from "./types";
 import { playerSelector } from "./selector";
 import { useTrackPlay } from "./track-play";
 import { useTrackLike } from "./track-like";
@@ -8,9 +8,10 @@ import { useEffect } from "react";
 
 interface useAudioPlayerProps {
   tracks?: ITrackData[];
+  playerTrack?: IPlayerTrack | undefined;
 }
 
-export const useAudioPlayer = ({ tracks }: useAudioPlayerProps) => {
+export const useAudioPlayer = ({ tracks, playerTrack }: useAudioPlayerProps) => {
   const dispatch = useDispatch();
 
   const { currentPlayingId, isPlayer } = useSelector(playerSelector);
@@ -73,15 +74,25 @@ export const useAudioPlayer = ({ tracks }: useAudioPlayerProps) => {
   }
 
   const like = async () => {
-    if (!tracks || tracks.length === 0) return;
+    if (!playerTrack) return;
 
-    const currentTrackIndex = tracks.findIndex(track => track.Id === currentPlayingId);
-    const currentTrack = currentTrackIndex % tracks.length;
-    const currentTrackData = tracks[currentTrack];
+    const updateLoved = !playerTrack.loved;
 
-    if (currentTrackData) {
-      await likeTrack(currentTrackData.Id, currentTrackData.Loved || false);
-    }
+    await likeTrack(playerTrack.id, updateLoved);
+
+    dispatch(updatePlayerTrackLoved(updateLoved));
+    // console.log('like');
+
+    // console.log('tracks ====', tracks)
+    // if (!tracks || tracks.length === 0) return;
+
+    // const currentTrackIndex = tracks.findIndex(track => track.Id === currentPlayingId);
+    // const currentTrack = currentTrackIndex % tracks.length;
+    // const currentTrackData = tracks[currentTrack];
+
+    // if (currentTrackData) {
+    //   await likeTrack(currentTrackData.Id, currentTrackData.Loved || false);
+    // }
   };
 
   return {

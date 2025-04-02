@@ -28,6 +28,11 @@ export const playerSlice = createSlice({
     setPlayerTrack: (state, action: PayloadAction<IPlayerTrack | null>) => {
       state.playerTrack = action.payload;
     },
+    updatePlayerTrackLoved: (state, action: PayloadAction<boolean>) => {
+      if (state.playerTrack) {
+        state.playerTrack.loved = action.payload;
+      }
+    },
     setIsPlaying: (state, action: PayloadAction<boolean>) => {
       state.isPlaying = action.payload;
     },
@@ -51,5 +56,5 @@ export const playerSlice = createSlice({
   },
 });
 
-export const { setPlayerTrack, setIsPlaying, setIsPlayer, setCurrentPlayingId, setCurrentTime, setPlayerTracks, setLovedPlayerTracks } = playerSlice.actions;
+export const { setPlayerTrack, setIsPlaying, setIsPlayer, setCurrentPlayingId, setCurrentTime, setPlayerTracks, setLovedPlayerTracks, updatePlayerTrackLoved } = playerSlice.actions;
 export default playerSlice.reducer;

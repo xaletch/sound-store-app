@@ -1,7 +1,6 @@
 import { AudioControl, playerSelector, useAudioPlayer } from "@/features/audio-player";
-import { setCurrentTime, setIsPlayer, setIsPlaying, setPlayerTrack } from "@/features/audio-player/model/slice";
+import { setCurrentTime, setIsPlayer, setIsPlaying } from "@/features/audio-player/model/slice";
 import { CloseIcon } from "@/shared/icons";
-import { a } from "node_modules/framer-motion/dist/types.d-B50aGbjN";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,7 +11,7 @@ export const AudioPlayer = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const currentTimeRef = useRef(currentTime);
 
-  const { play, pause, next, prev, like } = useAudioPlayer({ tracks: tracks || [] });
+  const { play, pause, next, prev, like } = useAudioPlayer({ tracks: tracks || [], playerTrack: playerTrack || undefined });
 
   useEffect(() => {
     if (audioRef.current && isPlayer) {
@@ -24,6 +23,8 @@ export const AudioPlayer = () => {
       }
     }
   }, [isPlaying, playerTrack, currentTime, isPlayer]);
+
+  console.log('=== playerTrack ===', playerTrack);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -68,7 +69,7 @@ export const AudioPlayer = () => {
   }
 
   return (
-    <div className="fixed bottom-20 1080:bottom-10 left-0 1080:left-[260px] w-full md:w-auto md:right-0 px-5 md:px-5">
+    <div className="fixed bottom-20 1080:bottom-10 left-0 1080:left-[260px] w-full md:w-auto md:right-0 px-4 md:px-5">
       <div className="bg-[#e7e4dd] border border-black rounded-3xl relative">
         <button className="absolute cursor-pointer -top-2 -right-1 380:right-0 w-6 h-6 flex items-center justify-center bg-[#E7E4DD] rounded-full" onClick={close}>
           <CloseIcon />

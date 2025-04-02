@@ -18,7 +18,7 @@ export const Welcome = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev < SLIDES_COUNT - 1 ? prev + 1 : prev));
-    }, 3700);
+    }, 7700);
 
     return () => clearInterval(interval);
   }, []);
@@ -46,7 +46,7 @@ export const Welcome = () => {
               className="h-full bg-[#7CC0AB] rounded-full"
               initial={{ width: 0 }}
               animate={{ width: index <= activeSlide ? "100%" : "0%" }}
-              transition={{ duration: 4.2 }}
+              transition={{ duration: 7.2 }}
             />
           </div>
         ))}
