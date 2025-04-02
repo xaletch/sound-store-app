@@ -57,7 +57,8 @@ export const useAudioPlayer = ({ tracks, playerTrack }: useAudioPlayerProps) => 
     const nextTrackData = tracks[nextTrack];
 
     if (nextTrackData) {
-      await playTrack(nextTrackData.Id, nextTrackData.Name, nextTrackData.Author, nextTrackData.PackId, );
+      await playTrack(nextTrackData.Id, nextTrackData.Name, nextTrackData.Author, nextTrackData.PackId);
+      dispatch(updatePlayerTrackLoved(nextTrackData.Loved!));
     }
   }
 
@@ -70,17 +71,20 @@ export const useAudioPlayer = ({ tracks, playerTrack }: useAudioPlayerProps) => 
 
     if (prevTrackData) {
       await playTrack(prevTrackData.Id, prevTrackData.Name, prevTrackData.Author, prevTrackData.PackId);
+      dispatch(updatePlayerTrackLoved(prevTrackData.Loved!));
     }
   }
 
   const like = async () => {
     if (!playerTrack) return;
+    const updateLoved = playerTrack.loved;
 
-    const updateLoved = !playerTrack.loved;
+    if (updateLoved !== undefined) {
+      await likeTrack(playerTrack.id, updateLoved);
+  
+      dispatch(updatePlayerTrackLoved(!updateLoved));
+    }
 
-    await likeTrack(playerTrack.id, updateLoved);
-
-    dispatch(updatePlayerTrackLoved(updateLoved));
     // console.log('like');
 
     // console.log('tracks ====', tracks)

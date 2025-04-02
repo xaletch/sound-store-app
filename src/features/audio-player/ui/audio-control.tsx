@@ -21,9 +21,7 @@ interface AudioControlProps {
 export const AudioControl = ({ isPlaying, onPlay, onPause, onNext, onPrev, onLike, trackData }: AudioControlProps) => {
   const { lovedTracks } = useSelector(playerSelector);
 
-  const IS_LOVE = trackData?.id ? lovedTracks[trackData.id] : false;
-
-  console.log(trackData);
+  const IS_LOVE = trackData?.id ? (trackData.loved !== undefined ? trackData.loved : lovedTracks[trackData.id]) : false;
 
   return (
     <div className="px-6 py-3">

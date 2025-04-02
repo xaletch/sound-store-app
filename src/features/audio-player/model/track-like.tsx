@@ -13,11 +13,11 @@ export const useTrackLike = () => {
       if (isLike) {
         await unLoved({ id: id.toString() });
 
-        dispatch(setLovedPlayerTracks([{ trackId: id, loved: true }]));
+        dispatch(setLovedPlayerTracks([{ trackId: id, loved: false }]));
       } else {
         await loved({ id: id.toString() });
 
-        dispatch(setLovedPlayerTracks([{ trackId: id, loved: false }]));
+        dispatch(setLovedPlayerTracks([{ trackId: id, loved: true }]));
       }
     }
     catch (err) {

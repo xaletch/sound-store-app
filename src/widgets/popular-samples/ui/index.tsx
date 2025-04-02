@@ -29,7 +29,7 @@ export const PopularSamples = () => {
           ))
         ) : (
           popularTracks?.Tracks.slice(0, 6).map((item, index) => (
-            <SamplesCard key={index} image={"/image/executor.png"} name={item.Name} id={item.Id} packId={item.PackId} author={item.Author} />
+            <SamplesCard key={index} image={"/image/executor.png"} loved={item.Loved} name={item.Name} id={item.Id} packId={item.PackId} author={item.Author} />
           ))
         )}
       </div>

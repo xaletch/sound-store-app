@@ -24,7 +24,9 @@ export const AudioPlayer = () => {
     }
   }, [isPlaying, playerTrack, currentTime, isPlayer]);
 
-  console.log('=== playerTrack ===', playerTrack);
+  // console.log('tracks', tracks)
+
+  // console.log('=== playerTrack ===', playerTrack);
 
   useEffect(() => {
     if (audioRef.current) {

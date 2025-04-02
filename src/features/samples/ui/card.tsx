@@ -2,7 +2,7 @@ import { SamplesImage } from "@/entities/samples"
 import { useGetPackPhotoQuery } from "@/entities/sound/model/services";
 import { useLazyListenTrackQuery } from "@/entities/track/model/services";
 import { playerSelector } from "@/features/audio-player";
-import { setCurrentPlayingId, setCurrentTime, setIsPlayer, setIsPlaying, setPlayerTrack } from "@/features/audio-player/model/slice";
+import { setCurrentPlayingId, setCurrentTime, setIsPlayer, setIsPlaying, setPlayerTrack, updatePlayerTrackLoved } from "@/features/audio-player/model/slice";
 import { IPlayerTrack } from "@/features/audio-player/model/types";
 import { PauseIcon, PlayIcon } from "@/shared/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,9 +13,10 @@ interface SamplesCardProps {
   id: number;
   packId: number;
   author: string;
+  loved: boolean;
 }
 
-export const SamplesCard = ({ name, id, packId, author }: SamplesCardProps) => {
+export const SamplesCard = ({ name, id, packId, author, loved }: SamplesCardProps) => {
   const { data: photo } = useGetPackPhotoQuery({ id: packId.toString() });
 
   const dispatch = useDispatch();
@@ -39,12 +40,14 @@ export const SamplesCard = ({ name, id, packId, author }: SamplesCardProps) => {
       const res = await play({ id: ID }).unwrap();
 
       if (res.Link) {
+        const isLoved = loved ?? false;
+
         const trackData: IPlayerTrack = {
           name: name,
           creator: author || '',
           id: id,
           track: res.Link,
-          loved: false,
+          loved: isLoved,
           packId: packId || 0
         };
 
@@ -53,6 +56,7 @@ export const SamplesCard = ({ name, id, packId, author }: SamplesCardProps) => {
         dispatch(setIsPlayer(true));
         dispatch(setCurrentPlayingId(id));
         dispatch(setCurrentTime(0));
+        dispatch(updatePlayerTrackLoved(isLoved));
       }
     }
     catch (err) {
