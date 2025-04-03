@@ -35,13 +35,15 @@ export const SearchSort = () => {
     if (popularTracks && popularTracks.Tracks) {
       dispatch(setTracks({ tracks: popularTracks.Tracks, replace: currentPage === 1 }));
       dispatch(setPlayerTracks(popularTracks.Tracks));
+
+      // console.log('=== ⚙️ ===', popularTracks, '\n', '==== filters ====', selectedFilters );
+      // console.log('=============', popularTracks)
     }
-  }, [popularTracks, dispatch]);
+  }, [popularTracks, dispatch, currentPage, selectedFilters]);
 
   useEffect(() => {
-    dispatch(setTracks({ tracks: [], replace: true }));
     dispatch(setCurrentPage(1));
-  }, [search, selectedFilters, dispatch]);
+  }, [search, selectedFilters.Genre, selectedFilters.Type, selectedFilters.Instruments, dispatch]);
 
   useEffect(() => {
     if (popularTracks?.Tracks.length &&inView) {

@@ -63,7 +63,7 @@ export const FoldersSort = () => {
 
   return (
     <div>
-      <h1 className="text-center font-medium text-xl">Фильтры</h1>
+      <h1 className="text-center font-medium text-xl">Паки</h1>
       <div className="my-6">
         <div className="">
           <div className="flex items-center gap-1">

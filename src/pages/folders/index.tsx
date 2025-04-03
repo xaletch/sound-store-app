@@ -32,15 +32,24 @@ export const Folders = () => {
   });
   
   useEffect(() => {
-    if (data && data.Packs) {
+    if (!data) return;
+    
+    if (page === 1 && data.Packs.length === 0) {
+      dispatch(setFolders({ folders: [], replace: true }));
+      return;
+    }
+  
+    if (data.Packs) {
       dispatch(setFolders({ folders: data.Packs, replace: page === 1 }));
     }
-  }, [data, dispatch]);
+  }, [data, dispatch, page]);
+
+  console.log('data =====', data);
 
   useEffect(() => {
     dispatch(setFolders({ folders: [], replace: true }));
     setPage(1);
-  }, [selectedFilters, dispatch]);
+  }, [selectedFilters.Genre, selectedFilters.Type, selectedFilters.Instruments, dispatch]);
 
 
   useEffect(() => {
@@ -51,7 +60,7 @@ export const Folders = () => {
   
   return (
     <div className="px-4 pb-4 ">
-      <h1 className="text-center font-medium text-xl">Фильтры</h1>
+      <h1 className="text-center font-medium text-xl">Паки</h1>
       <div className="my-6">
         <Sort />
       </div>

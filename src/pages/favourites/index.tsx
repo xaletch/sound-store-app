@@ -26,6 +26,8 @@ export const Favourites = () => {
     threshold: 0.5,
   });
 
+  console.log('data ===== ', data);
+
   useEffect(() => {
     if (data && isSuccess) {
       dispatch(setLovedTracks({ tracks: data.Tracks, replace: page === 1 }));
@@ -33,6 +35,12 @@ export const Favourites = () => {
       dispatch(setPlayerTracks(data.Tracks));
     }
   }, [data]);
+
+  useEffect(() => {
+    dispatch(setLovedTracks({ tracks: [], replace: true }));
+    setPage(1);
+  }, [selectedFilters.Genre, selectedFilters.Type, selectedFilters.Instruments, dispatch]);
+  
 
   useEffect(() => {
     if (data?.Tracks.length && inView) {
