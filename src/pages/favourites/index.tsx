@@ -2,6 +2,7 @@ import { useGetLovedQuery } from "@/entities/loved/model/services"
 import { setLovedLoading, setLovedTracks } from "@/entities/loved/model/slice";
 import { setPlayerTracks } from "@/features/audio-player/model/slice";
 import { filterSelector } from "@/features/filters/model/selector";
+import { Shadow } from "@/shared/ui";
 import { LikeContent } from "@/widgets"
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -49,12 +50,16 @@ export const Favourites = () => {
   }, [inView]);
 
   return (
-    <div className="px-4 pb-4 flex flex-col h-full">
-      <h1 className="text-center font-medium text-xl">Любимые сэмплы</h1>
-      <div className="flex-1">
-        <LikeContent />
-        <div ref={ref}></div>
+    <>
+      <Shadow cl="w-62 h-62 -translate-x-2/4 1080:w-104 1080:h-104  blur-[120px] 1080:blur-[200px] left-20 -top-16 1080:-top-10 1080:left-134" />
+
+      <div className="px-4 pb-4 flex flex-col h-full relative z-[2]">
+        <h1 className="text-center font-medium text-xl">Любимые сэмплы</h1>
+        <div className="flex-1">
+          <LikeContent />
+          <div ref={ref}></div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }

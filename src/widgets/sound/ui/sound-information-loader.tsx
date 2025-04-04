@@ -1,11 +1,13 @@
 import { SoundWrapperButton } from "@/entities/sound"
-import { Loader } from "@/shared/ui"
+import { Loader, Shadow } from "@/shared/ui"
 
 export const SoundInformationLoader = () => {
 
   return (
-    <div className="border border-black/20 rounded-xl">
-      <div className="px-3 py-4">
+    <div className="border border-black/20 rounded-xl relative">
+      <Shadow cl="w-68 h-68 md:w-80 md:h-80  blur-[80px] md:blur-[100px] -top-2 -left-10 md:left-0" />
+      
+      <div className="px-3 py-4 relative z-10">
         <div className="flex justify-between">
           <div className="min-w-[140] max-w-[155px] min-h-[140px]  md:min-w-[220px] md:min-h-[220px] rounded-xl overflow-hidden">
             <Loader cl="min-w-[140] w-full h-full md:min-w-[220px]" width={140} />

@@ -39,6 +39,8 @@
 }
 
 :root {
+  --green-350: #7CC0AB;
+  --green-550: #436c5f;
   --green-800: #436C5F;
   --yellow-100: #e7e4dd;
 }
@@ -47,6 +49,8 @@
   --font-sans: "DM Mono", "Roberto Pro", system-ui, sans-serif;
   --font-trap: "Trap";
 
+  --color-green-350: var(--green-350);
+  --color-green-550: var(--green-550);
   --color-green-800: var(--green-800);
   --color-yellow-100: var(--yellow-100);
 
