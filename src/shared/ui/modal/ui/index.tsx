@@ -8,7 +8,7 @@ interface ModalProps {
 
 export const Modal = ({ close, children }: ModalProps) => {
   return (
-    <div className="fixed top-0 left-0 w-full md:px-0 px-4 h-screen flex items-center justify-center" onClick={close}>
+    <div className="fixed top-0 left-0 w-full md:px-0 px-4 h-screen flex items-center justify-center z-50" onClick={close}>
       <motion.div 
         initial="hidden"
         animate="visible"

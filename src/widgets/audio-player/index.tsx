@@ -71,7 +71,7 @@ export const AudioPlayer = () => {
   }
 
   return (
-    <div className="fixed bottom-20 1080:bottom-10 left-0 1080:left-[260px] w-full md:w-auto md:right-0 px-4">
+    <div className="fixed bottom-20 1080:bottom-10 left-0 1080:left-[260px] w-full md:w-auto md:right-0 px-4 z-40">
       <div className="bg-[#e7e4dd] border border-black rounded-3xl relative">
         <button className="absolute cursor-pointer -top-2 -right-1 380:right-0 w-6 h-6 flex items-center justify-center bg-[#E7E4DD] rounded-full" onClick={close}>
           <CloseIcon />
