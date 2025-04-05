@@ -15,7 +15,7 @@ export interface SubscribeCardProps {
 export const SubscribeCard = ({ name, credit, credit_text, price, discount, price_text, cl = '', onClick, select }: SubscribeCardProps) => {  
   return (
     <div 
-      className={`w-full border border-[#1d1f22] rounded-4xl hover:bg-[#1d1f22] hover:text-[#e7e4dd] duration-300 ${name === 'ultra' ? 'shadow-subscribe' : ''} ${select ? 'bg-[#1d1f22] text-[#e7e4dd]' : ''} ${cl}`}
+      className={`w-full border border-[#1d1f22] rounded-4xl hover:bg-[#1d1f22] hover:text-[#e7e4dd] duration-300 ${name.toLowerCase() === 'ultra' ? 'shadow-subscribe' : ''} ${select ? 'bg-[#1d1f22] text-[#e7e4dd]' : ''} ${cl}`}
       onClick={() => onClick(name)}
     >
       <div className="flex flex-col items-center px-9 py-2.5 md:py-4">
