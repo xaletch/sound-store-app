@@ -16,6 +16,7 @@ import { Route as AppLayoutIndexImport } from './routes/_app/_layout/index'
 import { Route as AppLayoutWelcomeIndexImport } from './routes/_app/_layout/welcome/index'
 import { Route as AppLayoutSubscribeIndexImport } from './routes/_app/_layout/subscribe/index'
 import { Route as AppLayoutSearchIndexImport } from './routes/_app/_layout/search/index'
+import { Route as AppLayoutOfferIndexImport } from './routes/_app/_layout/offer/index'
 import { Route as AppLayoutFoldersIndexImport } from './routes/_app/_layout/folders/index'
 import { Route as AppLayoutFavouritesIndexImport } from './routes/_app/_layout/favourites/index'
 import { Route as AppLayoutFaqSupportIndexImport } from './routes/_app/_layout/faq-support/index'
@@ -50,6 +51,12 @@ const AppLayoutSubscribeIndexRoute = AppLayoutSubscribeIndexImport.update({
 const AppLayoutSearchIndexRoute = AppLayoutSearchIndexImport.update({
   id: '/search/',
   path: '/search/',
+  getParentRoute: () => AppLayoutRoute,
+} as any)
+
+const AppLayoutOfferIndexRoute = AppLayoutOfferIndexImport.update({
+  id: '/offer/',
+  path: '/offer/',
   getParentRoute: () => AppLayoutRoute,
 } as any)
 
@@ -130,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutFoldersIndexImport
       parentRoute: typeof AppLayoutImport
     }
+    '/_app/_layout/offer/': {
+      id: '/_app/_layout/offer/'
+      path: '/offer'
+      fullPath: '/offer'
+      preLoaderRoute: typeof AppLayoutOfferIndexImport
+      parentRoute: typeof AppLayoutImport
+    }
     '/_app/_layout/search/': {
       id: '/_app/_layout/search/'
       path: '/search'
@@ -169,6 +183,7 @@ interface AppLayoutRouteChildren {
   AppLayoutFaqSupportIndexRoute: typeof AppLayoutFaqSupportIndexRoute
   AppLayoutFavouritesIndexRoute: typeof AppLayoutFavouritesIndexRoute
   AppLayoutFoldersIndexRoute: typeof AppLayoutFoldersIndexRoute
+  AppLayoutOfferIndexRoute: typeof AppLayoutOfferIndexRoute
   AppLayoutSearchIndexRoute: typeof AppLayoutSearchIndexRoute
   AppLayoutSubscribeIndexRoute: typeof AppLayoutSubscribeIndexRoute
   AppLayoutWelcomeIndexRoute: typeof AppLayoutWelcomeIndexRoute
@@ -181,6 +196,7 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
   AppLayoutFaqSupportIndexRoute: AppLayoutFaqSupportIndexRoute,
   AppLayoutFavouritesIndexRoute: AppLayoutFavouritesIndexRoute,
   AppLayoutFoldersIndexRoute: AppLayoutFoldersIndexRoute,
+  AppLayoutOfferIndexRoute: AppLayoutOfferIndexRoute,
   AppLayoutSearchIndexRoute: AppLayoutSearchIndexRoute,
   AppLayoutSubscribeIndexRoute: AppLayoutSubscribeIndexRoute,
   AppLayoutWelcomeIndexRoute: AppLayoutWelcomeIndexRoute,
@@ -198,6 +214,7 @@ export interface FileRoutesByFullPath {
   '/faq-support': typeof AppLayoutFaqSupportIndexRoute
   '/favourites': typeof AppLayoutFavouritesIndexRoute
   '/folders': typeof AppLayoutFoldersIndexRoute
+  '/offer': typeof AppLayoutOfferIndexRoute
   '/search': typeof AppLayoutSearchIndexRoute
   '/subscribe': typeof AppLayoutSubscribeIndexRoute
   '/welcome': typeof AppLayoutWelcomeIndexRoute
@@ -210,6 +227,7 @@ export interface FileRoutesByTo {
   '/faq-support': typeof AppLayoutFaqSupportIndexRoute
   '/favourites': typeof AppLayoutFavouritesIndexRoute
   '/folders': typeof AppLayoutFoldersIndexRoute
+  '/offer': typeof AppLayoutOfferIndexRoute
   '/search': typeof AppLayoutSearchIndexRoute
   '/subscribe': typeof AppLayoutSubscribeIndexRoute
   '/welcome': typeof AppLayoutWelcomeIndexRoute
@@ -224,6 +242,7 @@ export interface FileRoutesById {
   '/_app/_layout/faq-support/': typeof AppLayoutFaqSupportIndexRoute
   '/_app/_layout/favourites/': typeof AppLayoutFavouritesIndexRoute
   '/_app/_layout/folders/': typeof AppLayoutFoldersIndexRoute
+  '/_app/_layout/offer/': typeof AppLayoutOfferIndexRoute
   '/_app/_layout/search/': typeof AppLayoutSearchIndexRoute
   '/_app/_layout/subscribe/': typeof AppLayoutSubscribeIndexRoute
   '/_app/_layout/welcome/': typeof AppLayoutWelcomeIndexRoute
@@ -239,6 +258,7 @@ export interface FileRouteTypes {
     | '/faq-support'
     | '/favourites'
     | '/folders'
+    | '/offer'
     | '/search'
     | '/subscribe'
     | '/welcome'
@@ -250,6 +270,7 @@ export interface FileRouteTypes {
     | '/faq-support'
     | '/favourites'
     | '/folders'
+    | '/offer'
     | '/search'
     | '/subscribe'
     | '/welcome'
@@ -262,6 +283,7 @@ export interface FileRouteTypes {
     | '/_app/_layout/faq-support/'
     | '/_app/_layout/favourites/'
     | '/_app/_layout/folders/'
+    | '/_app/_layout/offer/'
     | '/_app/_layout/search/'
     | '/_app/_layout/subscribe/'
     | '/_app/_layout/welcome/'
@@ -298,6 +320,7 @@ export const routeTree = rootRoute
         "/_app/_layout/faq-support/",
         "/_app/_layout/favourites/",
         "/_app/_layout/folders/",
+        "/_app/_layout/offer/",
         "/_app/_layout/search/",
         "/_app/_layout/subscribe/",
         "/_app/_layout/welcome/",
@@ -322,6 +345,10 @@ export const routeTree = rootRoute
     },
     "/_app/_layout/folders/": {
       "filePath": "_app/_layout/folders/index.tsx",
+      "parent": "/_app/_layout"
+    },
+    "/_app/_layout/offer/": {
+      "filePath": "_app/_layout/offer/index.tsx",
       "parent": "/_app/_layout"
     },
     "/_app/_layout/search/": {

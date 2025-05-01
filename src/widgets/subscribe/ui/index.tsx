@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { SubscribeCards } from "./subscribe-cards"
 import { SubscribeSort } from "./subscribe-sort"
 import { useSubscribe } from "@/features/subscribe/model/selectors"
-import { BigButton } from "@/shared/ui"
+import { BigButton, OfferLink } from "@/shared/ui"
 
 export const SubscribeContent = () => {
   const { select, selectTariff } = useSelector(useSubscribe);
@@ -14,6 +14,7 @@ export const SubscribeContent = () => {
         <BigButton cl={selectTariff ? 'bg-[#7cc0ab]' : ''} href={"payment/"} disabled={!selectTariff}>
           {selectTariff ? 'Перейти к оплате'  : 'Выбери тариф'}
         </BigButton>
+        <OfferLink />
       </div>
     </div>
   )

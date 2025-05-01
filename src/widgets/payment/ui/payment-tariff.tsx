@@ -1,6 +1,7 @@
 import { PaymentInfo } from "@/entities/subscribe/ui/payment-info"
 import { PaymentButtons } from "@/features/payment"
 import { useSubscribe } from "@/features/subscribe/model/selectors"
+import { OfferLink } from "@/shared/ui"
 import { useSelector } from "react-redux"
 
 export const PaymentTariff = () => {
@@ -13,6 +14,7 @@ export const PaymentTariff = () => {
       </div>
       <div className="mt-11">
         <PaymentButtons />
+        <OfferLink />
       </div>
     </div>
   )
