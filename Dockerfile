@@ -1,6 +1,6 @@
-FROM --platform=linux/amd64 node:23 as build
+# FROM --platform=linux/amd64 node:23 as build
 
-# FROM node:23 as build
+FROM node:23 as build
 
 WORKDIR /app
 
