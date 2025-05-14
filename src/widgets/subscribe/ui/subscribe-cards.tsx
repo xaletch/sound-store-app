@@ -1,5 +1,7 @@
 import { subscribersSelector } from "@/entities/subscribe/model/selector";
 import { SubscribeSortType } from "@/entities/subscribe/types"
+import { setPaymentSelect } from "@/features/payment/model/slice/payment.slice";
+import { SubscribeRequest } from "@/features/payment/model/types/subscribe.type";
 import { SubscribeCard } from "@/features/subscribe"
 import { setSelectTariff, setSelectTariffData } from "@/features/subscribe/model/slice";
 import { TariffData } from "@/features/subscribe/model/types";
@@ -15,7 +17,25 @@ export const SubscribeCards = ({ select, selectTariff }: SubscribeCardsProps ) =
 
   const { subscribers } = useSelector(subscribersSelector);
  
-  const handleSelect = (name: string, data: TariffData) => {
+  const handleSelect = (name: string, data: TariffData, Id: number) => {
+    const subData = {
+      Id: Id,
+      name: data.name,
+      credit: data.credit,
+      credit_text: data.credit_text,
+      price: data.price,
+      price_text: data.price_text,
+      discount: data.discount,
+      select: data.select,
+      duration: data.price_text === "месяц" ? 1 : data.price_text === "год" ? 12 : undefined,
+    }
+    console.log('data data', subData);
+    const paymentData: SubscribeRequest = {
+      SubId: Id,
+      Duration: data.price_text === "месяц" ? 1 : data.price_text === "год" ? 12 : 1,
+    }
+    
+    dispatch(setPaymentSelect(paymentData));
     dispatch(setSelectTariff(name));
     dispatch(setSelectTariffData(data));
   }
@@ -26,6 +46,7 @@ export const SubscribeCards = ({ select, selectTariff }: SubscribeCardsProps ) =
   };
 
   const tariffs = subscribers.map((subscriber) => ({
+    Id: subscriber.Id,
     name: subscriber.Type,
     credit: select === 'Месяц' ? `${subscriber.MonthCredits}` : `${subscriber.YearCredits}`,
     credit_text: "",
@@ -47,7 +68,7 @@ export const SubscribeCards = ({ select, selectTariff }: SubscribeCardsProps ) =
             price={tariff.price}
             price_text={tariff.price_text}
             discount={tariff.discount}
-            onClick={(name) => handleSelect(name, {...tariff})}
+            onClick={(name) => handleSelect(name, {...tariff}, tariff.Id)}
             select={tariff.select}
           />
         ))}

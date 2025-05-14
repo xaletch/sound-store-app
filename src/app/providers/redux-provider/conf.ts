@@ -8,6 +8,7 @@ import { userSlice } from "@/entities/user/model/slice";
 import { playerSlice } from "@/features/audio-player/model/slice";
 import { filterSlice } from "@/features/filters/model/slice";
 import { filterLoveSlice } from "@/features/like/model/slice";
+import { PaymentSlice } from "@/features/payment/model/slice/payment.slice";
 import { searchSlice } from "@/features/search/model/slice";
 import { subscribeSlice } from "@/features/subscribe/model/slice";
 import { API } from "@/shared/api";
@@ -30,6 +31,8 @@ export const store = configureStore({
         filter: filterSlice.reducer,
         search: searchSlice.reducer,
         modals: modalsSlice.reducer,
+
+        payment: PaymentSlice.reducer,
     },
 
     middleware(getDefaultMiddleware) {

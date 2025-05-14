@@ -10,4 +10,13 @@ export interface PaymentStatusRequest {
   paymentId: string;
 }
 
-export type PaymentStatusResponse = undefined;
+export interface PaymentSuccessStatusResponse {
+  status: 'success';
+}
+
+export interface PaymentFailedStatusResponse {
+  status: 'failed'
+  error: string;
+}
+ 
+export type PaymentStatusResponse = PaymentSuccessStatusResponse | PaymentFailedStatusResponse;

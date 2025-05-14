@@ -22,6 +22,7 @@ import { Route as AppLayoutFavouritesIndexImport } from './routes/_app/_layout/f
 import { Route as AppLayoutFaqSupportIndexImport } from './routes/_app/_layout/faq-support/index'
 import { Route as AppLayoutSoundNameImport } from './routes/_app/_layout/sound/$name'
 import { Route as AppLayoutSubscribePaymentIndexImport } from './routes/_app/_layout/subscribe/payment/index'
+import { Route as AppLayoutSubscribePaymentStatusPaymentIdImport } from './routes/_app/_layout/subscribe/payment/status/$paymentId'
 
 // Create/Update Routes
 
@@ -88,6 +89,13 @@ const AppLayoutSubscribePaymentIndexRoute =
   AppLayoutSubscribePaymentIndexImport.update({
     id: '/subscribe/payment/',
     path: '/subscribe/payment/',
+    getParentRoute: () => AppLayoutRoute,
+  } as any)
+
+const AppLayoutSubscribePaymentStatusPaymentIdRoute =
+  AppLayoutSubscribePaymentStatusPaymentIdImport.update({
+    id: '/subscribe/payment/status/$paymentId',
+    path: '/subscribe/payment/status/$paymentId',
     getParentRoute: () => AppLayoutRoute,
   } as any)
 
@@ -172,6 +180,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLayoutSubscribePaymentIndexImport
       parentRoute: typeof AppLayoutImport
     }
+    '/_app/_layout/subscribe/payment/status/$paymentId': {
+      id: '/_app/_layout/subscribe/payment/status/$paymentId'
+      path: '/subscribe/payment/status/$paymentId'
+      fullPath: '/subscribe/payment/status/$paymentId'
+      preLoaderRoute: typeof AppLayoutSubscribePaymentStatusPaymentIdImport
+      parentRoute: typeof AppLayoutImport
+    }
   }
 }
 
@@ -188,6 +203,7 @@ interface AppLayoutRouteChildren {
   AppLayoutSubscribeIndexRoute: typeof AppLayoutSubscribeIndexRoute
   AppLayoutWelcomeIndexRoute: typeof AppLayoutWelcomeIndexRoute
   AppLayoutSubscribePaymentIndexRoute: typeof AppLayoutSubscribePaymentIndexRoute
+  AppLayoutSubscribePaymentStatusPaymentIdRoute: typeof AppLayoutSubscribePaymentStatusPaymentIdRoute
 }
 
 const AppLayoutRouteChildren: AppLayoutRouteChildren = {
@@ -201,6 +217,8 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
   AppLayoutSubscribeIndexRoute: AppLayoutSubscribeIndexRoute,
   AppLayoutWelcomeIndexRoute: AppLayoutWelcomeIndexRoute,
   AppLayoutSubscribePaymentIndexRoute: AppLayoutSubscribePaymentIndexRoute,
+  AppLayoutSubscribePaymentStatusPaymentIdRoute:
+    AppLayoutSubscribePaymentStatusPaymentIdRoute,
 }
 
 const AppLayoutRouteWithChildren = AppLayoutRoute._addFileChildren(
@@ -219,6 +237,7 @@ export interface FileRoutesByFullPath {
   '/subscribe': typeof AppLayoutSubscribeIndexRoute
   '/welcome': typeof AppLayoutWelcomeIndexRoute
   '/subscribe/payment': typeof AppLayoutSubscribePaymentIndexRoute
+  '/subscribe/payment/status/$paymentId': typeof AppLayoutSubscribePaymentStatusPaymentIdRoute
 }
 
 export interface FileRoutesByTo {
@@ -232,6 +251,7 @@ export interface FileRoutesByTo {
   '/subscribe': typeof AppLayoutSubscribeIndexRoute
   '/welcome': typeof AppLayoutWelcomeIndexRoute
   '/subscribe/payment': typeof AppLayoutSubscribePaymentIndexRoute
+  '/subscribe/payment/status/$paymentId': typeof AppLayoutSubscribePaymentStatusPaymentIdRoute
 }
 
 export interface FileRoutesById {
@@ -247,6 +267,7 @@ export interface FileRoutesById {
   '/_app/_layout/subscribe/': typeof AppLayoutSubscribeIndexRoute
   '/_app/_layout/welcome/': typeof AppLayoutWelcomeIndexRoute
   '/_app/_layout/subscribe/payment/': typeof AppLayoutSubscribePaymentIndexRoute
+  '/_app/_layout/subscribe/payment/status/$paymentId': typeof AppLayoutSubscribePaymentStatusPaymentIdRoute
 }
 
 export interface FileRouteTypes {
@@ -263,6 +284,7 @@ export interface FileRouteTypes {
     | '/subscribe'
     | '/welcome'
     | '/subscribe/payment'
+    | '/subscribe/payment/status/$paymentId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -275,6 +297,7 @@ export interface FileRouteTypes {
     | '/subscribe'
     | '/welcome'
     | '/subscribe/payment'
+    | '/subscribe/payment/status/$paymentId'
   id:
     | '__root__'
     | '/_app/_layout'
@@ -288,6 +311,7 @@ export interface FileRouteTypes {
     | '/_app/_layout/subscribe/'
     | '/_app/_layout/welcome/'
     | '/_app/_layout/subscribe/payment/'
+    | '/_app/_layout/subscribe/payment/status/$paymentId'
   fileRoutesById: FileRoutesById
 }
 
@@ -324,7 +348,8 @@ export const routeTree = rootRoute
         "/_app/_layout/search/",
         "/_app/_layout/subscribe/",
         "/_app/_layout/welcome/",
-        "/_app/_layout/subscribe/payment/"
+        "/_app/_layout/subscribe/payment/",
+        "/_app/_layout/subscribe/payment/status/$paymentId"
       ]
     },
     "/_app/_layout/": {
@@ -365,6 +390,10 @@ export const routeTree = rootRoute
     },
     "/_app/_layout/subscribe/payment/": {
       "filePath": "_app/_layout/subscribe/payment/index.tsx",
+      "parent": "/_app/_layout"
+    },
+    "/_app/_layout/subscribe/payment/status/$paymentId": {
+      "filePath": "_app/_layout/subscribe/payment/status/$paymentId.tsx",
       "parent": "/_app/_layout"
     }
   }

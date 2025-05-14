@@ -7,14 +7,18 @@ import { PropsWithChildren, useEffect } from "react"
 import { useSelector } from "react-redux";
 import { useMediaQuery } from 'react-responsive';
 import { useVisit } from "../providers/visit-provider";
+import { useCurrentPath } from "../providers/path-provider";
 
 export const Layout = ({ children }: PropsWithChildren) => {
   const { firstVisit, setFirstVisit } = useVisit();
+  const { currentPath } = useCurrentPath();
 
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { isPlayer } = useSelector(playerSelector);
 
   const { downloadPackModal, downloadTrackModal, linkModal, toTryModal } = useSelector(modalSelector);
+
+  const isPaymentStatusPage = currentPath.match(/^\/subscribe\/payment\/status\/[^/]+$/);
 
   useEffect(() => {
     const firstVisit = localStorage.getItem("first-visit");
@@ -25,14 +29,14 @@ export const Layout = ({ children }: PropsWithChildren) => {
     <div className="flex flex-1">
       <main className="flex flex-row relative">
         <div className="flex flex-1">
-          {!firstVisit && isDesktop && <DesktopNavbar />}
-          <div className={`flex-1 max-w-7xl mx-auto ${!firstVisit ? 'pb-14.5 md:pb-0 pt-6' : ''}`}>
+          {!firstVisit && isDesktop && !isPaymentStatusPage && <DesktopNavbar />}
+          <div className={`flex-1 max-w-7xl mx-auto ${!firstVisit && !isPaymentStatusPage ? 'pb-14.5 md:pb-0 pt-6' : ''}`}>
             {children}
           </div>
         </div>
 
         {/* navbar */}
-        {!firstVisit && !isDesktop && <MobileNavbar />}
+        {!firstVisit && !isDesktop && !isPaymentStatusPage && <MobileNavbar />}
 
         {/* player */}
         {isPlayer && <AudioPlayer />}

@@ -1,5 +1,5 @@
 
-type SubscribeDuration = 1 | 12;
+export type SubscribeDuration = 1 | 12;
 
 type ActiveSubscribe = {
   Id: number;

@@ -5,7 +5,7 @@ import { OfferLink } from "@/shared/ui"
 import { useSelector } from "react-redux"
 
 export const PaymentTariff = () => {
-  const { selectTariffData } = useSelector(useSubscribe)
+  const { selectTariffData } = useSelector(useSubscribe);
 
   return (
     <div className="md:max-w-xl mx-auto">

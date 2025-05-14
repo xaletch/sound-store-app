@@ -6,4 +6,6 @@ export type TariffData = {
   price_text: string;
   discount: number;
   select: boolean;
+  Id: number;
+  duration: 1 | 12;
 };
