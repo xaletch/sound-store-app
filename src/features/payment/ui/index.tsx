@@ -1,4 +1,4 @@
-import { BigButton, PaymentButton } from "@/shared/ui"
+import { PaymentButton } from "@/shared/ui"
 import { paymentSelector, useSubscribeMutation } from "../model";
 import { SubscribeDuration, SubscribeResponse } from "../model/types/subscribe.type";
 import { useEffect, useState } from "react";
@@ -80,13 +80,13 @@ export const PaymentButtons = () => {
 
   return (
     <div className="flex flex-col gap-5">
-      <BigButton 
+      {/* <BigButton 
         href={"#"} 
         cl={"bg-[#7cc0ab]"} 
         disabled={isLoading}
       >
         Оплата TON
-      </BigButton>
+      </BigButton> */}
       <PaymentButton 
         cl={"bg-[#7cc0ab]"} 
         onClick={() => cardPayment(select?.SubId, select?.Duration)}

@@ -1,6 +1,7 @@
 import { API } from "@/shared/api";
-import { SubscribeRequest, SubscribeResponse } from "../types/subscribe.type";
+import { SubscribePostResponse, SubscribeRequest, SubscribeResponse } from "../types/subscribe.type";
 import { PaymentStatusRequest, PaymentStatusResponse } from "../types/payment-status.type";
+import { ActiveSubscribeResponse } from "../types/active-subscribe.type";
 
 export const PaymentApi = API.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,7 +19,25 @@ export const PaymentApi = API.injectEndpoints({
         body: req.data,
       }),
     }),
+    activeSubscribe: builder.query<ActiveSubscribeResponse, void>({
+      query: () => ({
+        url: "sounds/tg/activesub",
+        method: "GET",
+      })
+    }),
+    cancelSubscribe: builder.mutation<SubscribePostResponse, void>({
+      query: () => ({
+        url: "sounds/tg/cancelsubsribe",
+        method: "POST"
+      }),
+    }),
+    renewSubscribe: builder.mutation<SubscribePostResponse, void>({
+      query: () => ({
+        url: "sounds/tg/renewsubsribe",
+        method: "POST"
+      })
+    }),
   }),
 });
 
-export const { useSubscribeMutation, usePaymentStatusMutation } = PaymentApi;
+export const { useSubscribeMutation, usePaymentStatusMutation, useActiveSubscribeQuery, useCancelSubscribeMutation, useRenewSubscribeMutation } = PaymentApi;

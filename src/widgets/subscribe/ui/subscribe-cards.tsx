@@ -10,26 +10,27 @@ import { useDispatch, useSelector } from "react-redux";
 interface SubscribeCardsProps {
   select: SubscribeSortType;
   selectTariff: string;
+  selectNum: number | undefined;
 }
 
-export const SubscribeCards = ({ select, selectTariff }: SubscribeCardsProps ) => {
+export const SubscribeCards = ({ select, selectTariff, selectNum }: SubscribeCardsProps ) => {
   const dispatch = useDispatch();
 
-  const { subscribers } = useSelector(subscribersSelector);
- 
+  const { subscribers, activity } = useSelector(subscribersSelector);
+  console.log(activity)
   const handleSelect = (name: string, data: TariffData, Id: number) => {
-    const subData = {
-      Id: Id,
-      name: data.name,
-      credit: data.credit,
-      credit_text: data.credit_text,
-      price: data.price,
-      price_text: data.price_text,
-      discount: data.discount,
-      select: data.select,
-      duration: data.price_text === "месяц" ? 1 : data.price_text === "год" ? 12 : undefined,
-    }
-    console.log('data data', subData);
+    // const subData = {
+    //   Id: Id,
+    //   name: data.name,
+    //   credit: data.credit,
+    //   credit_text: data.credit_text,
+    //   price: data.price,
+    //   price_text: data.price_text,
+    //   discount: data.discount,
+    //   select: data.select,
+    //   duration: data.price_text === "месяц" ? 1 : data.price_text === "год" ? 12 : undefined,
+    // }
+    // console.log('subscribe', subData);
     const paymentData: SubscribeRequest = {
       SubId: Id,
       Duration: data.price_text === "месяц" ? 1 : data.price_text === "год" ? 12 : 1,
@@ -70,6 +71,7 @@ export const SubscribeCards = ({ select, selectTariff }: SubscribeCardsProps ) =
             discount={tariff.discount}
             onClick={(name) => handleSelect(name, {...tariff}, tariff.Id)}
             select={tariff.select}
+            activity={activity ? (tariff.Id === activity.Used && selectNum === activity.Duration) : false}
           />
         ))}
       </div>

@@ -1,6 +1,7 @@
 import { useGetSubscribersQuery } from "@/entities/subscribe/model/services";
-import { setSubscribers } from "@/entities/subscribe/model/slice";
+import { setSubActivity, setSubscribers } from "@/entities/subscribe/model/slice";
 import { playerSelector } from "@/features/audio-player";
+import { useActiveSubscribeQuery } from "@/features/payment/model";
 import { Shadow } from "@/shared/ui";
 import { SubscribeContent } from "@/widgets"
 import { useEffect } from "react";
@@ -12,12 +13,19 @@ export const Subscribe = () => {
   const { data, isSuccess } = useGetSubscribersQuery();
   const { isPlayer } = useSelector(playerSelector);
   
+  const { data: activity, isSuccess: activitySuccess } = useActiveSubscribeQuery();
 
   useEffect(() => {
     if (data && isSuccess) {
       dispatch(setSubscribers(data.Genres));
     }
   }, [data]);
+
+  useEffect(() => {
+    if (activity && activitySuccess) {
+      dispatch(setSubActivity(activity));
+    }
+  }, [activity])
   
   return (
     <>

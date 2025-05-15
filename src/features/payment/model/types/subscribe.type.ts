@@ -21,3 +21,5 @@ export interface SubscribeResponse {
   paymentId: string;
   token: string;
 }
+
+export type SubscribePostResponse = "success" | "error";
