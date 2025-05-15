@@ -18,7 +18,7 @@ export const SubscribeContent = () => {
             <BigButton cl={selectTariff ? 'bg-[#7cc0ab]' : ''} href={"payment/"} disabled={!selectTariff}>
               {selectTariff ? 'Перейти к оплате'  : 'Выбери тариф'}
             </BigButton>
-            {activity && activity.Used === 0 && activity.Duration === 0 && (
+            {activity && activity.Used !== 0 && activity.Duration !== 0 && (
               activity.AutoPay ? (
                 <CancelSubscribe autoPay={activity.AutoPay} />
               ) : (
