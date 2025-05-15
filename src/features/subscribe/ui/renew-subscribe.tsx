@@ -12,6 +12,7 @@ export const RenewSubscribe = ({ autoPay }: RenewSubscribeProps) => {
 
   const [renew] = useRenewSubscribeMutation();
 
+  // 
   const extend = async () => {
     try {
       const res = await renew();
