@@ -55,6 +55,7 @@
   --color-yellow-100: var(--yellow-100);
 
   --shadow-subscribe: 0 0 10px 5px #7cc0ab;
+  --shadow-input: 0 0 0px 2px #7CC0AB;
 
   --breakpoint-1160: 73rem;
   --breakpoint-400: 25rem;

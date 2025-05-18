@@ -6,12 +6,16 @@ import { PaymentWidget } from "./payment-widget";
 import { useDispatch, useSelector } from "react-redux";
 import { setPayment } from "../model/slice/payment.slice";
 import { toast } from "sonner";
+import { SendEmail } from "./send-email";
 
 export const PaymentButtons = () => {
   const dispatch = useDispatch();
-  const [subscribe] = useSubscribeMutation();
   const [confirmationToken, setConfirmationToken] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isEmail, setIsEmail] = useState<boolean>(false);
+  const [isEmailForm, setIsEmailForm] = useState<boolean>(false);
+  const [isSubscribeError, setIsSubscribeError] = useState<boolean>(false);
+  
+  const [subscribe, { isLoading }] = useSubscribeMutation();
 
   const { select } = useSelector(paymentSelector);
 
@@ -28,30 +32,38 @@ export const PaymentButtons = () => {
 
   const cardPayment = async (SubId: number | undefined, Duration: SubscribeDuration | undefined) => {
     if (!SubId || !Duration) return;
-
-    setIsLoading(true);
     
     try {
       const res = await subscribe({SubId, Duration}).unwrap()  as SubscribeResponse;
-      console.log(res);
+      
       if (res.token) {
         setConfirmationToken(res.token);
         // setPaymentId(res.paymentId);
         dispatch(setPayment(res));
-      } else {
-        toast.error('Не удалось создать платёж. Пожалуйста, попробуйте ещё раз.');
-        console.error('Ответ API не содержит token:', res);
+
+        setIsSubscribeError(false);
       }
+      //  else {
+      //   toast.error('Не удалось создать платёж. Пожалуйста, попробуйте ещё раз.');
+      //   console.error('Ответ API не содержит token:', res);
+
+      //   setIsSubscribeError(true);
+      // }
     }
     catch (err: unknown) {
       toast.error('Не удалось создать платёж. Пожалуйста, попробуйте ещё раз.');
-
       console.error('Ошибка при оплате', err);
-    }
-    finally {
-      setIsLoading(false);
+
+      setIsSubscribeError(true);
     }
   }
+
+  useEffect(() => {
+    if (isEmail) {
+      setIsEmailForm(false);
+      cardPayment(select?.SubId, select?.Duration);
+    }
+  }, [isEmail]);
 
   const handlePaymentError = (err: unknown, message: string) => {
     toast.error(message);
@@ -60,7 +72,7 @@ export const PaymentButtons = () => {
   }
 
   const handlePaymentSuccess = () => {
-    console.log('Платеж успешно завершен');
+    console.log('Обрабатываем платеж');
   }
 
   if (confirmationToken) {
@@ -82,13 +94,25 @@ export const PaymentButtons = () => {
       >
         Оплата TON
       </BigButton> */}
-      <PaymentButton 
-        cl={"bg-[#7cc0ab]"} 
-        onClick={() => cardPayment(select?.SubId, select?.Duration)}
-        disabled={isLoading}
-      >
-        {isLoading ? 'Загрузка...' : 'Оплата картой'}
-      </PaymentButton>
+      {/* {isEmail ? } */}
+      {isEmailForm && <SendEmail setIsEmail={setIsEmail} />}
+      {!isEmailForm && !isEmail && 
+        <PaymentButton 
+          cl={"bg-[#7cc0ab]"} 
+          onClick={() => setIsEmailForm(true)}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Загрузка...' : 'Оплата картой'}
+        </PaymentButton>
+      }
+      {isSubscribeError && isEmail && 
+        <PaymentButton 
+            cl={"bg-[#7cc0ab]"} 
+            onClick={() => cardPayment(select?.SubId, select?.Duration)}
+          >
+            {isLoading ? 'Загрузка...' : 'Попробовать снова'}
+        </PaymentButton>
+      }
     </div>
   )
 }

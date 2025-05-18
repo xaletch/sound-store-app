@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 interface PaymentWidgetProps {
   confirmationToken: string;
   returnUrl?: string;
-  onSuccess?: () => void;
+  onSuccess: () => void;
   onError?: (error: unknown, message: string) => void;
 }
 
@@ -34,7 +34,9 @@ export const PaymentWidget = ({ confirmationToken, returnUrl = 'https://layer-ap
           onError?.(err, errorMessage);
           setIsLoading(false);
         },
-        success_callback: onSuccess,
+        success_callback: () => {
+          onSuccess();
+        },
       });
 
       checkout.render('payment-form')

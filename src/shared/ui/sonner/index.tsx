@@ -7,15 +7,13 @@ export const SonnerComp = ({ ...props }: ToasterProps) => {
   return (
     <Sonner
       className="toaster group"
-      closeButton
       richColors
-      duration={3000}
-      visibleToasts={2}
+      duration={5000}
+      visibleToasts={1}
       expand
       position="top-center"
       toastOptions={{
         classNames: {
-          closeButton: "border-2 w-5 h-5",
           content: "p-1 text-sm",
         }
       }}
