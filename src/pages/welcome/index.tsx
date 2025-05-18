@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 
-import { SlideOne, SlideThree, SlideTwo } from "@/widgets"
+import { SlideOne } from "@/widgets/welcome/ui/slide-one";
+import { SlideTwo } from "@/widgets/welcome/ui/slide-two";
+import { SlideThree } from "@/widgets/welcome/ui/slide-three";
+
 import { AnimatePresence, motion } from "framer-motion";
 
-const SLIDES = [<SlideOne />, <SlideTwo />, <SlideThree />];
+const SLIDES = [SlideOne, SlideTwo, SlideThree]; 
 const SLIDES_COUNT = SLIDES.length;
 
 const slideVariants = {
@@ -61,7 +64,10 @@ export const Welcome = () => {
           exit="exit"
           className="absolute w-full h-full flex items-center justify-center"
         >
-          {SLIDES[activeSlide]}
+          {(() => {
+            const Slide = SLIDES[activeSlide];
+            return <Slide />;
+          })()}
         </motion.div>
       </AnimatePresence>
     </div>

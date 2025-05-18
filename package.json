@@ -21,6 +21,7 @@
     "react-intersection-observer": "^9.16.0",
     "react-redux": "^9.2.0",
     "react-responsive": "^10.0.1",
+    "sonner": "^2.0.3",
     "swiper": "^11.2.6",
     "tailwindcss": "^4.0.12",
     "telegram-webapps": "^8.0.4",

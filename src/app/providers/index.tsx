@@ -4,6 +4,7 @@ import { ReduxProvider } from './redux-provider'
 import { AuthProvider } from './auth-provider'
 import { CurrentPathProvider } from './path-provider'
 import { VisitProvider } from './visit-provider'
+import { SonnerComp } from '@/shared/ui'
 
 export const Provider = ({ children }: PropsWithChildren) => {
   return (
@@ -15,6 +16,7 @@ export const Provider = ({ children }: PropsWithChildren) => {
               {children}
             </VisitProvider>
           </AuthProvider>
+          <SonnerComp />
         </ReduxProvider>
       </TelegramProvider>
     </CurrentPathProvider>

@@ -5,14 +5,13 @@ import { useEffect, useState } from "react";
 import { PaymentWidget } from "./payment-widget";
 import { useDispatch, useSelector } from "react-redux";
 import { setPayment } from "../model/slice/payment.slice";
+import { toast } from "sonner";
 
 export const PaymentButtons = () => {
   const dispatch = useDispatch();
   const [subscribe] = useSubscribeMutation();
   const [confirmationToken, setConfirmationToken] = useState<string | null>(null);
-  const [paymentId, setPaymentId] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const { select } = useSelector(paymentSelector);
 
@@ -28,28 +27,25 @@ export const PaymentButtons = () => {
   }, []);
 
   const cardPayment = async (SubId: number | undefined, Duration: SubscribeDuration | undefined) => {
-    if (!SubId || !Duration) {
-      setError('Тариф не выбран');
-      return;
-    }
+    if (!SubId || !Duration) return;
 
     setIsLoading(true);
-    setError(null);
     
     try {
       const res = await subscribe({SubId, Duration}).unwrap()  as SubscribeResponse;
-
+      console.log(res);
       if (res.token) {
         setConfirmationToken(res.token);
-        setPaymentId(res.paymentId);
+        // setPaymentId(res.paymentId);
         dispatch(setPayment(res));
       } else {
-        setError('Не удалось создать платёж. Пожалуйста, попробуйте ещё раз.');
+        toast.error('Не удалось создать платёж. Пожалуйста, попробуйте ещё раз.');
         console.error('Ответ API не содержит token:', res);
       }
     }
     catch (err: unknown) {
-      setError('Не удалось создать платёж. Пожалуйста, попробуйте ещё раз.');
+      toast.error('Не удалось создать платёж. Пожалуйста, попробуйте ещё раз.');
+
       console.error('Ошибка при оплате', err);
     }
     finally {
@@ -58,7 +54,7 @@ export const PaymentButtons = () => {
   }
 
   const handlePaymentError = (err: unknown, message: string) => {
-    setError(message);
+    toast.error(message);
     console.error('Ошибка виджета оплаты:', err);
     setConfirmationToken(null);
   }
@@ -71,7 +67,6 @@ export const PaymentButtons = () => {
     return (
       <PaymentWidget 
         confirmationToken={confirmationToken}
-        paymentId={paymentId}
         onError={handlePaymentError}
         onSuccess={handlePaymentSuccess}
       />
@@ -94,11 +89,6 @@ export const PaymentButtons = () => {
       >
         {isLoading ? 'Загрузка...' : 'Оплата картой'}
       </PaymentButton>
-      {error && (
-        <div className="px-2 py-3 my-2 bg-red-50 text-red-500 rounded-xl border border-red-200 text-center">
-          {error}
-        </div>
-      )}
     </div>
   )
 }

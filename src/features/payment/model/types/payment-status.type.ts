@@ -1,13 +1,14 @@
-interface Body {
-  Id: number;
-  UserId: number;
-  Price: number;
-  Duration: number;
-}
+// interface Body {
+//   Id: number;
+//   UserId: number;
+//   Price: number;
+//   Duration: number;
+// }
 
 export interface PaymentStatusRequest {
-  data: Body
-  paymentId: string;
+  // data: Body
+  // paymentId: string;
+  token: string;
 }
 
 export interface PaymentSuccessStatusResponse {

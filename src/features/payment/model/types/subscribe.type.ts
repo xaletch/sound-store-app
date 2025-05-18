@@ -1,13 +1,13 @@
 
 export type SubscribeDuration = 1 | 12;
 
-type ActiveSubscribe = {
-  Id: number;
-  UserId: number;
-  Price: number;
-  Duration: SubscribeDuration;
-  AutoPay: boolean;
-}
+// type ActiveSubscribe = {
+//   Id: number;
+//   UserId: number;
+//   Price: number;
+//   Duration: SubscribeDuration;
+//   AutoPay: boolean;
+// }
 
 export interface SubscribeRequest {
   SubId: number;
@@ -17,8 +17,8 @@ export interface SubscribeRequest {
 // export interface  SubscribeData {}
 
 export interface SubscribeResponse {
-  ActiveSubscribe: ActiveSubscribe;
-  paymentId: string;
+  // ActiveSubscribe: ActiveSubscribe;
+  // paymentId: string;
   token: string;
 }
 

@@ -11,7 +11,7 @@ export const usePaymentVerify = () => {
     try {      
       const res = await status(data).unwrap() as PaymentStatusResponse;
   
-      console.log('===== payment verify ===== ', res);
+      // console.log('===== payment verify ===== ', res);
 
       if (res.status === 'success') {
         navigate({ to: '/' });

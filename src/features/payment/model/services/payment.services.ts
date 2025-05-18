@@ -14,9 +14,8 @@ export const PaymentApi = API.injectEndpoints({
     }),
     paymentStatus: builder.mutation<PaymentStatusResponse, PaymentStatusRequest>({
       query: (req) => ({
-        url: `sounds/tg/paymentstatus/${req.paymentId}`,
+        url: `sounds/tg/paymentstatus/${req.token}`,
         method: "POST",
-        body: req.data,
       }),
     }),
     activeSubscribe: builder.query<ActiveSubscribeResponse, void>({

@@ -2,13 +2,12 @@ import { useEffect, useState } from "react"
 
 interface PaymentWidgetProps {
   confirmationToken: string;
-  paymentId: string;
   returnUrl?: string;
   onSuccess?: () => void;
   onError?: (error: unknown, message: string) => void;
 }
 
-export const PaymentWidget = ({ confirmationToken, paymentId, returnUrl = 'https://layer-app.ru/subscribe/payment/status', onSuccess, onError }: PaymentWidgetProps) => {
+export const PaymentWidget = ({ confirmationToken, returnUrl = 'https://layer-app.ru/subscribe/payment/status', onSuccess, onError }: PaymentWidgetProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,7 +26,7 @@ export const PaymentWidget = ({ confirmationToken, paymentId, returnUrl = 'https
     try {
       const checkout = new window.YooMoneyCheckoutWidget({
         confirmation_token: confirmationToken,
-        return_url: `${returnUrl}/${paymentId}`,
+        return_url: `${returnUrl}/${confirmationToken}`,
         error_callback: (err: unknown) => {
           const errorMessage = 'Ошибка инициализации виджета';
           console.error(errorMessage, err);
