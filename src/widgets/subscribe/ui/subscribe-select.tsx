@@ -32,7 +32,7 @@ export const SubscribeSelect = ({ data }: SubscribeSelectProps) => {
         ) : (
           <p className="text-center text-xl">Ваша подписка закончится</p>
         )}
-        <p className="text-center text-xl">12.12.2025</p>
+        {data.EndAt && <p className="text-center text-xl">{data.EndAt.split(" ")[0]}</p>}
       </div>
     </div>
   )

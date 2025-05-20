@@ -5,4 +5,5 @@ export interface ActiveSubscribeResponse {
   Duration: number;
   AutoPay: boolean;
   Used: number;
+  EndAt?: string;
 }
