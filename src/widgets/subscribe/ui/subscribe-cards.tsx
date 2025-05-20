@@ -10,14 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 interface SubscribeCardsProps {
   select: SubscribeSortType;
   selectTariff: string;
-  selectNum: number | undefined;
 }
 
-export const SubscribeCards = ({ select, selectTariff, selectNum }: SubscribeCardsProps ) => {
+export const SubscribeCards = ({ select, selectTariff }: SubscribeCardsProps ) => {
   const dispatch = useDispatch();
 
-  const { subscribers, activity } = useSelector(subscribersSelector);
-  console.log(activity)
+  const { subscribers } = useSelector(subscribersSelector);
+
   const handleSelect = (name: string, data: TariffData, Id: number) => {
     // const subData = {
     //   Id: Id,
@@ -71,7 +70,7 @@ export const SubscribeCards = ({ select, selectTariff, selectNum }: SubscribeCar
             discount={tariff.discount}
             onClick={(name) => handleSelect(name, {...tariff}, tariff.Id)}
             select={tariff.select}
-            activity={activity ? (tariff.Id === activity.Used && selectNum === activity.Duration) : false}
+            activity={false}
           />
         ))}
       </div>

@@ -24,5 +24,5 @@ export const CancelSubscribe = ({ autoPay }: CancelSubscribeProps) => {
     }
   };
 
-  return <PaymentButton onClick={cancel} cl={"hover:opacity-80 bg-[#1d1f22] text-[#e7e4dd]"}>Отменить подписку</PaymentButton>
+  return <PaymentButton onClick={cancel} cl={"hover:opacity-80 bg-[#7cc0ab]"}>Отменить</PaymentButton>
 }

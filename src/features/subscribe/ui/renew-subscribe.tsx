@@ -26,5 +26,5 @@ export const RenewSubscribe = ({ autoPay }: RenewSubscribeProps) => {
     }
   };
 
-  return <PaymentButton onClick={extend} cl={"hover:opacity-80 bg-[#1d1f22] text-[#e7e4dd]"}>Возобновить подписку</PaymentButton>
+  return <PaymentButton onClick={extend} cl={"hover:opacity-80 bg-[#7cc0ab]"}>Продлить</PaymentButton>
 }
