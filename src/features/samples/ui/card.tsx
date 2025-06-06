@@ -67,20 +67,22 @@ export const SamplesCard = ({ name, id, packId, author, loved }: SamplesCardProp
   const playing = currentPlayingId === id && isPlaying;
 
   return (
-    <div className="rounded-3xl border border-black" onClick={handleSoundTrack}>
-      <div className="px-2 py-2.5 flex items-center gap-3.5">
-        <SamplesImage image={photo?.Photo || ''} name={name} />
-        <div>
-          {playing ? <PauseIcon /> : <PlayIcon />}
-        </div>
-        <div className="flex flex-col flex-1">
-          <div className="text-[#1D1F22] font-medium text-xs md:text-base line-clamp-2 break-words">
-            {name}
-          </div>
-          {/* <h4 className={'text-[#1D1F22] font-medium text-xs md:text-base truncate max-w-[60px] 400:max-w-[100px] line-clamp-2 break-words sm:max-w-[200px]'}>{name}</h4> */}
-          <p className={'text-[#1D1F22]/20 font-medium text-xs md:text-base'}>{author}</p>
-        </div>
-      </div>
+<div className="rounded-3xl border border-black" onClick={handleSoundTrack}>
+  <div className="px-2 py-2.5 flex items-center gap-3.5">
+    <SamplesImage image={photo?.Photo || ''} name={name} />
+    <div>
+      {playing ? <PauseIcon /> : <PlayIcon />}
     </div>
+    
+    <div className="flex flex-col flex-1 min-w-0">
+      <div className="text-[#1D1F22] font-medium text-xs md:text-base line-clamp-2 break-words overflow-hidden max-w-full">
+        {name}
+      </div>
+      <p className="text-[#1D1F22]/20 font-medium text-xs md:text-base truncate mt-0.5">
+        {author}
+      </p>
+    </div>
+  </div>
+</div>
   )
 }
