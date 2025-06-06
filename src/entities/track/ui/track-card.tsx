@@ -28,7 +28,7 @@ export const TrackCard = ({ name, genre, duration, bpm, isLike, isPurchased, id,
         <TrackLose id={id} name={name} author={creator || ''} loved={isLike} packId={packId} />
       </div>
       <div className="flex flex-col font-medium text-xs md:text-base">
-        <div>{name}</div>
+        <div className="text-[#1D1F22] font-medium text-xs md:text-base line-clamp-2 break-words">{name}</div>
         <span className="text-[#1D1F22]/20">{creator}</span>
       </div>
       <div className="font-medium text-[#1D1F22]/20 text-xs md:text-base">{DURATION}</div>

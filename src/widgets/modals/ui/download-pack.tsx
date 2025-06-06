@@ -19,7 +19,7 @@ export const DownloadPackModal = () => {
       <ModalText>
         <p>Вы потратите {tracks.length} кредитов и получите доступ к скачиванию этого сэмпл пака:</p>
         <div className="mt-4">
-          <p>{pack?.Name}</p>
+          <p className="line-clamp-2 break-words">{pack?.Name}</p>
           <p>{pack?.Genre}</p>
           <p>{pack?.Autor}</p>
         </div>

@@ -74,7 +74,10 @@ export const SamplesCard = ({ name, id, packId, author, loved }: SamplesCardProp
           {playing ? <PauseIcon /> : <PlayIcon />}
         </div>
         <div className="flex flex-col flex-1">
-          <h4 className={'text-[#1D1F22] font-medium text-xs md:text-base'}>{name}</h4>
+          <div className="text-[#1D1F22] font-medium text-xs md:text-base line-clamp-2 break-words">
+            {name}
+          </div>
+          {/* <h4 className={'text-[#1D1F22] font-medium text-xs md:text-base truncate max-w-[60px] 400:max-w-[100px] line-clamp-2 break-words sm:max-w-[200px]'}>{name}</h4> */}
           <p className={'text-[#1D1F22]/20 font-medium text-xs md:text-base'}>{author}</p>
         </div>
       </div>

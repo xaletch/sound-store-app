@@ -19,7 +19,7 @@ export const DownloadTrackModal = () => {
       <ModalText>
         <p>Вы потратите 1 кредит и получите доступ к скачиванию этого сэмпла:</p>
         <div className="mt-4">
-          <p>{downloadTrackData?.track}</p>
+          <p className="line-clamp-2 break-words">{downloadTrackData?.track}</p>
           <p>{downloadTrackData?.genre}</p>
           <p>{downloadTrackData?.creator}</p>
         </div>
