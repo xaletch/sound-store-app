@@ -27,7 +27,7 @@ export const TrackLike = ({ isLike, id }: { isLike: boolean, id: number }) => {
     }
   }
   return (
-    <button onClick={handleLike} disabled={isLoading} className="cursor-pointer">
+    <button onClick={handleLike} disabled={isLoading} className="cursor-pointer flex items-center justify-center">
       {isLike ? <LikeSelectIcon /> : <LikeThinIcon/>}
     </button>
   )

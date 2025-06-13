@@ -10,7 +10,7 @@ export const ButtonPay = () => {
   }
   return (
     <>
-      <SoundButton onClick={download} cl={"min-w-37.5 md:w-[320px] bg-[#1D1F22] text-[#E7E4DD] hover:bg-[#7cc0ab]"}>
+      <SoundButton onClick={download} cl={"380:px-0 px-2 380:min-w-37.5 md:w-[320px] bg-[#1D1F22] text-[#E7E4DD] hover:bg-[#7cc0ab]"}>
         <span>
           <AddIcon />
         </span>

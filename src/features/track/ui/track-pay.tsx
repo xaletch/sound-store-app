@@ -22,7 +22,7 @@ export const TrackPay = ({ id, genre, creator, track }: ITrackPay) => {
   }
 
   return (
-    <button onClick={handleDownload} className="cursor-pointer">
+    <button onClick={handleDownload} className="cursor-pointer flex items-center justify-center">
       <PayIcon />
     </button>
   )
