@@ -33,7 +33,7 @@ export const TrackCard = ({ name, genre, duration, bpm, isLike, isPurchased, id,
         <span className="text-[#1D1F22]/20">{creator}</span>
       </div>
       <div className="font-medium text-[#1D1F22]/20 text-xs md:text-base">{DURATION}</div>
-      <div className="font-medium text-[#1D1F22]/20 text-xs md:text-base">{bpm}</div>
+      <div className="font-medium text-[#1D1F22]/20 text-xs md:text-base">{bpm === 0 ? '' : bpm}</div>
       {isPurchased ? <TrackDownload /> : <TrackPay id={id} track={name} genre={genre} creator={creator || ''} />}
       <TrackLike isLike={isLike} id={id} />
     </div>
