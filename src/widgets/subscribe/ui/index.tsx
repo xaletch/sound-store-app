@@ -20,7 +20,7 @@ export const SubscribeContent = () => {
       }
       <div className="mt-8 md:mt-16 md:max-w-xl md:mx-auto">
           <div className="flex flex-col gap-4">
-            {activity && activity.Used === 0 && (
+            {activity && !activity.AutoPay && (
               <BigButton cl={selectTariff ? 'bg-[#7cc0ab]' : ''} href={"payment/"} disabled={!selectTariff}>
                 {selectTariff ? 'Перейти к оплате'  : 'Выбери тариф'}
               </BigButton>
