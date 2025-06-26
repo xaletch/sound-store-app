@@ -28,11 +28,11 @@ export const SubscribeSelect = ({ data }: SubscribeSelectProps) => {
           <>
             <p className="text-center text-xl">Ваша подписка активна,</p>
             <p className="text-center text-xl">слудующее списание будет</p>
+            {data.EndAt && <p className="text-center text-xl">{data.EndAt.split(" ")[0]}</p>}
           </>
         ) : (
-          <p className="text-center text-xl">Ваша подписка закончится</p>
+          <p className="text-center text-xl">Ваша подписка закончилась</p>
         )}
-        {data.EndAt && <p className="text-center text-xl">{data.EndAt.split(" ")[0]}</p>}
       </div>
     </div>
   )
